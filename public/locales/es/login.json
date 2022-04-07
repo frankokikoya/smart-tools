@@ -1,0 +1,15 @@
+{
+  "email": "Correo electrónico",
+  "email_validate_label": "Ingresa un correo valido",
+  "password": "Contraseña",
+  "button_login": "Iniciar sesión",
+  "checkbox_persist_session": "No cerrar sesión",
+  "msg_welcome": "Inicia sesión",
+  "link_new_account": "¿No tienes una cuenta registrate?",
+  "link_new_account_signup": "Registrate",
+  "link_recover": "Recupérala",
+  "link_recover_password": "¿Olvidaste tu contraseña?",
+  "submit_expired": "El usuario ha expirado",
+  "submit_invalid": "Correo o contraseña inválidos",
+  "submit_invalid_permissions": "No cuentas con los permisos necesarios para ingresar al portal de Financieros"
+}

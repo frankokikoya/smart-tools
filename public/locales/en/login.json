@@ -1,0 +1,16 @@
+{
+  "email": "Email",
+  "email_validate_label": "Enter a valid email",
+  "password": "Password",
+  "button_login": "Log in",
+  "checkbox_persist_session": "Don't close session",
+  "msg_welcome": "Log In",
+  "link_new_account": "Did you don't have an account?",
+  "link_new_account_signup": "Sign up",
+  "link_recover": "Recover",
+  "link_recover_password": "Did you forget your password?",
+  "submit_expired": "Your username have expired",
+  "submit_invalid": "Your email or password has expired",
+  "submit_invalid_permissions": "You don't have necessary permissions to log in Market-place users financiers",
+  "submit_invalid_user": "Email or password is incorrect"
+}
