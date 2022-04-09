@@ -1,9 +1,8 @@
 import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { ThemeProvider } from "@material-ui/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from '@mui/material/CssBaseline';
 import theme from "./theme";
-import "./index.sass";
 import MainLayout from "./components/MainLayout";
 import RequireAuth from "./components/RequireAuth";
 // import { AuthProvider } from "./context/AuthProvider";
@@ -19,7 +18,7 @@ function App() {
   return (
     <React.StrictMode>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
+      <CssBaseline />
         <Suspense fallback={<div>Loading ...</div>}>
           <BrowserRouter>
             {/* <AuthProvider> */}

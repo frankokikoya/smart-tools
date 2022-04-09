@@ -3,12 +3,12 @@ import { loadAbort } from "../../../utilities";
 
 const baseURL = process.env.REACT_APP_BASE_URL;
 
-export const login = ({ email = "", password = "" }) => {
+export const login = ({ email = "", password = "", host = "" }) => {
   const controller = loadAbort();
   return {
     call: axios.post(
-      `${baseURL}/cotizador/api/sso/login`,
-      { correoElectronico: email, contrasenia: password },
+      `${baseURL}/sso/login`,
+      { email, password, host },
       { signal: controller.signal }
     ),
     controller,

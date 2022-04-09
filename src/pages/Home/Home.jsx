@@ -1,34 +1,88 @@
-import React, { useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import AuthContext from "../../context/AuthProvider";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+// import Typography from "@mui/material/Typography";
+import LoginRight from "./components/LoginRight";
 
 const Home = () => {
-  const { setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
+  const { 0: session, 2: removeSession } = useAuth();
 
   const logout = async () => {
-    // if used in more components, this should be in context
-    // axios to /logout endpoint
-    setAuth({});
-    navigate("/linkpage");
+    await removeSession();
+    navigate("/login");
   };
 
   return (
-    <section>
-      <h1>Home</h1>
-      <br />
-      <p>You are logged in!</p>
-      <br />
-      <Link to="/admin">Go to the Editor page</Link>
-      <br />
-      <Link to="/financier">Go to the Admin page</Link>
-      <br />
-      <Link to="/user">Go to the Lounge</Link>
-      <br />
-      <div className="flexGrow">
-        <button onClick={logout}>Sign Out</button>
-      </div>
-    </section>
+    <Grid container sx={{ height: "100vh", width: "100vw", margin: 0 }}>
+      <Grid
+        item
+        xs={6}
+        sx={{
+          height: "100vh",
+          background: "url(imgs/bg-login.jpg)",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          //backgroundSize: "100% 100%"
+        }}
+      >
+        <LoginRight />
+      </Grid>
+      <Grid item xs={6}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            // border: "3px solid grey",
+          }}
+        >
+          <Box
+            sx={{
+              flexWrap: "wrap",
+              display: "flex",
+              height: "15vh",
+              flexDirection: "row-reverse",
+              bgcolor: "background.paper",
+              // border: "3px solid red",
+            }}
+          >
+            <Box
+              component="img"
+              alt="logo-kikoya"
+              src="imgs/logo-kikoya.svg"
+              sx={{
+                m: 2,
+                // border: "3px solid purple",
+                maxWidth: "60%",
+                maxHeight: "60%",
+              }}
+            />
+          </Box>
+          <Box
+            sx={{
+              flexWrap: "wrap",
+              display: "flex",
+              alignContent: "center",
+              justifyContent: "center",
+              height: "85vh",
+              border: "3px solid green",
+            }}
+          >
+            <Box
+              component={Paper}
+              sx={{
+                height: "30%",
+                width: "30%",
+              }}
+            ></Box>
+          </Box>
+        </Box>
+      </Grid>
+    </Grid>
   );
 };
 

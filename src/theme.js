@@ -1,7 +1,10 @@
-import { createTheme } from "@material-ui/core";
+import { createTheme } from '@mui/material/styles';
 // import { primary, secondary } from "./helpers";
 
 const theme = createTheme({
+    typography: {
+        fontFamily: ["Heebo", "sans-serif"]
+    },
     palette: {
         primary: {
             // main: primary(),

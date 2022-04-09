@@ -1,31 +1,20 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useFetchAndLoad, useAuth } from "../../hooks";
 import { login } from "./services/login.service";
 import { userSessionAdapter } from "../../adapters";
 
-const SESSION = {
-  accessToken: null,
-  user: {
-    id: 1,
-    name: "Franko",
-    email: "oznama27@gmail.com",
-    role: {
-      id: 1,
-      type: 1,
-      privileges: [],
-    },
-  },
-};
-
 const Login = () => {
   const { loading, callEndpoint } = useFetchAndLoad();
   const [session, setSession] = useAuth();
+  const navigate = useNavigate();
 
   const emailRef = useRef();
   const errRef = useRef();
 
-  const [email, setEmail] = useState("oznama27@gmail.com");
+  const [email, setEmail] = useState("root@kikoya.io");
   const [password, setPassword] = useState("12345678");
+  const [host, setHost] = useState("kikoya.io");
   const [errMsg, setErrMsg] = useState("");
 
   useEffect(() => {
@@ -36,25 +25,26 @@ const Login = () => {
     setErrMsg("");
   }, [email, password]);
 
+  useEffect(() => {
+    session?.user && navigate("/");
+  }, [session, navigate]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const {
-        data: { accessToken },
-      } = await callEndpoint(login({ email, password }));
+      const { data } = await callEndpoint(login({ email, password, host }));
 
-      SESSION.accessToken = accessToken;
-      const userSession = userSessionAdapter(SESSION);
+      const userSession = userSessionAdapter(data);
       setSession(userSession);
 
       setEmail("");
       setPassword("");
+      setHost("");
     } catch (error) {
       console.log("ERROR BACK", error);
     }
   };
-  // useAsync(getUser, userAdapter, () => {}, []);
-  // { email: "oznama27@gmail.com", password: "12345678" }
+  
   return (
     <>
       {loading ? (
@@ -68,7 +58,7 @@ const Login = () => {
               {errMsg}
             </p>
             <h1>Sign In</h1>
-            <pre>{JSON.stringify(session)}</pre>
+            <pre>{JSON.stringify(session ? session : {})}</pre>
             <form onSubmit={handleSubmit}>
               <label htmlFor="email">Email:</label>
               <input

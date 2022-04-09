@@ -12,8 +12,9 @@ export const userSessionAdapter = ({ accessToken, user: { id, name, email, role 
     email,
     role: {
       id: role.id,
-      type: role.type,
-      privileges: role.privileges
+      name: role.name,
+      description: role.description,
+      permissions: role.permissions
     }
   }
 });
