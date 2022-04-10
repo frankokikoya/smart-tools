@@ -27,7 +27,8 @@ function useStorage(key, defaultValue, storageObject) {
 
   const remove = useCallback(() => {
     setValue(undefined);
-  }, []);
+    storageObject.removeItem(key);
+  }, [key, storageObject]);
 
   return [value, setValue, remove];
 }

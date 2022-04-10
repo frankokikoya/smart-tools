@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-const LoginRight = () => {
+export const LoginLeft = () => {
   return (
     <Box
       sx={{
@@ -86,5 +86,3 @@ const LoginRight = () => {
     </Box>
   );
 };
-
-export default LoginRight;

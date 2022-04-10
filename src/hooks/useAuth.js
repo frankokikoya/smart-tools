@@ -1,13 +1,6 @@
 import { useLocalStorage } from "./useStorage";
-//import { useContext } from "react";
-//import AuthContext from "../context/AuthProvider";
 
-// const useAuth = () => {
-//     return useContext(AuthContext);
-// }
-
-const useAuth = () => {
-    return useLocalStorage("session");
+export const useAuth = () => {
+  const [session, setSession, removeSession] = useLocalStorage("session");
+  return { session, setSession, removeSession };
 };
-
-export default useAuth;

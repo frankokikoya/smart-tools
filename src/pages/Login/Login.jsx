@@ -1,92 +1,32 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useFetchAndLoad, useAuth } from "../../hooks";
-import { login } from "./services/login.service";
-import { userSessionAdapter } from "../../adapters";
+import React from "react";
+import Grid from "@mui/material/Grid";
+import { LoginLeft, LoginRight, LoginForm } from "./components";
 
-const Login = () => {
-  const { loading, callEndpoint } = useFetchAndLoad();
-  const [session, setSession] = useAuth();
-  const navigate = useNavigate();
+// root@kikoya.io
+// 12345678
+// kikoya.io
+export const Login = () => {
 
-  const emailRef = useRef();
-  const errRef = useRef();
-
-  const [email, setEmail] = useState("root@kikoya.io");
-  const [password, setPassword] = useState("12345678");
-  const [host, setHost] = useState("kikoya.io");
-  const [errMsg, setErrMsg] = useState("");
-
-  useEffect(() => {
-    emailRef.current.focus();
-  }, []);
-
-  useEffect(() => {
-    setErrMsg("");
-  }, [email, password]);
-
-  useEffect(() => {
-    session?.user && navigate("/");
-  }, [session, navigate]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const { data } = await callEndpoint(login({ email, password, host }));
-
-      const userSession = userSessionAdapter(data);
-      setSession(userSession);
-
-      setEmail("");
-      setPassword("");
-      setHost("");
-    } catch (error) {
-      console.log("ERROR BACK", error);
-    }
-  };
-  
   return (
-    <>
-      {loading ? (
-        <div>
-          <h3>LOADING</h3>
-        </div>
-      ) : (
-        <>
-          <section>
-            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
-              {errMsg}
-            </p>
-            <h1>Sign In</h1>
-            <pre>{JSON.stringify(session ? session : {})}</pre>
-            <form onSubmit={handleSubmit}>
-              <label htmlFor="email">Email:</label>
-              <input
-                type="text"
-                id="email"
-                ref={emailRef}
-                autoComplete="off"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                required
-              />
-
-              <label htmlFor="password">Password:</label>
-              <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} value={password} required />
-              <button>Sign In</button>
-            </form>
-            {/* <p>
-              Need an Account?
-              <br />
-              <span className="line">
-                <Link to="/register">Sign Up</Link>
-              </span>
-            </p> */}
-          </section>
-        </>
-      )}
-    </>
+    <Grid container sx={{ height: "100vh", width: "100vw", margin: 0 }}>
+      <Grid
+        item
+        xs={6}
+        sx={{
+          height: "100vh",
+          background: "url(imgs/bg-login.jpg)",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      >
+        <LoginLeft />
+      </Grid>
+      <Grid item xs={6}>
+        <LoginRight>
+          <LoginForm />
+        </LoginRight>
+      </Grid>
+    </Grid>
   );
 };
-
-export default Login;
