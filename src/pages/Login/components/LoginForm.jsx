@@ -28,7 +28,7 @@ export const LoginForm = () => {
   };
   const onSubmit = async ({ email, password }) => {
     try {
-      const { data } = await callEndpoint(login({ email, password, host: "kikoya.i" }));
+      const { data } = await callEndpoint(login({ email, password, host: "kikoya.io" }));
 
       const userSession = userSessionAdapter(data);
       setSession(userSession);
