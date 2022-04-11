@@ -10,7 +10,12 @@ export const CustomTextInput = ({ label, ...props }) => {
       <Typography component="label" htmlFor={props.id || props.name} sx={{ p: 1 }}>
         {label}
       </Typography>
-      <TextField {...field} {...props} error={meta.touched ? true : false} helperText={ meta.touched && meta.error && meta.error} />
+      <TextField
+        {...field}
+        {...props}
+        error={meta.touched ? true : false}
+        helperText={meta.touched && meta.error && meta.error}
+      />
     </>
   );
 };

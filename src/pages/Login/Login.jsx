@@ -1,25 +1,17 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
+import useStyles from "./Login.styles";
 import { LoginLeft, LoginRight, LoginForm } from "./components";
 
 // root@kikoya.io
 // 12345678
 // kikoya.io
 export const Login = () => {
-
+  const classes = useStyles();
+  const { gridContainder, gridItem } = classes;
   return (
-    <Grid container sx={{ height: "100vh", width: "100vw", margin: 0 }}>
-      <Grid
-        item
-        xs={6}
-        sx={{
-          height: "100vh",
-          background: "url(imgs/bg-login.jpg)",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-        }}
-      >
+    <Grid container className={gridContainder}>
+      <Grid item xs={6} className={gridItem}>
         <LoginLeft />
       </Grid>
       <Grid item xs={6}>

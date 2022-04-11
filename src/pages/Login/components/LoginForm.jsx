@@ -9,11 +9,14 @@ import { useFetchAndLoad, useAuth } from "../../../hooks";
 import { userSessionAdapter } from "../../../adapters";
 import { login } from "../services/login.service";
 import { CustomTextInput } from "../../../components/CustomTextInput";
+import useStyles from "../styles/LoginForm.styles";
 
 export const LoginForm = () => {
   const { loading, callEndpoint } = useFetchAndLoad();
   const { session, setSession } = useAuth();
   const navigate = useNavigate();
+
+  const { formTitle, formInput, loginContent, loadingButton, textButton, textError } = useStyles;
 
   useEffect(() => {
     session?.user && navigate("/");
@@ -35,17 +38,7 @@ export const LoginForm = () => {
   };
   return (
     <>
-      <Typography
-        component={Box}
-        variant="h3"
-        sx={{
-          p: 1,
-          width: "100%",
-          fontWeight: "bold",
-          marginBottom: 3,
-        }}
-        gutterBottom
-      >
+      <Typography component={Box} variant="h3" sx={{ ...formTitle }} gutterBottom>
         Inicio de sesión
       </Typography>
       <Formik
@@ -64,7 +57,7 @@ export const LoginForm = () => {
               label="Correo electrónico"
               placeholder="correo@ejemplo.com"
               variant="outlined"
-              sx={{ p: 1, width: "100%" }}
+              sx={{ ...formInput }}
             />
             <CustomTextInput
               type="password"
@@ -72,29 +65,18 @@ export const LoginForm = () => {
               label="Contraseña"
               placeholder="contraseña"
               variant="outlined"
-              sx={{ p: 1, width: "100%" }}
+              sx={{ ...formInput }}
             />
-            <Box sx={{
-              marginTop: 1, 
-              flexWrap: "wrap", 
-              display: "flex", 
-              justifyContent: "space-between"
-            }}>
-              <Box sx={{ width: "50%", height: "100%"}}>
-                <LoadingButton
-                  type="submit"
-                  variant="contained"
-                  size="medium"
-                  loading={loading}
-                  sx={{ textTransform: "none", borderRadius: 10, width: "100%", p: 1 }}
-                >
-                  <Typography component="span" color="common.white" sx={{ fontWeight: "bold", fontSize: 14 }}>
+            <Box sx={{ ...loginContent }}>
+              <Box sx={{ width: "50%", height: "100%" }}>
+                <LoadingButton type="submit" variant="contained" size="medium" loading={loading} sx={{ ...loadingButton }}>
+                  <Typography component="span" color="common.white" sx={{ ...textButton }}>
                     Inicio de sesión
                   </Typography>
                 </LoadingButton>
               </Box>
               <Box sx={{ width: "45%" }}>
-                <Typography component="span" color="red" sx={{ fontWeight: "bold", fontSize: 10 }}>
+                <Typography component="span" color="red" sx={{ ...textError }}>
                   Usuario no registrado, contacta al administrador
                 </Typography>
               </Box>
