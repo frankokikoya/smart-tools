@@ -3,9 +3,6 @@ import Grid from "@mui/material/Grid";
 import useStyles from "./Login.styles";
 import { LoginLeft, LoginRight, LoginForm } from "./components";
 
-// root@kikoya.io
-// 12345678
-// kikoya.io
 export const Login = () => {
   const classes = useStyles();
   const { gridContainder, gridItem } = classes;
