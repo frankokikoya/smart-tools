@@ -8,7 +8,7 @@ import Box from "@mui/material/Box";
 import { useFetchAndLoad, useAuth } from "../../../hooks";
 import { userSessionAdapter } from "../../../adapters";
 import { login } from "../services/login.service";
-import { CustomTextInput } from "../../../components/CustomTextInput";
+import { LabelTextInput } from "../../../components/LabelTextInput";
 import useStyles from "../styles/LoginForm.styles";
 
 export const LoginForm = () => {
@@ -51,7 +51,7 @@ export const LoginForm = () => {
       >
         {(formik) => (
           <Form>
-            <CustomTextInput
+            <LabelTextInput
               type="text"
               name="email"
               label="Correo electrónico"
@@ -59,7 +59,7 @@ export const LoginForm = () => {
               variant="outlined"
               sx={{ ...formInput }}
             />
-            <CustomTextInput
+            <LabelTextInput
               type="password"
               name="password"
               label="Contraseña"

@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { useField } from "formik";
 
-export const CustomTextInput = ({ label, ...props }) => {
+export const LabelTextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <>
