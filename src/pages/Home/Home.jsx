@@ -1,22 +1,7 @@
 import React from "react";
-import { Box, Grid } from "@mui/material";
-import { NavBar } from "../../components/NavBarLayout/NavBar";
-import { TitleSelected } from "./components/TitleSelected";
-import { FilterBox } from "./components/FilterBox/FilterBox";
-import { DataGridCustom } from "./components/DataGridCustom";
-
-const useStyles = {
-  root: {
-    height: "100vh",
-    width: "100vw",
-  },
-  content: {
-    display: "flex",
-    flexDirection: "column",
-    width: "100%",
-    height: "100%"
-  },
-};
+import { TitleSelected } from "../Home/components/TitleSelected";
+import { FilterBox } from "../Home/components/FilterBox";
+import { DataGridCustom } from "../Home/components/DataGridCustom";
 
 const columns = [
   {
@@ -195,20 +180,12 @@ const rows = [
 ];
 
 export const Home = () => {
-  const { root, content } = useStyles;
 
   return (
     <>
-      <Grid container sx={{ ...root }}>
-        <NavBar />
-        <Grid item xs={12} sx={{ height: "90%" }}>
-          <Box sx={{ ...content }}>
-            <TitleSelected title="Cotizaciones" />
-            <FilterBox />
-            <DataGridCustom rows={rows} columns={columns} />
-          </Box>
-        </Grid>
-      </Grid>
+      <TitleSelected title="Cotizaciones" />
+      <FilterBox />
+      <DataGridCustom rows={rows} columns={columns} />
     </>
   );
 };

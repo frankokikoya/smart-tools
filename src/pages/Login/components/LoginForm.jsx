@@ -19,7 +19,7 @@ export const LoginForm = () => {
   const { formTitle, formInput, loginContent, loadingButton, textButton, textError } = useStyles;
 
   useEffect(() => {
-    session?.user && navigate("/");
+    session?.user && navigate("/home");
   }, [session, navigate]);
 
   const initialValues = {
