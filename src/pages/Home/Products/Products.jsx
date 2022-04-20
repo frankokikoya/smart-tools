@@ -11,7 +11,7 @@ import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { NoRows } from "../../../components/DataGridBox/NoRows";
 import { MainBox } from "../../../components/MainBox";
 import { rows as initialRows, columns } from "../data/Products.data";
-import useArray from "../../../hooks/useArray";
+import { useArray } from "../../../hooks";
 
 export const Products = () => {
   const { array: rows, filter } = useArray(initialRows);

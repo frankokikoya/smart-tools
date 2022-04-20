@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function useArray(defaultValue) {
+export const useArray = (defaultValue = []) => {
   const [array, setArray] = useState(defaultValue);
 
   function push(element) {

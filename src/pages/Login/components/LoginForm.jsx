@@ -27,6 +27,7 @@ export const LoginForm = () => {
     password: "12345678",
   };
   const onSubmit = async ({ email, password }) => {
+    console.log("LOG");
     try {
       const { data } = await callEndpoint(login({ email, password, host: "kikoya.io" }));
 

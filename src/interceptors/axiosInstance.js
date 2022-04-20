@@ -1,34 +1,65 @@
 import axios from "axios";
-import jwt_decode from "jwt-decode";
-import dayjs from "dayjs";
 
-const baseURL = process.env.REACT_APP_BASE_URL;
+const axiosInstance = (history = null) => {
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  let session = localStorage.getItem("SESSION") ? JSON.parse(localStorage.getItem("SESSION")) : null;
 
-let authToken = localStorage.getItem("TOKEN") ? JSON.parse(localStorage.getItem("TOKEN")) : null;
+  let headers = {};
 
-const axiosInstance = axios.create({
-  baseURL,
-  headers: { Authorization: `Bearer ${authToken}` },
-});
-
-axiosInstance.interceptors.request.use(async (req) => {
-  if (!authToken) {
-    authToken = localStorage.getItem("TOKEN") ? JSON.parse(localStorage.getItem("TOKEN")) : null;
-    req.headers.Authorization = `Bearer ${authToken}`;
+  if (session) {
+    headers.Authorization = `Bearer ${session?.accessToken}`;
   }
 
-  const user = jwt_decode(authToken);
-  const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
+  const instance = axios.create({ baseURL, headers });
 
-  if (!isExpired) return req;
+  instance.interceptors.request.use(
+    (req) => {
 
-  //   const response = await axios.post(`${baseURL}/api/token/refresh/`, {
-  //     refresh: authToken.refresh,
-  //   });
+      // const getPath = window.location.pathname;
 
-  //   localStorage.setItem("authToken", JSON.stringify(response.data));
-  //   req.headers.Authorization = `Bearer ${response.data.access}`;
-  return req;
-});
+      if (!session) {
+        session = localStorage.getItem("SESSION") ? JSON.parse(localStorage.getItem("SESSION")) : null;
+        req.headers.Authorization = `Bearer ${session?.accessToken}`;
+      }
+
+      return req;
+    },
+    (error) => {
+      // console.log("ERROR FROM AXIOSINSTANCE", error);
+      return Promise.reject(error);
+    }
+  );
+
+  instance.interceptors.response.use(
+    (response) =>
+      new Promise((resolve, reject) => {
+        resolve(response);
+      }),
+    (error) => {
+      if (!error.response) {
+        return new Promise((resolve, reject) => {
+          reject(error);
+        });
+      }
+
+      // console.log("STATUS ", error.response);
+
+      if (error.response.status === 403) {
+        localStorage.removeItem("SESSION");
+
+        if (history) {
+          history.push("/");
+        } else {
+          window.location = "/";
+        }
+      } else {
+        return new Promise((resolve, reject) => {
+          reject(error);
+        });
+      }
+    }
+  );
+  return instance;
+};
 
 export default axiosInstance;

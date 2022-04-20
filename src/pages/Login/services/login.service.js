@@ -1,4 +1,5 @@
 import axios from "axios";
+import axiosInstance from "../../../interceptors/axiosInstance";
 import { loadAbort } from "../../../utilities";
 
 const baseURL = process.env.REACT_APP_BASE_URL;
@@ -10,6 +11,17 @@ export const login = ({ email = "", password = "", host = "" }) => {
       `${baseURL}/sso/login`,
       { email, password, host },
       { signal: controller.signal }
+    ),
+    controller,
+  };
+};
+
+export const getUsers = () => {
+  const controller = loadAbort();
+  return {
+    call: axiosInstance().get(
+      `/user`,
+      { signal: controller.signal },
     ),
     controller,
   };

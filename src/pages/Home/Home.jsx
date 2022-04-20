@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as Yup from "yup";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { Box, Typography } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
 import { FilterTextInput } from "./components/FilterTextInput";
 import { MainBox } from "../../components/MainBox";
-import { DataGrid } from "@mui/x-data-grid";
 import { NoRows } from "../../components/DataGridBox/NoRows";
 import { rows, columns, inputList } from "./data/Home.data";
+import { useArray, useFetchAndLoad } from "../../hooks";
+import { getUsers } from "../Login/services/login.service";
 
 export const Home = () => {
+  const { loading, callEndpoint } = useFetchAndLoad();
+  const { array: users, set: setUsers } = useArray([]);
+
   const initialValues = {
     email: "",
     phone: "",
@@ -28,11 +33,26 @@ export const Home = () => {
     folio: Yup.string(),
   });
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data: { content } } = await callEndpoint(getUsers());
+        console.log(content);
+        setUsers(content);
+      } catch (error) {
+        console.log("ERROR", error);
+      }
+      
+    };
+    fetchData();
+    // if(!loading) fetchData();
+  }, []);
+
   return (
     <MainBox>
       <MainBox.SubMenu>
         <Typography component={Box} variant="h5" color="secondary" sx={{ fontWeight: "bold", ml: 2 }} gutterBottom>
-          <CheckCircleOutlineIcon /> Cotizaciones
+          <CheckCircleOutlineIcon /> Cotizaciones {`${loading} - ${users.length}`}
         </Typography>
       </MainBox.SubMenu>
       <MainBox.FilterBox initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>

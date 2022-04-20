@@ -1,10 +1,12 @@
-import axios from "axios";
+import axiosInstance from "../interceptors/axiosInstance";
 import { loadAbort } from "../utilities";
 
-export const login = (C) => {
+const baseURL = process.env.REACT_APP_BASE_URL;
+
+export const logout = () => {
   const controller = loadAbort();
   return {
-    call: axios.get(`https://rickandmortyapi.com/api/character/${C}`, { signal: controller.signal }),
+    call: axiosInstance.get(`${baseURL}/sso/logout`, { signal: controller.signal }),
     controller,
   };
 };
