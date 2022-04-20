@@ -25,7 +25,6 @@ const axiosInstance = (history = null) => {
       return req;
     },
     (error) => {
-      // console.log("ERROR FROM AXIOSINSTANCE", error);
       return Promise.reject(error);
     }
   );
