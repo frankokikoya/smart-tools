@@ -14,7 +14,7 @@ export const MenuItems = [
     {
         id: 2,
         label: "Productos/Planes", 
-        path:"products",
+        path:"/products",
         haveNested: false,
         icon:<Inventory2OutlinedIcon style={{ marginRight: 5 }} fontSize="small" /> 
     },

@@ -22,8 +22,8 @@ export const Navigation = () => {
         {/* protected routes */}
         {/* only conected */}
         <Route element={<RequireAuth />}>
-          <Route path="home" element={<NavBarLayout />}>
-            <Route index element={<Home />} />
+          <Route element={<NavBarLayout />}>
+            <Route path="home" element={<Home />} />
             <Route path="products" element={<Products />} />
           </Route>
         </Route>
