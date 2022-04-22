@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { todoSlice, userSlice } from "./states";
+import { TodoSlice, UserSlice, ErrorSlice } from "./states";
 
 export const store = configureStore({
   reducer: {
-    todo: todoSlice,
-    user: userSlice,
+    todo: TodoSlice,
+    user: UserSlice,
+    error: ErrorSlice
   },
 });

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useDispatch } from 'react-redux';
 import * as Yup from "yup";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -10,8 +11,10 @@ import { NoRows } from "../../components/DataGridBox/NoRows";
 import { rows, columns, inputList } from "./data/Home.data";
 import { useArray, useFetchAndLoad } from "../../hooks";
 import { getUsers } from "../Login/services/login.service";
+import { showError } from "../../redux/states/ErrorSlice";
 
 export const Home = () => {
+  const dispatch = useDispatch();
   const { loading, callEndpoint } = useFetchAndLoad();
   const { array: users, set: setUsers } = useArray([]);
 
@@ -34,19 +37,12 @@ export const Home = () => {
   });
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data: { content } } = await callEndpoint(getUsers());
-        console.log(content);
-        setUsers(content);
-      } catch (error) {
-        console.log("ERROR", error);
-      }
-      
-    };
-    fetchData();
-    // if(!loading) fetchData();
-  }, []);
+    callEndpoint(getUsers())
+      .then(({ data: { content } }) => setUsers(content))
+      .catch(({ response }) => {
+        if(response?.status === 403)dispatch(showError({ title: "Error", message: "Fobidden" }));
+      });
+  }, [setUsers, dispatch]);
 
   return (
     <MainBox>

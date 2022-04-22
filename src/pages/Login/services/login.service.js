@@ -20,7 +20,7 @@ export const getUsers = () => {
   const controller = loadAbort();
   return {
     call: axiosInstance().get(
-      `/user`,
+      `${baseURL}/user`,
       { signal: controller.signal },
     ),
     controller,
