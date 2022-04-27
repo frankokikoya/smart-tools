@@ -56,6 +56,7 @@ export const LoginForm = () => {
               type="text"
               name="email"
               label="Correo electrónico"
+              labelProps={{ ml:1 }}
               placeholder="correo@ejemplo.com"
               variant="outlined"
               sx={{ ...formInput }}
@@ -64,6 +65,7 @@ export const LoginForm = () => {
               type="password"
               name="password"
               label="Contraseña"
+              labelProps={{ ml:1 }}
               placeholder="contraseña"
               variant="outlined"
               sx={{ ...formInput }}

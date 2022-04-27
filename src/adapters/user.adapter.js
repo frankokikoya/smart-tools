@@ -18,3 +18,14 @@ export const userSessionAdapter = ({ accessToken, user: { id, name, email, role 
     }
   }
 });
+
+export const userAdapter = (user) => ({
+    id: user.id,
+    name: user.name,
+    surname: user.surname,
+    secondSurname: user.secondSurname,
+    email: user.email,
+    phone: user.phone,
+    role: user.role,
+    branch: user.branch
+});

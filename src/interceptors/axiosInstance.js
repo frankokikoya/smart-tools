@@ -41,8 +41,6 @@ const axiosInstance = (history = null) => {
         });
       }
 
-      // console.log("STATUS ", error.response);
-
       if (error.response.status === 403) {
         localStorage.removeItem("SESSION");
 

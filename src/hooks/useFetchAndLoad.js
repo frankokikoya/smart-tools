@@ -18,16 +18,12 @@ const useFetchAndLoad = () => {
     return result;
   };
 
-  const cancelEndpoint = () => {
-    setLoading(false);
-    controller && controller.abort();
-  };
-
   useEffect(() => {
     return () => {
-      cancelEndpoint();
+      setLoading(false);
+      controller && controller.abort();
     };
-  }, []); // eslint-disable-line
+  }, [controller]);
 
   return { loading, callEndpoint };
 };

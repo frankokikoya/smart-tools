@@ -20,7 +20,19 @@ export const getUsers = () => {
   const controller = loadAbort();
   return {
     call: axiosInstance().get(
-      `${baseURL}/user`,
+      `${baseURL}/users`,
+      { signal: controller.signal },
+    ),
+    controller,
+  };
+};
+
+export const createUser = ({ email, name, surname, secondSurname, phone, branch, role }) => {
+  const controller = loadAbort();
+  return {
+    call: axiosInstance().post(
+      `${baseURL}/users`,
+      { email, name, surname, secondSurname, phone, branch, role },
       { signal: controller.signal },
     ),
     controller,

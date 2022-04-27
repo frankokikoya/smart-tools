@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import React from "react";
 import * as Yup from "yup";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -9,14 +8,9 @@ import { FilterTextInput } from "./components/FilterTextInput";
 import { MainBox } from "../../components/MainBox";
 import { NoRows } from "../../components/DataGridBox/NoRows";
 import { rows, columns, inputList } from "./data/Home.data";
-import { useArray, useFetchAndLoad } from "../../hooks";
-import { getUsers } from "../Login/services/login.service";
-import { showError } from "../../redux/states/ErrorSlice";
 
 export const Home = () => {
-  const dispatch = useDispatch();
-  const { loading, callEndpoint } = useFetchAndLoad();
-  const { array: users, set: setUsers } = useArray([]);
+  
 
   const initialValues = {
     email: "",
@@ -36,19 +30,11 @@ export const Home = () => {
     folio: Yup.string(),
   });
 
-  useEffect(() => {
-    callEndpoint(getUsers())
-      .then(({ data: { content } }) => setUsers(content))
-      .catch(({ response }) => {
-        if(response?.status === 403)dispatch(showError({ title: "Error", message: "Fobidden" }));
-      });
-  }, [setUsers, dispatch]);
-
   return (
     <MainBox>
       <MainBox.SubMenu>
         <Typography component={Box} variant="h5" color="secondary" sx={{ fontWeight: "bold", ml: 2 }} gutterBottom>
-          <CheckCircleOutlineIcon /> Cotizaciones {`${loading} - ${users.length}`}
+          <CheckCircleOutlineIcon /> Cotizaciones
         </Typography>
       </MainBox.SubMenu>
       <MainBox.FilterBox initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
