@@ -6,8 +6,6 @@ import { Button, Box, MenuItem } from "@mui/material";
 import { FormDialog } from "../../../../components/FormDialog";
 import { LabelTextInput } from "../../../../components/LabelTextInput";
 import { LabelSelectInput } from "../../../../components/LabelSelectInput";
-import { useFetchAndLoad } from "../../../../hooks";
-import { createUser } from "../../../Login/services/login.service";
 
 const styles = {
     form: { display: "flex", flexDirection: "column", width: "100%", height: "100%", pl: 2 },
@@ -17,22 +15,10 @@ const styles = {
 
 };
 
-const CreateUserForm = ({ handleClose, setOpen }) => {
-
-    const { loading, callEndpoint } = useFetchAndLoad();
+const CreateUserForm = ({ handleClose, onSubmit }) => {
 
     const requiredAndOnlyLetters = Yup.string().required("Éste campos es requerido").matches(/^[aA-zZ\s]+$/, "Formato inválido, solo se admiten letras");
 
-    const onSubmit = async (values) => {
-        try {
-            const { data } = await callEndpoint(createUser(values));
-            console.log("NEW", data);
-            setOpen(false);
-        } catch (error) {
-            console.log(error.response);
-            setOpen(false);
-        }
-    };
 
     const initialValues = {
         name: "",

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useDispatch } from 'react-redux';
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import SmsOutlinedIcon from "@mui/icons-material/SmsOutlined";
@@ -10,7 +10,7 @@ import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 import { Button, TextField, FormControlLabel, Checkbox, Typography } from "@mui/material";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { useArray, useFetchAndLoad, useAsync } from "../../../hooks";
-import { getUsers } from "../../Login/services/login.service";
+import { getUsers, createUser, deleteUser } from "./services/users.service";
 import { userAdapter } from "../../../adapters/user.adapter";
 import { showError } from "../../../redux/states/ErrorSlice";
 import { NoRows } from "../../../components/DataGridBox/NoRows";
@@ -18,22 +18,70 @@ import { MainBox } from "../../../components/MainBox";
 import { FormDialog } from "../../../components/FormDialog";
 import CreateUserForm from "./components/CreateUserForm";
 import { columns } from "../data/Products.data";
+import ConfirmDialog from "../../../components/ConfirmDialog/ConfirmDialog";
 
 export const Products = () => {
   const dispatch = useDispatch();
   const { loading, callEndpoint } = useFetchAndLoad();
-  const { array: users, set: setUsers, filter } = useArray([]);
-  
-  const [open, setOpen] = React.useState(false);
+  const { array: users, set: setUsers, push: addUser, filter } = useArray([]);
 
-  // Modal
-  const handleClickOpen = () => {
-    setOpen(true);
+  const [open, setOpen] = useState(false);
+  const [openConfirm, setOpenConfirm] = useState(false);
+  const [itemDelete, setItemDelete] = useState({ name: "", id: 0 });
+
+  // Modal Create
+  const handleClickOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  // Modal Confirm
+  const handleCloseConfirm = () => {
+    setItemDelete({ name: "", id: 0 });
+    setOpenConfirm(false);
+  };
+  // CRUD USERS
+  /* GET ALL */
+  const getApiData = async () => await callEndpoint(getUsers());
+  /* CREATE */
+  const onSubmit = async (values) => {
+    try {
+      const { data } = await callEndpoint(createUser(values));
+      addUser(userAdapter(data));
+      setOpen(false);
+    } catch (error) {
+      setOpen(false);
+      if (error?.response?.data) dispatch(showError({ title: "Error", message: error.response.data.message }));
+    }
+  };
+  /* DELETE */
+  const actionDEleteUser = useCallback(
+    ({ row }) => () => {
+      setItemDelete({ name: row.name, id: row.id });
+      setOpenConfirm(true);
+    },
+    [setItemDelete, setOpenConfirm]
+  );
+
+  const confirmDelete = async () => {
+    try {
+      await callEndpoint(deleteUser(itemDelete.id));
+      filter((row) => row.id !== itemDelete.id);
+      setItemDelete({ name: "", id: 0 });
+      setOpenConfirm(false);
+    } catch (error) {
+      setItemDelete({ name: "", id: 0 });
+      setOpenConfirm(false);
+      if (error?.response?.data) dispatch(showError({ title: "Error", message: error.response.data.message }));
+    }
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const adaptUsers = ({ data: { content = [] } }) => {
+    setUsers(content.map(user => userAdapter(user)));
   };
+
+  const catchError = (error) => {
+    if (error?.status === 403) dispatch(showError({ title: "Error", message: "Fobidden" }));
+  };
+
+  useAsync(getApiData, adaptUsers, catchError, () => { }, []);
 
   // Grid
   const actionsColumn = {
@@ -43,31 +91,11 @@ export const Products = () => {
     minWidth: 110,
     flex: 0.8,
     getActions: (params) => [
-      <GridActionsCellItem icon={<EditOutlinedIcon color="secondary" />} label="Editar" onClick={deleteUser(params.id)} />,
-      <GridActionsCellItem icon={<PowerSettingsNewOutlinedIcon color="secondary" />} label="On, off" onClick={deleteUser(params.id)} />,
-      <GridActionsCellItem icon={<DeleteOutlineOutlinedIcon color="secondary" />} label="Eliminar" onClick={deleteUser(params.id)} />,
+      <GridActionsCellItem icon={<EditOutlinedIcon color="secondary" />} label="Editar" onClick={actionDEleteUser(params)} />,
+      <GridActionsCellItem icon={<PowerSettingsNewOutlinedIcon color="secondary" />} label="On, off" onClick={actionDEleteUser(params)} />,
+      <GridActionsCellItem icon={<DeleteOutlineOutlinedIcon color="secondary" />} label="Eliminar" onClick={actionDEleteUser(params)} />,
     ],
   };
-
-  // CRUD USERS
-  const getApiData = async () => await callEndpoint(getUsers());
-
-  const deleteUser = useCallback(
-    (id) => () => {
-      filter((row) => row.id !== id);
-    },
-    [filter]
-  );
-
-  const adaptUsers = ({ data: {content=[]} }) => {
-    setUsers(content.map(user => userAdapter(user)));
-  };
-
-  const catchError = ( error ) => {
-    if(error?.status === 403)dispatch(showError({ title: "Error", message: "Fobidden" }));
-  };
-
-  useAsync(getApiData, adaptUsers, catchError, () => {}, []);
 
   return (
     <MainBox>
@@ -112,9 +140,21 @@ export const Products = () => {
           </Typography>
         </FormDialog.Title>
         <FormDialog.Content>
-          <CreateUserForm setOpen={setOpen} handleClose={handleClose} />
+          <CreateUserForm handleClose={handleClose} onSubmit={onSubmit} />
         </FormDialog.Content>
       </FormDialog>
+      <ConfirmDialog open={openConfirm} handleClose={handleCloseConfirm}>
+        <ConfirmDialog.Title>
+          Confirmación de acción
+        </ConfirmDialog.Title>
+        <ConfirmDialog.Content>
+          ¿ Estás seguro de elminar al usuario <strong>{itemDelete.name}</strong> ?
+        </ConfirmDialog.Content>
+        <ConfirmDialog.Actions>
+          <Button onClick={handleCloseConfirm} autoFocus>Cancelar</Button>
+          <Button onClick={confirmDelete}>Aceptar</Button>
+        </ConfirmDialog.Actions>
+      </ConfirmDialog>
     </MainBox>
   );
 };
