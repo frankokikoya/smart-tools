@@ -1,6 +1,5 @@
 import React from "react";
 import { Grid, AppBar, Box, Typography } from "@mui/material";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
@@ -40,14 +39,12 @@ const sxStyles = {
     boxContent: { display: "flex", flexDirection: "column", width: "60%" },
     texTitle: { fontWeight: "bold", width: "60%", alignSelf: "center" },
     texContent: { width: "40%", alignSelf: "center", textAlign: "center" },
-    boxButton: { display: "flex", flexWrap: "wrap", justifyContent: "center" },
-    buttonStyle: { width: "20%", textTransform: "none", borderRadius: 10, p: 1 },
-    buttonText: { fontWeight: "bold", fontSize: 14 }
+    boxButton: { display: "flex", flexWrap: "wrap", justifyContent: "center" }
 };
 
-const ErrorToken = () => {
+export const ErrorBase = ({ imageSrc, title, message, children }) => {
     const { gridContainder, content, footerContent, logoItem } = useStyles();
-    const { appBarBox, boxContent, texTitle, texContent, boxButton, buttonStyle, buttonText } = sxStyles;
+    const { appBarBox, boxContent, texTitle, texContent, boxButton } = sxStyles;
     return (
         <Grid container className={gridContainder}>
             <AppBar position="static" sx={appBarBox}>
@@ -62,7 +59,7 @@ const ErrorToken = () => {
                         sx={texTitle}
                         gutterBottom
                     >
-                        Upss... ha ocurrido un error
+                        {title}
                     </Typography>
                     <Typography
                         variant="span"
@@ -70,19 +67,10 @@ const ErrorToken = () => {
                         sx={texContent}
                         gutterBottom
                     >
-                        El token ha expirado y/o se utilizó más de una vez, restablece tu contraseña
+                        {message}
                     </Typography>
                     <Box sx={boxButton}>
-                        <LoadingButton
-                            color="secondary"
-                            variant="contained"
-                            size="medium"
-                            sx={buttonStyle}
-                        >
-                            <Typography component="span" color="common.white" sx={buttonText}>
-                                Restablecer contraseña
-                            </Typography>
-                        </LoadingButton>
+                        {children}
                     </Box>
                 </Box>
             </Grid>
@@ -96,11 +84,9 @@ const ErrorToken = () => {
                 >
                     Smooth Journeys. Smart Decisions.
                 </Typography>
-                <Box component="img" sx={{ position: "absolute", bottom: "10%", left: "85%" }} alt="pensando" src="imgs/pensando.svg" />
+                <Box component="img" sx={{ position: "absolute", bottom: "10%", left: "85%" }} alt="pensando" src={imageSrc} />
             </footer>
         </Grid>
 
     )
-}
-
-export default ErrorToken;
+};

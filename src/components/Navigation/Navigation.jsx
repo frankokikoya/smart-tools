@@ -3,7 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import MainLayout from "./MainLayout";
 import RequireAuth from "./RequireAuth";
 import { NavBarLayout } from "../NavBarLayout";
-import { Login, Missing, Unauthorized, Home, Admin, Financier, Recovery, ErrorToken } from "../../pages";
+import { Login, Missing, Unauthorized, Home, Admin, Financier, Recovery } from "../../pages";
+import { ErrorToken } from "../../pages/Errors";
 import { Products } from "../../pages/Home/Products";
 
 const ROLES = {
