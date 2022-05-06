@@ -38,7 +38,7 @@ const CreateUserForm = ({ handleClose, onSubmit }) => {
             .email('Formato inválido, sólo se admite el formato "correo@ejemplo.com"')
             .required("Éste campo es requerido"),
         phone: Yup.string()
-            .phone("MX", "Formato inválido, solo se admiten números")
+            .phone("MX", "Formato inválido, sólo se admiten números")
             .required("Éste campo es requerido"),
         role: Yup.number().moreThan(0, "Elige una opción válida").required("Éste campo es requerido"),
         branch: Yup.number().moreThan(0, "Elige una opción válida").required("Éste campo es requerido"),
@@ -105,7 +105,7 @@ const CreateUserForm = ({ handleClose, onSubmit }) => {
                         />
                         <LabelSelectInput
                             name="role"
-                            label="Role y permisos"
+                            label="Roles y permisos"
                             labelProps={{ ...styles.inputLabel }}
                             divProps={{ ml: 5 }}
                             sx={{ ...styles.widthInput }}

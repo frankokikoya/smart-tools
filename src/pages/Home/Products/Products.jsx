@@ -41,14 +41,19 @@ export const Products = () => {
   /* GET ALL */
   const getApiData = async () => await callEndpoint(getUsers());
   /* CREATE */
-  const onSubmit = async (values) => {
+  const onSubmit = async (values, { setFieldError }) => {
     try {
       const { data } = await callEndpoint(createUser(values));
       addUser(userAdapter(data));
       setOpen(false);
     } catch (error) {
-      setOpen(false);
-      if (error?.response?.data) dispatch(showError({ title: "Error", message: error.response.data.message }));
+      // setOpen(false);
+      if (error?.response?.status === 400) {
+        const { errors = [] } = error.response.data;
+        errors.forEach((err) => {
+          setFieldError(err.entity, err.message)
+        });
+      }
     }
   };
   /* DELETE */

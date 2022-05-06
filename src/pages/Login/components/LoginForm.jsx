@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,7 @@ import useStyles from "../styles/LoginForm.styles";
 export const LoginForm = () => {
   const { loading, callEndpoint } = useFetchAndLoad();
   const { session, setSession } = useAuth();
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const { formTitle, formInput, loginContent, loadingButton, textButton, textError } = useStyles;
@@ -26,15 +27,16 @@ export const LoginForm = () => {
     email: "root@kikoya.io",
     password: "12345678",
   };
+
   const onSubmit = async ({ email, password }) => {
-    console.log("LOG");
     try {
       const { data } = await callEndpoint(login({ email, password, host: "kikoya.io" }));
 
       const userSession = userSessionAdapter(data);
       setSession(userSession);
     } catch (error) {
-      console.log("ERROR BACK", error);
+      // console.log("ERROR BACK", error.response);
+      if (error?.response?.data) setErrorMessage(error.response.data.message);
     }
   };
   return (
@@ -56,7 +58,7 @@ export const LoginForm = () => {
               type="text"
               name="email"
               label="Correo electrónico"
-              labelProps={{ ml:1 }}
+              labelProps={{ ml: 1 }}
               placeholder="correo@ejemplo.com"
               variant="outlined"
               sx={{ ...formInput }}
@@ -65,7 +67,7 @@ export const LoginForm = () => {
               type="password"
               name="password"
               label="Contraseña"
-              labelProps={{ ml:1 }}
+              labelProps={{ ml: 1 }}
               placeholder="contraseña"
               variant="outlined"
               sx={{ ...formInput }}
@@ -80,7 +82,7 @@ export const LoginForm = () => {
               </Box>
               <Box sx={{ width: "45%" }}>
                 <Typography component="span" color="red" sx={{ ...textError }}>
-                  Usuario no registrado, contacta al administrador
+                  {errorMessage && errorMessage}
                 </Typography>
               </Box>
             </Box>

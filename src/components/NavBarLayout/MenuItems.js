@@ -21,14 +21,14 @@ export const MenuItems = [
     {
         id: 3,
         label: "Catálogos", 
-        path:"/home",
+        path:"/catalogs",
         haveNested: true,
         icon:<ArticleOutlinedIcon style={{ marginRight: 5 }} fontSize="small" /> 
     },
     {
         id: 4,
         label: "Configuración", 
-        path:"products",
+        path:"settings",
         haveNested: false,
         icon:<SettingsOutlinedIcon style={{ marginRight: 5 }} fontSize="small" /> 
     },

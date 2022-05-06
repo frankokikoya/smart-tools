@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import MainLayout from "./MainLayout";
 import RequireAuth from "./RequireAuth";
 import { NavBarLayout } from "../NavBarLayout";
-import { Login, Missing, Unauthorized, Home, Admin, Financier, Recovery } from "../../pages";
+import { Login, Missing, Unauthorized, Home, Admin, Financier, Recovery, ErrorToken } from "../../pages";
 import { Products } from "../../pages/Home/Products";
 
 const ROLES = {
@@ -19,13 +19,16 @@ export const Navigation = () => {
         {/* public routes */}
         <Route index element={<Login />} />
         <Route path="unauthorized" element={<Unauthorized />} />
-        <Route path="recovery-password" element={<Recovery />} />
+        <Route path="generate-password" element={<Recovery />} />
+        <Route path="error-token" element={<ErrorToken />} />
         {/* protected routes */}
         {/* only conected */}
         <Route element={<RequireAuth />}>
           <Route element={<NavBarLayout />}>
             <Route path="home" element={<Home />} />
-            <Route path="products" element={<Products />} />
+            <Route path="products" element={<div>Productos...</div>} />
+            <Route path="catalogs" element={<div>Catalogs...</div>} />
+            <Route path="settings" element={<Products />} />
           </Route>
         </Route>
         {/* ADMIN */}
