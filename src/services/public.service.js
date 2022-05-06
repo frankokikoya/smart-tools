@@ -2,7 +2,7 @@
 import axiosInstance from "../interceptors/axiosInstance";
 import { loadAbort } from "../utilities";
 
-const baseURL = process.env.REACT_APP_BASE_URL;
+const baseURL = process.env.REACT_APP_API_URL;
 
 export const logout = () => {
   const controller = loadAbort();

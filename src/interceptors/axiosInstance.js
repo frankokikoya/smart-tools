@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = (history = null) => {
-  const baseURL = process.env.REACT_APP_BASE_URL;
+  const baseURL = process.env.REACT_APP_API_URL;
   let session = localStorage.getItem("SESSION") ? JSON.parse(localStorage.getItem("SESSION")) : null;
 
   let headers = {};
