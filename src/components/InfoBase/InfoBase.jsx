@@ -38,7 +38,7 @@ const sxStyles = {
         boxShadow: "none",
     },
     boxContent: { display: "flex", flexDirection: "column", width: "70%" },
-    texTitle: { fontWeight: "bold", width: "70%", alignSelf: "center", textAlign: "center", border: "1px solid red" },
+    texTitle: { fontWeight: "bold", width: "70%", alignSelf: "center", textAlign: "center" },
     texContent: { width: "40%", alignSelf: "center", textAlign: "center" },
     boxButton: { display: "flex", flexWrap: "wrap", justifyContent: "center" }
 };
