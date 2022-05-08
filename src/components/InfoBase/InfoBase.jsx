@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Grid, AppBar, Box, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
@@ -36,13 +37,13 @@ const sxStyles = {
         background: "transparent",
         boxShadow: "none",
     },
-    boxContent: { display: "flex", flexDirection: "column", width: "60%" },
-    texTitle: { fontWeight: "bold", width: "60%", alignSelf: "center" },
+    boxContent: { display: "flex", flexDirection: "column", width: "70%" },
+    texTitle: { fontWeight: "bold", width: "70%", alignSelf: "center", textAlign: "center", border: "1px solid red" },
     texContent: { width: "40%", alignSelf: "center", textAlign: "center" },
     boxButton: { display: "flex", flexWrap: "wrap", justifyContent: "center" }
 };
 
-export const ErrorBase = ({ imageSrc, title, message, children }) => {
+const InfoBase = ({ imageSrc, title, message, children }) => {
     const { gridContainder, content, footerContent, logoItem } = useStyles();
     const { appBarBox, boxContent, texTitle, texContent, boxButton } = sxStyles;
     return (
@@ -90,3 +91,15 @@ export const ErrorBase = ({ imageSrc, title, message, children }) => {
 
     )
 };
+
+InfoBase.propTypes = {
+    imageSrc: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ])
+};
+
+export { InfoBase };

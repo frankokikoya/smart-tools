@@ -8,11 +8,11 @@ const sxStyles = {
     buttonText: { fontWeight: "bold", fontSize: 14 }
 };
 
-export const ErrorToken = () => {
+const SuccessPassword = () => {
     const { buttonStyle, buttonText } = sxStyles;
     const imageSrc = "imgs/pensando.svg";
-    const title = "Upss... ha ocurrido un error";
-    const message = "El token ha expirado y/o se utilizó más de una vez, restablece tu contraseña";
+    const title = "Se ha generado una nueva contraseña";
+    const message = "Inicia sesión con tu nueva contraseña";
     return (
         <InfoBase imageSrc={imageSrc} title={title} message={message}>
             <LoadingButton
@@ -22,9 +22,11 @@ export const ErrorToken = () => {
                 sx={buttonStyle}
             >
                 <Typography component="span" color="common.white" sx={buttonText}>
-                    Restablecer contraseña
+                    Volver al inicio de sesión
                 </Typography>
             </LoadingButton>
         </InfoBase>
     )
 };
+
+export { SuccessPassword };
