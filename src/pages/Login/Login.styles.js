@@ -13,6 +13,6 @@ const useStyles = makeStyles({
     backgroundPosition: "center",
     backgroundSize: "cover",
   },
-});
+}, {index: 1});
 
 export default useStyles;

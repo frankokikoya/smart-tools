@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) =>
     inacitveLink: {
       color: "white",
     },
-  })
+  }, {index: 1})
 );
 
 export const NavLinkCustom = React.forwardRef((props, ref) => {

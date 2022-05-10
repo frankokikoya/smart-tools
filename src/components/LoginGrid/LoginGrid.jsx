@@ -18,7 +18,7 @@ const useStyles = makeStyles({
         backgroundPosition: "center",
         backgroundSize: "cover",
     },
-});
+}, {index: 1});
 
 const LoginGrid = ({ children }) => {
     const { gridContainder, gridItem } = useStyles();

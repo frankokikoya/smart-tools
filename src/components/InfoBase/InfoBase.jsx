@@ -29,7 +29,7 @@ const useStyles = makeStyles({
         maxWidth: "75%",
         maxHeight: "75%",
     },
-});
+}, {index: 1});
 
 const sxStyles = {
     appBarBox: {
