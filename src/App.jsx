@@ -15,17 +15,19 @@ function App() {
   }, [dispatch])
 
   return (
-    <React.StrictMode>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <ModalError />
-        <Suspense fallback={<div>Loading ...</div>}>
-          <BrowserRouter>
-            <Navigation />
-          </BrowserRouter>
-        </Suspense>
-      </ThemeProvider>
-    </React.StrictMode>
+    <>
+      <CssBaseline />
+      <React.StrictMode>
+        <ThemeProvider theme={theme}>
+          <ModalError />
+          <Suspense fallback={<div>Loading ...</div>}>
+            <BrowserRouter>
+              <Navigation />
+            </BrowserRouter>
+          </Suspense>
+        </ThemeProvider>
+      </React.StrictMode>
+    </>
   );
 }
 
