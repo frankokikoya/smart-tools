@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
 import Typography from "@mui/material/Typography";
@@ -9,7 +10,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import CheckIcon from "@mui/icons-material/Check";
 import { LoginGrid } from "../../components/LoginGrid";
 import { LabelTextInput } from "../../components/LabelTextInput";
-import { useSearchParams } from "react-router-dom";
+import { useFetchAndLoad } from "../../hooks";
+import { createPassword } from "./services/recovery.service";
 
 const useStyles = {
     formTitle: {
@@ -32,6 +34,7 @@ const useStyles = {
 };
 
 const NewPassword = () => {
+    const { loading, callEndpoint } = useFetchAndLoad();
     const [searchParams] = useSearchParams();
     const getToken = searchParams.get("token");
     const { formTitle, formInput, loginContent, loadingButton, textButton, listError, listItem } = useStyles;
@@ -43,8 +46,14 @@ const NewPassword = () => {
         confirmPassword: "",
     };
 
-    const onSubmit = (values) => {
-        console.log(values);
+    const onSubmit = async ({ confirmPassword }) => {
+        try {
+            const newPass = await callEndpoint(createPassword({ password: confirmPassword, token: getToken}));
+            console.log(newPass);
+        } catch (error) {
+            console.log("Error generate-pass ", error);
+            // if (error?.response?.data) setErrorMessage(error.response.data.message);
+        }
     };
 
     const validationSchema = Yup.object({
