@@ -1,7 +1,7 @@
-import { createTheme } from '@mui/material/styles';
+import { unstable_createMuiStrictModeTheme } from '@mui/material/styles';
 // import { primary, secondary } from "./helpers";
 
-const theme = createTheme({
+const theme = unstable_createMuiStrictModeTheme({
     typography: {
         fontFamily: ["Heebo", "sans-serif"]
     },
