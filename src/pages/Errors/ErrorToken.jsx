@@ -5,16 +5,17 @@ import { InfoBase } from "../../components/InfoBase";
 
 const sxStyles = {
     buttonStyle: { width: "20%", textTransform: "none", borderRadius: 10, p: 1 },
-    buttonText: { fontWeight: "bold", fontSize: 14 }
+    buttonText: { fontWeight: "bold", fontSize: 14 },
+    imageProps: { position: "absolute", bottom: "10%", left: "85%" }
 };
 
 export const ErrorToken = () => {
-    const { buttonStyle, buttonText } = sxStyles;
+    const { buttonStyle, buttonText, imageProps } = sxStyles;
     const imageSrc = "imgs/pensando.svg";
     const title = "Upss... ha ocurrido un error";
     const message = "El token ha expirado y/o se utilizó más de una vez, restablece tu contraseña";
     return (
-        <InfoBase imageSrc={imageSrc} title={title} message={message}>
+        <InfoBase imageSrc={imageSrc} imageProps={imageProps} title={title} message={message}>
             <LoadingButton
                 color="secondary"
                 variant="contained"

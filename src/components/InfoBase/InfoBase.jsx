@@ -43,7 +43,7 @@ const sxStyles = {
     boxButton: { display: "flex", flexWrap: "wrap", justifyContent: "center" }
 };
 
-const InfoBase = ({ imageSrc, title, message, children }) => {
+const InfoBase = ({ imageSrc, imageProps, title, message, children }) => {
     const { gridContainder, content, footerContent, logoItem } = useStyles();
     const { appBarBox, boxContent, texTitle, texContent, boxButton } = sxStyles;
     return (
@@ -85,7 +85,7 @@ const InfoBase = ({ imageSrc, title, message, children }) => {
                 >
                     Smooth Journeys. Smart Decisions.
                 </Typography>
-                <Box component="img" sx={{ position: "absolute", bottom: "10%", left: "85%" }} alt="pensando" src={imageSrc} />
+                <Box component="img" sx={imageProps} alt="pensando" src={imageSrc} />
             </footer>
         </Grid>
 
@@ -94,6 +94,7 @@ const InfoBase = ({ imageSrc, title, message, children }) => {
 
 InfoBase.propTypes = {
     imageSrc: PropTypes.string.isRequired,
+    imageProps: PropTypes.object.isRequired,
     title: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
     children: PropTypes.oneOfType([

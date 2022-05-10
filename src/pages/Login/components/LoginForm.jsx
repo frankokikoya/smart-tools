@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 import LoadingButton from "@mui/lab/LoadingButton";
+import Link from '@mui/material/Link';
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useFetchAndLoad, useAuth } from "../../../hooks";
@@ -100,7 +101,7 @@ export const LoginForm = () => {
         }}
         gutterBottom
       >
-        ¿Has olvidado tu constraseña? Recupérala.
+        ¿Has olvidado tu constraseña? <Link component={RouterLink} to="/recovery-password">Recupérala aquí.</Link>
       </Typography>
     </>
   );

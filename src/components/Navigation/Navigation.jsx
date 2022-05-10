@@ -3,9 +3,19 @@ import { Route, Routes } from "react-router-dom";
 import MainLayout from "./MainLayout";
 import RequireAuth from "./RequireAuth";
 import { NavBarLayout } from "../NavBarLayout";
-import { Login, Missing, Unauthorized, Home, Admin, Financier, Recovery, SuccessPassword } from "../../pages";
 import { ErrorToken, ErrorSystem } from "../../pages/Errors";
 import { Products } from "../../pages/Home/Products";
+import {
+  Login,
+  Home,
+  Admin,
+  Missing,
+  Unauthorized,
+  Financier,
+  Recovery,
+  SuccessPassword,
+  NewPassword
+} from "../../pages";
 
 const ROLES = {
   ADMIN: 1,
@@ -20,7 +30,8 @@ export const Navigation = () => {
         {/* public routes */}
         <Route index element={<Login />} />
         <Route path="unauthorized" element={<Unauthorized />} />
-        <Route path="generate-password" element={<Recovery />} />
+        <Route path="generate-password" element={<NewPassword />} />
+        <Route path="recovery-password" element={<Recovery />} />
         <Route path="success-password" element={<SuccessPassword />} />
         <Route path="error-token" element={<ErrorToken />} />
         <Route path="error-system" element={<ErrorSystem />} />
