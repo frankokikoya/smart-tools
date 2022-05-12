@@ -81,7 +81,6 @@ const Recovery = () => {
                   </Typography>
                 </LoadingButton>
               </Box>
-              {getToken}
             </Box>
           </Form>
         )}
