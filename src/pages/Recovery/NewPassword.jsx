@@ -120,7 +120,7 @@ const NewPassword = () => {
                         />
                         <Box sx={{ ...loginContent }}>
                             <Box sx={{ width: "50%", height: "100%" }}>
-                                <LoadingButton type="submit" variant="contained" size="medium" sx={{ ...loadingButton }} disabled={enableButton}>
+                                <LoadingButton type="submit" variant="contained" size="medium" loading={loading} sx={{ ...loadingButton }} disabled={enableButton}>
                                     <Typography component="span" color="common.white" sx={{ ...textButton }}>
                                         Cambiar contraseña
                                     </Typography>
