@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
 import Typography from "@mui/material/Typography";
@@ -36,6 +36,7 @@ const useStyles = {
 const NewPassword = () => {
     const { loading, callEndpoint } = useFetchAndLoad();
     const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
     const getToken = searchParams.get("token");
     const { formTitle, formInput, loginContent, loadingButton, textButton, listError, listItem } = useStyles;
     const [errors, setErrors] = useState({ hasMin: false, hasUpperCase: false, hasLowerCase: false, hasNumber: false, hasSymbole: false });
@@ -48,10 +49,12 @@ const NewPassword = () => {
 
     const onSubmit = async ({ confirmPassword }) => {
         try {
-            const newPass = await callEndpoint(createPassword({ password: confirmPassword, token: getToken}));
+            const newPass = await callEndpoint(createPassword({ password: confirmPassword, token: getToken }));
             console.log(newPass);
+            navigate("/success-password");
         } catch (error) {
             console.log("Error generate-pass ", error);
+            navigate("/error-token");
             // if (error?.response?.data) setErrorMessage(error.response.data.message);
         }
     };
