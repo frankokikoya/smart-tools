@@ -15,7 +15,7 @@ const styles = {
 
 };
 
-const CreateUserForm = ({ handleClose, onSubmit }) => {
+const CreateUserForm = ({ handleClose, onSubmit, loading }) => {
 
     const requiredAndOnlyLetters = Yup.string().required("Éste campos es requerido").matches(/^[aA-zZ\s]+$/, "Formato inválido, solo se admiten letras");
 
@@ -131,7 +131,7 @@ const CreateUserForm = ({ handleClose, onSubmit }) => {
                         <Button onClick={handleClose} variant="outlined" sx={{ ...styles.button }}>
                             Cancelar
                         </Button>
-                        <Button type="submit" variant="contained" sx={{ ...styles.button }}>
+                        <Button type="submit" variant="contained" loading={loading} sx={{ ...styles.button }}>
                             Crear usuario
                         </Button>
                     </FormDialog.Actions>

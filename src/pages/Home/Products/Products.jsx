@@ -145,7 +145,7 @@ export const Products = () => {
           </Typography>
         </FormDialog.Title>
         <FormDialog.Content>
-          <CreateUserForm handleClose={handleClose} onSubmit={onSubmit} />
+          <CreateUserForm handleClose={handleClose} onSubmit={onSubmit} loading={loading} />
         </FormDialog.Content>
       </FormDialog>
       <ConfirmDialog open={openConfirm} handleClose={handleCloseConfirm}>
