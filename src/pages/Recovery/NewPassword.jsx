@@ -49,9 +49,8 @@ const NewPassword = () => {
 
     const onSubmit = async ({ confirmPassword }) => {
         try {
-            const newPass = await callEndpoint(createPassword({ password: confirmPassword, token: getToken }));
-            console.log(newPass);
-            navigate("/success-password");
+            const { status } = await callEndpoint(createPassword({ password: confirmPassword, token: getToken }));
+            if (status === 200) navigate("/success-password");
         } catch (error) {
             console.log("Error generate-pass ", error);
             navigate("/error-token");

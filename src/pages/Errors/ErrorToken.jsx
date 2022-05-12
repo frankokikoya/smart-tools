@@ -1,4 +1,5 @@
 import React from "react";
+import { Link as RouterLink } from "react-router-dom";
 import { Typography } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { InfoBase } from "../../components/InfoBase";
@@ -17,10 +18,12 @@ export const ErrorToken = () => {
     return (
         <InfoBase imageSrc={imageSrc} imageProps={imageProps} title={title} message={message}>
             <LoadingButton
+                LinkComponent={RouterLink}
                 color="secondary"
                 variant="contained"
                 size="medium"
                 sx={buttonStyle}
+                to="/recovery-password"
             >
                 <Typography component="span" color="common.white" sx={buttonText}>
                     Restablecer contraseña

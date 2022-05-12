@@ -6,7 +6,8 @@ import Box from "@mui/material/Box";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { LoginGrid } from "../../components/LoginGrid";
 import { LabelTextInput } from "../../components/LabelTextInput";
-import { useSearchParams } from "react-router-dom";
+import { useFetchAndLoad } from "../../hooks";
+import { recoveryPassword } from "./services/recovery.service";
 
 const useStyles = {
   formTitle: {
@@ -27,16 +28,22 @@ const useStyles = {
 };
 
 const Recovery = () => {
-  const [searchParams] = useSearchParams();
-  const getToken = searchParams.get("token");
+  const { loading, callEndpoint } = useFetchAndLoad();
   const { formTitle, formInput, loginContent, loadingButton, textButton } = useStyles;
 
   const initialValues = {
     email: ""
   };
 
-  const onSubmit = (values) => {
-    console.log(values);
+  const onSubmit = async ({ email }) => {
+    try {
+      const { status } = await callEndpoint(recoveryPassword({ email, host: "kikoya.io" }));
+      console.log(status);
+      // if (status === 200) navigate("/success-password");
+    } catch (error) {
+      console.log("Error generate-pass ", error);
+      navigate("/error-system");
+    }
   };
 
   const validationSchema = Yup.object({
@@ -66,7 +73,7 @@ const Recovery = () => {
             />
             <Box sx={{ ...loginContent }}>
               <Box sx={{ width: "80%", height: "100%" }}>
-                <LoadingButton type="submit" variant="contained" size="medium" sx={{ ...loadingButton }}>
+                <LoadingButton type="submit" variant="contained" size="medium" loading={loading} sx={{ ...loadingButton }}>
                   <Typography component="span" color="common.white" sx={{ ...textButton }}>
                     Enviar correo
                   </Typography>

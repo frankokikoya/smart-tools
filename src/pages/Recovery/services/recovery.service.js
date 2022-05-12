@@ -15,3 +15,16 @@ export const createPassword = ({ password = "", token = "" }) => {
         controller,
     };
 };
+
+export const recoveryPassword = ({ email = "", token = "", host = "" }) => {
+    const controller = loadAbort();
+    return {
+        call: axios.patch(
+            `${baseURL}/users/security/recovery`,
+            { email, host },
+            { headers: { "Authorization": `Bearer ${token}` } },
+            { signal: controller.signal }
+        ),
+        controller,
+    };
+};
