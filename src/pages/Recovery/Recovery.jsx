@@ -1,6 +1,7 @@
 import React from "react";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
+import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -29,6 +30,7 @@ const useStyles = {
 
 const Recovery = () => {
   const { loading, callEndpoint } = useFetchAndLoad();
+  const navigate = useNavigate();
   const { formTitle, formInput, loginContent, loadingButton, textButton } = useStyles;
 
   const initialValues = {

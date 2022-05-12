@@ -16,13 +16,12 @@ export const createPassword = ({ password = "", token = "" }) => {
     };
 };
 
-export const recoveryPassword = ({ email = "", token = "", host = "" }) => {
+export const recoveryPassword = ({ email = "", host = "" }) => {
     const controller = loadAbort();
     return {
-        call: axios.patch(
+        call: axios.post(
             `${baseURL}/users/security/recovery`,
             { email, host },
-            { headers: { "Authorization": `Bearer ${token}` } },
             { signal: controller.signal }
         ),
         controller,
