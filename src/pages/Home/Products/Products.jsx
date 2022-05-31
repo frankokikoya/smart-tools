@@ -125,8 +125,8 @@ export const Products = () => {
       </MainBox.SearchBox>
       <MainBox.GridBox>
         <DataGrid
-          rows={users}
           columns={[...columns, actionsColumn]}
+          rows={users}
           checkboxSelection
           disableSelectionOnClick
           disableColumnMenu

@@ -101,7 +101,7 @@ export const LoginForm = () => {
         }}
         gutterBottom
       >
-        ¿Has olvidado tu constraseña? <Link component={RouterLink} to="/recovery-password">Recupérala aquí.</Link>
+        ¿Has olvidado tu contraseña? <Link component={RouterLink} to="/recovery-password">Recupérala aquí.</Link>
       </Typography>
     </>
   );

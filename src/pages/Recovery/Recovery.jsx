@@ -41,7 +41,7 @@ const Recovery = () => {
     try {
       const { status } = await callEndpoint(recoveryPassword({ email, host: "kikoya.io" }));
       console.log(status);
-      // if (status === 200) navigate("/success-password");
+      if (status === 200) navigate("/success-email");
     } catch (error) {
       console.log("Error generate-pass ", error);
       navigate("/error-system");

@@ -8,6 +8,7 @@ const axiosInstance = (history = null) => {
 
   if (session) {
     headers.Authorization = `Bearer ${session?.accessToken}`;
+    headers['Accept-Language'] = 'es-MX';
   }
 
   const instance = axios.create({ baseURL, headers });

@@ -6,3 +6,4 @@ export * from './Missing';
 export * from './Recovery';
 export * from './Unauthorized';
 export * from './User';
+export * from './Catalogs';

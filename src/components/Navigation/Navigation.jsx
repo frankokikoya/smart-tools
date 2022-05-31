@@ -14,7 +14,9 @@ import {
   Financier,
   Recovery,
   SuccessPassword,
-  NewPassword
+  NewPassword,
+  Catalogs,
+  SuccessEmailSend
 } from "../../pages";
 
 const ROLES = {
@@ -33,6 +35,7 @@ export const Navigation = () => {
         <Route path="generate-password" element={<NewPassword />} />
         <Route path="recovery-password" element={<Recovery />} />
         <Route path="success-password" element={<SuccessPassword />} />
+        <Route path="success-email" element={<SuccessEmailSend />} />
         <Route path="error-token" element={<ErrorToken />} />
         <Route path="error-system" element={<ErrorSystem />} />
         {/* protected routes */}
@@ -41,7 +44,7 @@ export const Navigation = () => {
           <Route element={<NavBarLayout />}>
             <Route path="home" element={<Home />} />
             <Route path="products" element={<div>Productos...</div>} />
-            <Route path="catalogs" element={<div>Catalogs...</div>} />
+            <Route path="catalogs" element={<Catalogs />} />
             <Route path="settings" element={<Products />} />
           </Route>
         </Route>
