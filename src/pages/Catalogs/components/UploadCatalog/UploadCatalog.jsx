@@ -38,12 +38,12 @@ export const UploadCatalog = () => {
               onClick={handleNext}
               sx={uploadStyles.buttonStyles} >
               <Typography component="span" color="common.white" sx={uploadStyles.buttonText}>
-                Cargar un catálogo
+                Cargar catálogo
               </Typography>
             </LoadingButton>
           </Box>
           : <Box>
-            <StepperUpload/>
+            <StepperUpload />
           </Box>
       }
     </>

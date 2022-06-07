@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import PropTypes from "prop-types";
 
 export const TabPanel = ({ children, value, index, ...other }) => {
@@ -14,7 +14,7 @@ export const TabPanel = ({ children, value, index, ...other }) => {
         >
             {value === index && (
                 <Box sx={{ p: 3 }}>
-                    <Typography component={Box}>{children}</Typography>
+                    {children}
                 </Box>
             )}
         </Box>

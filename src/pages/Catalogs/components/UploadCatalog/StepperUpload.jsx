@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { LoadingButton } from '@mui/lab';
-import SimCardDownloadIcon from '@mui/icons-material/SimCardDownload';
-import { Box, Step, StepContent, StepLabel, Stepper, Typography } from '@mui/material';
+import { Box, Step, StepContent, StepLabel, Stepper } from '@mui/material';
+import { StepOne } from './StepOne';
+import { StepTwo } from './StepTwo';
 
 
 const steps = [
@@ -43,56 +43,49 @@ export const StepperUpload = () => {
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'start', width: '95%', ml: '2%' }}>
-      <Stepper activeStep={activeStep} orientation="vertical" sx={{ maxWidth: '15%' }}>
+      <Stepper
+        activeStep={activeStep}
+        orientation="vertical"
+        sx={{
+          maxWidth: '15%',
+          '.Mui-completed .MuiStepIcon-root': {
+            color: 'secondary.main'
+          },
+          '.Mui-disabled .MuiStepIcon-root': {
+            color: '#e0e0e0'
+          },
+          '.MuiStep-root .Mui-disabled': {
+            color: '#bdbdbd'
+          },
+          '.MuiStep-root .Mui-disabled .MuiStepLabel-label': {
+            color: '#bdbdbd'
+          },
+          '.MuiStep-root .MuiStepLabel-label': {
+            fontWeight: 'bold',
+            color: 'primary.main'
+          }
+        }}>
         {
-          steps.map(step => (
-            <Step key={step.id}>
-              <StepLabel>{step.label}</StepLabel>
-              <StepContent>
-                <Typography>{step.description}</Typography>
+          steps.map((step, i) => (
+            <Step key={step.id} expanded={true}>
+              <StepLabel>
+                {step.label}
+              </StepLabel>
+              <StepContent sx={{ color: i <= activeStep ? 'primary.main' : '#e0e0e0' }}>
+                {step.description}
               </StepContent>
             </Step>
           ))
         }
       </Stepper>
-      <Box sx={{ ml: '5%', width: '50%' }}>
-        <Typography gutterBottom>
-          En este apartado encontrarás la plantilla correspondiente a catálogos. Favor de descargarla y completarla <br /> con la información que deseas incluir.
-        </Typography>
-        <Box sx={{ border: '1px solid #ccc', borderRadius: '5px', pt: 3, px: 3 }}>
-          <Typography variant='h6' sx={{ fontWeight: 'bold' }}>
-            Cómo preparar tu archivo correctamente
-          </Typography>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Box component='ul'>
-              <li>Tamaño máximo de 25MB</li>
-              <li>Formato del archivo .CSV</li>
-            </Box>
-            <Box component='ul'>
-              <li>
-                Considera el tipo de dato <br /> definido en cada columna de <br /> la pantalla: Ej. Texto plano, <br /> números, fechas, etc.
-              </li>
-            </Box>
-            <Box component='ul'>
-              <li>Tamaño máximo de 25MB</li>
-            </Box>
-          </Box>
-        </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
-          <LoadingButton
-            color="secondary"
-            variant="contained"
-            size="medium"
-            endIcon={<SimCardDownloadIcon sx={{ color: 'white' }}/>}
-            sx={{ textTransform: "none", borderRadius: 10 }} >
-            <Typography 
-              component="span" 
-              color="common.white" 
-              sx={{ fontWeight: "bold", fontSize: 14 }}>
-              Descargar CSV
-            </Typography>
-          </LoadingButton>
-        </Box>
+      <Box sx={{ ml: '10%', width: '50%' }}>
+        {
+          activeStep === 0
+            ? <StepOne handleNext={handleNext} />
+            : activeStep === 1
+              ? <StepTwo />
+              : <div>Three</div>
+        }
       </Box>
     </Box>
   )
