@@ -1,22 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+import CircularProgress from '@mui/material/CircularProgress';
 import { Box } from "@mui/material";
-import { AccessoryHeader } from "./AccessoryHeader";
-import { AccessoryGrid } from "./AccessoryGrid";
-import { useFetchAndLoad, useArray, useAsync } from "../../../../hooks";
-import { AccessoryAdapter } from "../../../../adapters/accessory.adapter";
+import { useFetchAndLoad, useAsync } from "../../../../hooks";
 import { getAccessories } from "../../services/catalogs.service";
-import { UploadCatalog } from "../UploadCatalog/UploadCatalog";
+import UploadCatalog from "../UploadCatalog";
+import AccessoryHeader from "./AccessoryHeader";
+import AccessoryGrid from "./AccessoryGrid";
 import { panelStyles } from "./sxStyles";
 
-export const CatalogPanel = () => {
-    const { loading, callEndpoint } = useFetchAndLoad();
-    const { array: accessories, set: setAccessories } = useArray([]);
+const CatalogPanel = () => {
+    const [step, setStep] = useState(0);
+    const [isEmpty, setIsEmpty] = useState(0);
+    const { callEndpoint } = useFetchAndLoad();
 
-    const adapAccessories = ({ data, status }) => {
-        console.log({ status, data });
-        if (status === 200) {
-            setAccessories(data.content.map(accessory => AccessoryAdapter(accessory)));
-        }
+    const handleNext = () => {
+        setStep((prevActiveStep) => prevActiveStep + 1);
+      };
+    
+      // const handleBack = () => {
+      //    setStep((prevActiveStep) => prevActiveStep - 1);
+      //  };
+    
+      /*const handleReset = () => {
+        setStep(0);
+      };*/
+    
+    // CHECK ACCESSORIES
+    const adapAccessories = ({ status }) => {
+        // console.log({ status, data });
+        status === 200 && setIsEmpty(2);
+
+        status === 204 && setIsEmpty(1);
+
     };
 
     const catchError = (error) => {
@@ -31,13 +46,17 @@ export const CatalogPanel = () => {
     return (
         <>
             {
-                accessories.length > 0
-                    ? <Box sx={panelStyles.tabPanelBox}>
-                        <AccessoryHeader />
-                        <AccessoryGrid />
-                    </Box>
-                    : <UploadCatalog />
+                isEmpty === 0
+                    ? <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: 10 }}> <CircularProgress /> </Box>
+                    : isEmpty === 2
+                        ? <Box sx={panelStyles.tabPanelBox}>
+                            <AccessoryHeader />
+                            <AccessoryGrid />
+                        </Box>
+                        : <UploadCatalog step={step} handleNext={handleNext} />
             }
         </>
     )
 };
+
+export default CatalogPanel;

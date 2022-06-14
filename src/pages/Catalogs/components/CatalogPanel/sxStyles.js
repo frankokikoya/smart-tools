@@ -1,7 +1,5 @@
 export const headerStyles = {
-    tableBox: {
-        ml: "20%", display: "flex"
-    },
+    tableBox: { display: "flex"},
     tableRow: {
         '&:last-child td, &:last-child th': { border: 0 }
     },
@@ -18,12 +16,15 @@ export const headerStyles = {
 
 export const panelStyles = {
     tabPanelBox: {
-        display: "flex", flexDirection: "column", height: "65vh",
+        display: "flex", 
+        flexDirection: "column",
+        width: "100%",
+        height: "70vh"
     }
 };
 
 export const gridStyles = {
-    gridBox: { display: "flex", height: "100%", ml: "20%", mr: "15%", mt: "1%" },
+    gridBox: { display: "flex", height: "100%", mt: "1%" },
     displayGrid: {
         '.MuiDataGrid-columnSeparator': {
             display: 'none',

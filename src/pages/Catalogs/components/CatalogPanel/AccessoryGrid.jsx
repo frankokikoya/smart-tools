@@ -8,13 +8,13 @@ import { AccessoryAdapter, AccessoryPaginationAdapter } from "../../../../adapte
 import { Box } from "@mui/material";
 import { gridStyles } from "./sxStyles";
 
-export const AccessoryGrid = () => {
+const AccessoryGrid = () => {
     const { loading, callEndpoint } = useFetchAndLoad();
     const { array: accessories, set: setAccessories } = useArray([]);
     // pagination
     const [pageInfo, setPageInfo] = useState({});
     const [page, setPage] = useState(0);
-    const [pageSize, setPageSize] = useState(5);
+    const [pageSize, setPageSize] = useState(10);
     const [rowCountState, setRowCountState] = useState(pageInfo?.totalElements || 0);
 
 
@@ -69,3 +69,5 @@ export const AccessoryGrid = () => {
         </Box>
     )
 };
+
+export default AccessoryGrid;

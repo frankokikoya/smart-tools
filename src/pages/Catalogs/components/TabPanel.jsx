@@ -2,7 +2,7 @@ import React from "react";
 import { Box } from "@mui/material";
 import PropTypes from "prop-types";
 
-export const TabPanel = ({ children, value, index, ...other }) => {
+const TabPanel = ({ children, value, index, ...other }) => {
     return (
         <Box
             role="tabpanel"
@@ -26,3 +26,6 @@ TabPanel.propTypes = {
     index: PropTypes.number.isRequired,
     value: PropTypes.number.isRequired,
 };
+
+
+export default TabPanel;

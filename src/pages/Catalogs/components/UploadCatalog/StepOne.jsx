@@ -3,7 +3,7 @@ import { LoadingButton } from '@mui/lab';
 import SimCardDownloadIcon from '@mui/icons-material/SimCardDownload';
 import { Box, Typography } from '@mui/material';
 
-export const StepOne = ({ handleNext }) => {
+const StepOne = ({ handleNext }) => {
     return (
         <>
             <Typography gutterBottom>
@@ -51,3 +51,5 @@ export const StepOne = ({ handleNext }) => {
         </>
     )
 };
+
+export default StepOne;

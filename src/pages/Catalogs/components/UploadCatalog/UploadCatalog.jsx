@@ -4,20 +4,7 @@ import { Box, Typography } from "@mui/material";
 import { uploadStyles } from "./sxStyles"
 import { StepperUpload } from "./StepperUpload";
 
-export const UploadCatalog = () => {
-  const [step, setStep] = useState(0);
-
-  const handleNext = () => {
-    setStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  // const handleBack = () => {
-  //    setStep((prevActiveStep) => prevActiveStep - 1);
-  //  };
-
-  const handleReset = () => {
-    setStep(0);
-  };
+const UploadCatalog = ({ step, handleNext }) => {
 
   return (
     <>
@@ -49,3 +36,5 @@ export const UploadCatalog = () => {
     </>
   )
 };
+
+export default UploadCatalog;

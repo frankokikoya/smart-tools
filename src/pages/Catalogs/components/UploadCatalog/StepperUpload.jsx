@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { Box, Step, StepContent, StepLabel, Stepper } from '@mui/material';
-import { StepOne } from './StepOne';
-import { StepTwo } from './StepTwo';
+import StepOne from './StepOne';
+import StepTwo from './StepTwo';
+import StepThree from './StepThree';
+import { useArray, useFetchAndLoad } from '../../../../hooks';
+import { formatBytes } from '../../../../utilities/formatBytes.utility';
+import { processCSV, validateCSV } from '../../services/catalogs.service';
+import { uploadStyles } from './sxStyles';
 
 
 const steps = [
@@ -28,43 +33,66 @@ const steps = [
 
 export const StepperUpload = () => {
   const [activeStep, setActiveStep] = useState(0);
-
+  const [uploadFile, setUploadFile] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [fileInfo, setFileInfo] = useState({ name: null, size: null });
+  const [validateFile, setValidateFile] = useState({ corrects: 0, errors: 0, total: 0, errorRows: [] });
+  // custom hooks
+  const { array: fileErrors, push: addError, clear: clearErrors } = useArray([]);
+  const { loading: loadingValidate, callEndpoint: callValidate } = useFetchAndLoad();
+  const { callEndpoint: callProcess } = useFetchAndLoad();
+  // handle stepper
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
-
-  const handleBack = () => {
+  /*const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
   const handleReset = () => {
     setActiveStep(0);
+  };*/
+  // hanlde file
+  const handleOnChange = (event) => {
+    const file = event.target.files[0];
+    file.size > 150000 && addError('El archivo excede el peso permitido');
+    file.type !== 'text/csv' && addError(`La extensión "${file.type}" no está permitida, sólo .CSV`);
+    setSelectedFile(file);
+    setFileInfo({ name: file.name, size: formatBytes(file.size) });
+  };
+  const handleDeleteFile = () => {
+    setSelectedFile(null);
+    setFileInfo({ name: null, size: null });
+    setValidateFile({ corrects: 0, errors: 0, total: 0, errorRows: [] });
+    clearErrors();
+    activeStep === 2 && setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+  const sendProcessFile = async () => {
+    try {
+      const { status } = await callProcess(processCSV({ file: selectedFile }));
+      status === 200 && setUploadFile(true);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const sendValidateFile = async () => {
+    try {
+      const { data } = await callValidate(validateCSV({ file: selectedFile }));
+      const { corrects, errors, total, errorRows } = data;
+      console.log({ corrects, errors, total, errorRows });
+      setValidateFile((prev) => ({ ...prev, corrects, errors, total, errorRows }));
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      errorRows.length === 0 && await sendProcessFile();
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'start', width: '95%', ml: '2%' }}>
+    <Box sx={{ display: 'flex', justifyContent: 'start', width: '95%', height: '100%', ml: '2%' }}>
       <Stepper
         activeStep={activeStep}
         orientation="vertical"
-        sx={{
-          maxWidth: '15%',
-          '.Mui-completed .MuiStepIcon-root': {
-            color: 'secondary.main'
-          },
-          '.Mui-disabled .MuiStepIcon-root': {
-            color: '#e0e0e0'
-          },
-          '.MuiStep-root .Mui-disabled': {
-            color: '#bdbdbd'
-          },
-          '.MuiStep-root .Mui-disabled .MuiStepLabel-label': {
-            color: '#bdbdbd'
-          },
-          '.MuiStep-root .MuiStepLabel-label': {
-            fontWeight: 'bold',
-            color: 'primary.main'
-          }
-        }}>
+        sx={uploadStyles.stepperStyle}>
         {
           steps.map((step, i) => (
             <Step key={step.id} expanded={true}>
@@ -78,13 +106,29 @@ export const StepperUpload = () => {
           ))
         }
       </Stepper>
-      <Box sx={{ ml: '10%', width: '50%' }}>
+      <Box sx={{ ml: '10%', width: '50%', height: '100%' }}>
         {
           activeStep === 0
             ? <StepOne handleNext={handleNext} />
             : activeStep === 1
-              ? <StepTwo />
-              : <div>Three</div>
+              ? <StepTwo
+                loading={loadingValidate}
+                fileInfo={fileInfo}
+                selectedFile={selectedFile}
+                fileErrors={fileErrors}
+                handleOnChange={handleOnChange}
+                handleDeleteFile={handleDeleteFile}
+                sendFile={sendValidateFile}
+              />
+              : activeStep === 2
+                ? <StepThree
+                  fileInfo={fileInfo}
+                  validateFile={validateFile}
+                  handleDeleteFile={handleDeleteFile}
+                  sendFile={sendProcessFile}
+                  uploadFile={uploadFile}
+                />
+                : <></>
         }
       </Box>
     </Box>

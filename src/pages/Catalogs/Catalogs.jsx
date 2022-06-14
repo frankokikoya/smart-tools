@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { MainBox } from "../../components/MainBox";
-import { TabPanel } from "./components/TabPanel";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import FlagIcon from '@mui/icons-material/Flag';
 import RestorePageIcon from '@mui/icons-material/RestorePage';
-import { CatalogPanel } from "./components/CatalogPanel";
+import TabPanel from "./components/TabPanel";
+import CatalogPanel from "./components/CatalogPanel";
 import {
     Box,
     Divider,

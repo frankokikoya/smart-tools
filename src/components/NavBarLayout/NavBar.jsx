@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { AppBar, Toolbar, Box, Button, IconButton, Avatar, Menu, MenuItem, ListItemIcon, ListItemButton } from "@mui/material";
+import { AppBar, Toolbar, Box, Button, IconButton, Avatar, Menu, MenuItem, ListItemIcon } from "@mui/material";
 import Logout from "@mui/icons-material/Logout";
 import { NavLinkCustom } from "./NavLinkCustom";
 import KeyIcon from '@mui/icons-material/Key';
@@ -16,26 +16,21 @@ const useSx = {
     p: 1,
     alignItems: "center",
     justifyContent: "space-between",
-    // border: "1px solid white"
   },
   boxLogo: {
     width: "10%",
     height: "10%",
-    // border: "1px solid white"
   },
   menuTab: {
     flexWrap: "wrap",
     display: "flex",
     width: "70%",
     alignItems: "center",
-    // border: "1px solid white"
   },
   boxAvatar: {
     flexWrap: "wrap",
     display: "flex",
-    // maxWidth: "15vw",
     alignItems: "center",
-    // border: "1px solid white"
   },
   menuItem: {
     color: "primary.main",
@@ -121,20 +116,16 @@ export const NavBar = () => {
             }}
           >
             <MenuItem>
-              <ListItemButton>
-                <ListItemIcon>
-                  <KeyIcon fontSize="small" />
-                </ListItemIcon>
-                Cambiar contraseña
-              </ListItemButton>
+              <ListItemIcon>
+                <KeyIcon fontSize="small" />
+              </ListItemIcon>
+              Cambiar contraseña
             </MenuItem>
-            <MenuItem>
-              <ListItemButton onClick={handleLogout}>
-                <ListItemIcon>
-                  <Logout fontSize="small" />
-                </ListItemIcon>
-                Salir
-              </ListItemButton>
+            <MenuItem onClick={handleLogout}>
+              <ListItemIcon>
+                <Logout fontSize="small" />
+              </ListItemIcon>
+              Salir
             </MenuItem>
           </Menu>
         </Box>

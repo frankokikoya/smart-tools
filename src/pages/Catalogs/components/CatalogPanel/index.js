@@ -1,1 +1,2 @@
-export * from './CatalogPanel';
+import CatalogPanel from './CatalogPanel';
+export default CatalogPanel;

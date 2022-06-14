@@ -29,3 +29,22 @@ export const rows = [
     { id: 9, accesory: "Gato Hidraulico" },
     { id: 10, accesory: "Tapetes" },
 ];
+
+export const errorRows = [
+    {
+        message: "Campo accesorio obligatorio",
+        lines: [
+            17,
+            20,
+            21
+        ]
+    },
+    {
+        message: "Campo incorrecto",
+        lines: [
+            2,
+            3,
+            4
+        ]
+    }
+]

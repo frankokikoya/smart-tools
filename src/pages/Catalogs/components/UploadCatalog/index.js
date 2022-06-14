@@ -1,1 +1,2 @@
-export * from './UploadCatalog';
+import UploadCatalog from './UploadCatalog';
+export default UploadCatalog;

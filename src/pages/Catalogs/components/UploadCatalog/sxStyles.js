@@ -14,16 +14,15 @@ export const uploadStyles = {
     },
     buttonStyles: { textTransform: "none", borderRadius: 10, width: "20%", height: "90%" },
     buttonText: { fontWeight: "bold", fontSize: 14 },
-    stepTwoContainer: {
+    stepContainer: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         pt: 3,
-        mt: 4,
     },
     fileContainer: {
-        p: 3,
+        p: 4,
         mt: 3,
         width: '100%',
         display: 'flex',
@@ -47,5 +46,39 @@ export const uploadStyles = {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    tableContainer: {
+        mt: 4, 
+        display: 'flex', 
+        flexWrap: 'wrap', 
+        width: '100%', 
+    },
+    tableItem: {
+        mt: 1,
+        display: 'flex', 
+        flexWrap: 'wrap', 
+        width: '100%', 
+        borderBottom: '1px solid #ccc', 
+        justifyContent: 'space-between', 
+    },
+    stepperStyle: {
+        height: '100%',
+        maxWidth: '15%',
+        '.Mui-completed .MuiStepIcon-root': {
+            color: 'secondary.main'
+        },
+        '.Mui-disabled .MuiStepIcon-root': {
+            color: '#e0e0e0'
+        },
+        '.MuiStep-root .Mui-disabled': {
+            color: '#bdbdbd'
+        },
+        '.MuiStep-root .Mui-disabled .MuiStepLabel-label': {
+            color: '#bdbdbd'
+        },
+        '.MuiStep-root .MuiStepLabel-label': {
+            fontWeight: 'bold',
+            color: 'primary.main'
+        }
     }
 };
