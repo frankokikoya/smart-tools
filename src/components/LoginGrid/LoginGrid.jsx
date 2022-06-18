@@ -1,9 +1,11 @@
-import React from "react";
-import Grid from "@mui/material/Grid";
-import PropTypes from "prop-types";
-import { makeStyles } from "@mui/styles";
-import { LoginLeft } from "./LoginLeft";
-import { LoginRight } from "./LoginRight";
+import React from 'react';
+
+import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
+import PropTypes from 'prop-types';
+
+import { LoginLeft } from './LoginLeft';
+import { LoginRight } from './LoginRight';
 
 const useStyles = makeStyles({
     gridContainder: {
@@ -18,7 +20,7 @@ const useStyles = makeStyles({
         backgroundPosition: "center",
         backgroundSize: "cover",
     },
-}, {index: 1});
+}, { index: 1 });
 
 const LoginGrid = ({ children }) => {
     const { gridContainder, gridItem } = useStyles();

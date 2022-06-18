@@ -1,9 +1,11 @@
 import React from 'react';
-import { Box, Button, Typography } from '@mui/material';
-import UploadFileSharpIcon from '@mui/icons-material/UploadFileSharp';
-import CircularProgress from '@mui/material/CircularProgress';
+
 import CancelIcon from '@mui/icons-material/Cancel';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
+import UploadFileSharpIcon from '@mui/icons-material/UploadFileSharp';
+import { Box, Button, Typography } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
+
 import ErrorsLocalValidate from './ErrorsLocalValidate';
 import { uploadStyles } from './sxStyles';
 
@@ -18,18 +20,18 @@ const StepTwo = ({ ...props }) => {
             }
             {
                 !props.selectedFile?.type
-                    ? <label htmlFor="upload-file" style={{ marginTop: '5%' }}>
+                    ? <label htmlFor='upload-file' style={{ marginTop: '5%' }}>
                         <input
-                            id="upload-file"
-                            type="file"
-                            accept="text/csv"
+                            id='upload-file'
+                            type='file'
+                            accept='text/csv'
                             onChange={props.handleOnChange}
                             style={{ display: 'none' }}
                         />
                         <Button
-                            component="span"
-                            variant="contained"
-                            color="secondary"
+                            component='span'
+                            variant='contained'
+                            color='secondary'
                             endIcon={<UploadFileSharpIcon sx={{ color: "white" }} />}
                             sx={{ textTransform: "none", borderRadius: 10 }}>
                             <Typography sx={{ fontWeight: "bold", fontSize: 14, color: "white" }}>
@@ -54,9 +56,9 @@ const StepTwo = ({ ...props }) => {
                         {
                             !props.loading && <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
                                 <Button
-                                    component="span"
-                                    variant="contained"
-                                    color="primary"
+                                    component='span'
+                                    variant='contained'
+                                    color='primary'
                                     onClick={props.handleDeleteFile}
                                     sx={{ textTransform: "none", borderRadius: 10 }}>
                                     <Typography sx={uploadStyles.buttonFile}>
@@ -66,9 +68,9 @@ const StepTwo = ({ ...props }) => {
                                 {
                                     props.fileErrors.length === 0
                                         ? <Button
-                                            component="span"
-                                            variant="contained"
-                                            color="secondary"
+                                            component='span'
+                                            variant='contained'
+                                            color='secondary'
                                             onClick={props.sendFile}
                                             sx={{ textTransform: "none", borderRadius: 10, ml: 3 }}>
                                             <Typography sx={uploadStyles.buttonFile}>

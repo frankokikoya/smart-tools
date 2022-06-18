@@ -1,12 +1,14 @@
-import React, { useEffect, Suspense } from "react";
-import { BrowserRouter } from "react-router-dom";
-import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import { useDispatch } from "react-redux";
-import { clearError } from "./redux/states/ErrorSlice";
-import theme from "./theme";
-import { Navigation } from "./components/Navigation";
-import ModalError from "./components/ModalError/ModalError";
+import React, { useEffect, Suspense } from 'react';
+
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import { useDispatch } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+
+import ModalError from './components/ModalError/ModalError';
+import { Navigation } from './components/Navigation';
+import { clearError } from './redux/states/ErrorSlice';
+import theme from './theme';
 
 function App() {
   const dispatch = useDispatch();

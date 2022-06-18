@@ -1,13 +1,15 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { AppBar, Toolbar, Box, Button, IconButton, Avatar, Menu, MenuItem, ListItemIcon } from "@mui/material";
-import Logout from "@mui/icons-material/Logout";
-import { NavLinkCustom } from "./NavLinkCustom";
+import React, { useState } from 'react';
+
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import KeyIcon from '@mui/icons-material/Key';
-import { useAuth, useFetchAndLoad } from "../../hooks";
-import { MenuItems } from "./MenuItems";
-import { logout } from "../../services/public.service";
+import Logout from '@mui/icons-material/Logout';
+import { AppBar, Toolbar, Box, Button, IconButton, Avatar, Menu, MenuItem, ListItemIcon } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
+import { useAuth, useFetchAndLoad } from '../../hooks';
+import { logout } from '../../services/public.service';
+import { MenuItems } from './MenuItems';
+import { NavLinkCustom } from './NavLinkCustom';
 
 const useSx = {
   boxContent: {
@@ -70,10 +72,10 @@ export const NavBar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position='static'>
       <Toolbar>
         <Box sx={{ ...boxContent }}>
-          <Box component="img" alt="logo-kikoya" src="/imgs/logo-login.svg" sx={{ ...boxLogo }} />
+          <Box component='img' alt='logo-kikoya' src='/imgs/logo-login.svg' sx={{ ...boxLogo }} />
 
           <Box sx={{ ...menuTab }}>
             {MenuItems.map(({ id, label, path, icon, haveNested }) => {
@@ -88,15 +90,15 @@ export const NavBar = () => {
 
           <Box sx={{ ...boxAvatar }}>
             <IconButton sx={{ p: 0 }}>
-              <Avatar alt="avatar-kikoya" src="/imgs/avatar.svg" />
+              <Avatar alt='avatar-kikoya' src='/imgs/avatar.svg' />
             </IconButton>
             <Button
-              size="large"
+              size='large'
               endIcon={<ArrowDropDownIcon />}
               sx={{ color: "white", textTransform: "none" }}
               onClick={handleClick}
               aria-controls={open ? 'account-menu' : undefined}
-              aria-haspopup="true"
+              aria-haspopup='true'
               aria-expanded={open ? 'true' : undefined}
             >
               Bienvenido, @{session.user.name}
@@ -104,7 +106,7 @@ export const NavBar = () => {
           </Box>
           <Menu
             anchorEl={anchorEl}
-            id="account-menu"
+            id='account-menu'
             open={open}
             onClose={handleClose}
             onClick={handleClose}
@@ -117,13 +119,13 @@ export const NavBar = () => {
           >
             <MenuItem>
               <ListItemIcon>
-                <KeyIcon fontSize="small" />
+                <KeyIcon fontSize='small' />
               </ListItemIcon>
               Cambiar contraseña
             </MenuItem>
             <MenuItem onClick={handleLogout}>
               <ListItemIcon>
-                <Logout fontSize="small" />
+                <Logout fontSize='small' />
               </ListItemIcon>
               Salir
             </MenuItem>

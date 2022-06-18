@@ -1,6 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import DialogActions from "@mui/material/DialogActions";
+import React from 'react';
+
+import DialogActions from '@mui/material/DialogActions';
+import PropTypes from 'prop-types';
 
 const ActionsDialog = ({ children }) => {
     return (

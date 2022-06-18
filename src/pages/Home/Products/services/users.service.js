@@ -1,5 +1,5 @@
-import axiosInstance from "../../../../interceptors/axiosInstance";
-import { loadAbort } from "../../../../utilities";
+import axiosInstance from '../../../../interceptors/axiosInstance';
+import { loadAbort } from '../../../../utilities';
 
 export const getUsers = () => {
     const controller = loadAbort();

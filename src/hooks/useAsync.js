@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 export const useAsync = (
   asyncFn, // Funcion asíncrona de axios
   successFunction, // Funcion para retornar el resultado de la llamada

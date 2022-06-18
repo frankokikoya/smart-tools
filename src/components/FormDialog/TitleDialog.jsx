@@ -1,8 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import DialogTitle from "@mui/material/DialogTitle";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
+import React from 'react';
+
+import CloseIcon from '@mui/icons-material/Close';
+import DialogTitle from '@mui/material/DialogTitle';
+import IconButton from '@mui/material/IconButton';
+import PropTypes from 'prop-types';
 
 
 const BootstrapDialogTitle = (props) => {
@@ -13,7 +14,7 @@ const BootstrapDialogTitle = (props) => {
             {children}
             {onClose ? (
                 <IconButton
-                    aria-label="close"
+                    aria-label='close'
                     onClick={onClose}
                     sx={{
                         position: 'absolute',
@@ -31,7 +32,7 @@ const BootstrapDialogTitle = (props) => {
 
 const TitleDialog = ({ children, handleClose }) => {
     return (
-        <BootstrapDialogTitle id="from-dialog-title" onClose={handleClose}>
+        <BootstrapDialogTitle id='from-dialog-title' onClose={handleClose}>
             {children}
         </BootstrapDialogTitle>
     )

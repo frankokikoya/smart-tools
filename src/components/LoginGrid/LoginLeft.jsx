@@ -1,6 +1,7 @@
-import React from "react";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import React from 'react';
+
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 const useStyles = {
     LeftContainer: {
@@ -29,16 +30,16 @@ export const LoginLeft = () => {
             <Box sx={{ ...firtsItemLeft }}>
                 <Typography
                     component={Box}
-                    variant="h2"
-                    color="common.white"
+                    variant='h2'
+                    color='common.white'
                     sx={{ width: "50%", fontWeight: "bold" }}
                     gutterBottom>
                     ¡Vamos tras bambalinas!
                 </Typography>
                 <Typography
                     component={Box}
-                    variant="h6"
-                    color="common.white"
+                    variant='h6'
+                    color='common.white'
                     sx={{ width: "50%", fontWeight: "bold", fontSize: 30 }}
                     gutterBottom
                 >
@@ -46,8 +47,8 @@ export const LoginLeft = () => {
                 </Typography>
                 <Typography
                     component={Box}
-                    variant="h6"
-                    color="common.white"
+                    variant='h6'
+                    color='common.white'
                     sx={{ fontSize: 22 }}
                     gutterBottom>
                     Realiza otra cotización, aquí
@@ -56,8 +57,8 @@ export const LoginLeft = () => {
             <Box sx={{ height: "10%" }}
             >
                 <Typography
-                    variant="h6"
-                    color="common.white"
+                    variant='h6'
+                    color='common.white'
                     component={Box}
                     sx={{ m: 2, fontWeight: "bold", fontSize: 30 }}
                     gutterBottom

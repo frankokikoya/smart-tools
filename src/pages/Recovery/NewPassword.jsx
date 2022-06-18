@@ -1,17 +1,19 @@
-import React, { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import * as Yup from "yup";
-import { Formik, Form } from "formik";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import LoadingButton from "@mui/lab/LoadingButton";
-import CloseIcon from "@mui/icons-material/Close";
-import CheckIcon from "@mui/icons-material/Check";
-import { LoginGrid } from "../../components/LoginGrid";
-import { LabelTextInput } from "../../components/LabelTextInput";
-import { useFetchAndLoad } from "../../hooks";
-import { createPassword } from "./services/recovery.service";
+import React, { useState } from 'react';
+
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
+import LoadingButton from '@mui/lab/LoadingButton';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import { Formik, Form } from 'formik';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import * as Yup from 'yup';
+
+import { LabelTextInput } from '../../components/LabelTextInput';
+import { LoginGrid } from '../../components/LoginGrid';
+import { useFetchAndLoad } from '../../hooks';
+import { createPassword } from './services/recovery.service';
 
 const useStyles = {
     formTitle: {
@@ -80,7 +82,7 @@ const NewPassword = () => {
 
     return (
         <LoginGrid>
-            <Typography component={Box} variant="h4" sx={{ ...formTitle }} gutterBottom>
+            <Typography component={Box} variant='h4' sx={{ ...formTitle }} gutterBottom>
                 Genera una nueva contraseña
             </Typography>
             <Formik
@@ -91,12 +93,12 @@ const NewPassword = () => {
                 {(formik) => (
                     <Form>
                         <LabelTextInput
-                            type="password"
-                            name="password"
-                            label="Contraseña nueva"
+                            type='password'
+                            name='password'
+                            label='Contraseña nueva'
                             labelProps={{ ml: 1 }}
-                            placeholder="**********"
-                            variant="outlined"
+                            placeholder='**********'
+                            variant='outlined'
                             sx={{ ...formInput }}
                         />
                         <Box
@@ -104,26 +106,26 @@ const NewPassword = () => {
                             elevation={3}
                             sx={{ width: "100%", height: "40%", py: 1, mb: 1 }}>
                             <ul style={{ ...listError }}>
-                                <Typography component="li" sx={{ ...listItem, color: errors.hasMin ? "#1BB55C" : "#D32F2F" }}>{errors.hasMin ? <CheckIcon sx={{ mr: 1 }} /> : <CloseIcon sx={{ mr: 1 }} />} Mínimo 8 carácteres</Typography>
-                                <Typography component="li" sx={{ ...listItem, color: errors.hasUpperCase ? "#1BB55C" : "#D32F2F" }}>{errors.hasUpperCase ? <CheckIcon sx={{ mr: 1 }} /> : <CloseIcon sx={{ mr: 1 }} />}Incluye al menos una letra mayúscula</Typography>
-                                <Typography component="li" sx={{ ...listItem, color: errors.hasLowerCase ? "#1BB55C" : "#D32F2F" }}>{errors.hasLowerCase ? <CheckIcon sx={{ mr: 1 }} /> : <CloseIcon sx={{ mr: 1 }} />}Incluye al menos una letra minúscula</Typography>
-                                <Typography component="li" sx={{ ...listItem, color: errors.hasNumber ? "#1BB55C" : "#D32F2F" }}>{errors.hasNumber ? <CheckIcon sx={{ mr: 1 }} /> : <CloseIcon sx={{ mr: 1 }} />}Incluye al menos un número</Typography>
-                                <Typography component="li" sx={{ ...listItem, color: errors.hasSymbole ? "#1BB55C" : "#D32F2F" }}>{errors.hasSymbole ? <CheckIcon sx={{ mr: 1 }} /> : <CloseIcon sx={{ mr: 1 }} />}Incluye al menos un caracter especial.<br />Ej. !,#,$,%,&,/,(),[],-,_,+</Typography>
+                                <Typography component='li' sx={{ ...listItem, color: errors.hasMin ? "#1BB55C" : "#D32F2F" }}>{errors.hasMin ? <CheckIcon sx={{ mr: 1 }} /> : <CloseIcon sx={{ mr: 1 }} />} Mínimo 8 carácteres</Typography>
+                                <Typography component='li' sx={{ ...listItem, color: errors.hasUpperCase ? "#1BB55C" : "#D32F2F" }}>{errors.hasUpperCase ? <CheckIcon sx={{ mr: 1 }} /> : <CloseIcon sx={{ mr: 1 }} />}Incluye al menos una letra mayúscula</Typography>
+                                <Typography component='li' sx={{ ...listItem, color: errors.hasLowerCase ? "#1BB55C" : "#D32F2F" }}>{errors.hasLowerCase ? <CheckIcon sx={{ mr: 1 }} /> : <CloseIcon sx={{ mr: 1 }} />}Incluye al menos una letra minúscula</Typography>
+                                <Typography component='li' sx={{ ...listItem, color: errors.hasNumber ? "#1BB55C" : "#D32F2F" }}>{errors.hasNumber ? <CheckIcon sx={{ mr: 1 }} /> : <CloseIcon sx={{ mr: 1 }} />}Incluye al menos un número</Typography>
+                                <Typography component='li' sx={{ ...listItem, color: errors.hasSymbole ? "#1BB55C" : "#D32F2F" }}>{errors.hasSymbole ? <CheckIcon sx={{ mr: 1 }} /> : <CloseIcon sx={{ mr: 1 }} />}Incluye al menos un caracter especial.<br />Ej. !,#,$,%,&,/,(),[],-,_,+</Typography>
                             </ul>
                         </Box>
                         <LabelTextInput
-                            type="password"
-                            name="confirmPassword"
-                            label="Confirmar la contraseña nueva"
+                            type='password'
+                            name='confirmPassword'
+                            label='Confirmar la contraseña nueva'
                             labelProps={{ ml: 1 }}
-                            placeholder="Confirma tu contraseña"
-                            variant="outlined"
+                            placeholder='Confirma tu contraseña'
+                            variant='outlined'
                             sx={{ ...formInput }}
                         />
                         <Box sx={{ ...loginContent }}>
                             <Box sx={{ width: "50%", height: "100%" }}>
-                                <LoadingButton type="submit" variant="contained" size="medium" loading={loading} sx={{ ...loadingButton }} disabled={enableButton}>
-                                    <Typography component="span" color="common.white" sx={{ ...textButton }}>
+                                <LoadingButton type='submit' variant='contained' size='medium' loading={loading} sx={{ ...loadingButton }} disabled={enableButton}>
+                                    <Typography component='span' color='common.white' sx={{ ...textButton }}>
                                         Cambiar contraseña
                                     </Typography>
                                 </LoadingButton>

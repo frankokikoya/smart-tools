@@ -1,14 +1,18 @@
-import React from "react";
-import * as Yup from "yup";
-import { Formik, Form } from "formik";
-import { useNavigate } from "react-router-dom";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import LoadingButton from "@mui/lab/LoadingButton";
-import { LoginGrid } from "../../components/LoginGrid";
-import { LabelTextInput } from "../../components/LabelTextInput";
-import { useFetchAndLoad } from "../../hooks";
-import { recoveryPassword } from "./services/recovery.service";
+import React from 'react';
+
+import LoadingButton from '@mui/lab/LoadingButton';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import { Formik, Form } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+
+import { LabelTextInput } from '../../components/LabelTextInput';
+import { LoginGrid } from '../../components/LoginGrid';
+import { useFetchAndLoad } from '../../hooks';
+import { recoveryPassword } from './services/recovery.service';
+
+
 
 const useStyles = {
   formTitle: {
@@ -54,7 +58,7 @@ const Recovery = () => {
 
   return (
     <LoginGrid>
-      <Typography component={Box} variant="h4" sx={{ ...formTitle }} gutterBottom>
+      <Typography component={Box} variant='h4' sx={{ ...formTitle }} gutterBottom>
         Restablece tu contraseña
       </Typography>
       <Formik
@@ -65,18 +69,18 @@ const Recovery = () => {
         {(formik) => (
           <Form>
             <LabelTextInput
-              type="text"
-              name="email"
-              label="Correo electrónico"
+              type='text'
+              name='email'
+              label='Correo electrónico'
               labelProps={{ ml: 1 }}
-              placeholder="example@example.com"
-              variant="outlined"
+              placeholder='example@example.com'
+              variant='outlined'
               sx={{ ...formInput }}
             />
             <Box sx={{ ...loginContent }}>
               <Box sx={{ width: "80%", height: "100%" }}>
-                <LoadingButton type="submit" variant="contained" size="medium" loading={loading} sx={{ ...loadingButton }}>
-                  <Typography component="span" color="common.white" sx={{ ...textButton }}>
+                <LoadingButton type='submit' variant='contained' size='medium' loading={loading} sx={{ ...loadingButton }}>
+                  <Typography component='span' color='common.white' sx={{ ...textButton }}>
                     Enviar correo
                   </Typography>
                 </LoadingButton>

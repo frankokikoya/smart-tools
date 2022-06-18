@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
 import CancelIcon from '@mui/icons-material/Cancel';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Box, Button, Typography } from '@mui/material';
-import { uploadStyles } from './sxStyles';
+
+import CatalogContext from '../../context/CatalogContext';
 import ErrorAccordion from './ErrorAccordion/ErrorAccordion';
+import { uploadStyles } from './sxStyles';
 
 const StepThree = ({ validateFile, fileInfo, handleDeleteFile, sendFile, uploadFile }) => {
+    const { setIsUpdate, setActiveStep, setUploadStep, setIsEmpty } = useContext(CatalogContext);
+
+    const handleBack = () => {
+        setIsUpdate(false);
+        setUploadStep(0);
+        setActiveStep(0)
+        setIsEmpty(2);
+    };
+
     return (
         <Box sx={uploadStyles.stepContainer}>
             <Box
@@ -25,12 +37,12 @@ const StepThree = ({ validateFile, fileInfo, handleDeleteFile, sendFile, uploadF
                     </span>
                     {fileInfo.size && `(${fileInfo.size})`}
                 </Typography>
-                {validateFile.errorRows.length > 0 &&
+                {!uploadFile && validateFile.errorRows.length > 0 &&
                     <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
                         <Button
-                            component="span"
-                            variant="contained"
-                            color="secondary"
+                            component='span'
+                            variant='contained'
+                            color='secondary'
                             onClick={handleDeleteFile}
                             sx={{ textTransform: "none", borderRadius: 10 }}>
                             <Typography sx={uploadStyles.buttonFile}>
@@ -99,9 +111,9 @@ const StepThree = ({ validateFile, fileInfo, handleDeleteFile, sendFile, uploadF
                     </Box>
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', width: '100%', mt: 3, justifyContent: 'flex-end' }}>
                         <Button
-                            component="span"
-                            variant="contained"
-                            color="primary"
+                            component='span'
+                            variant='contained'
+                            color='primary'
                             onClick={sendFile}
                             sx={{ textTransform: "none", borderRadius: 10 }}>
                             <Typography sx={uploadStyles.buttonFile}>
@@ -110,6 +122,18 @@ const StepThree = ({ validateFile, fileInfo, handleDeleteFile, sendFile, uploadF
                         </Button>
                     </Box>
                 </>}
+                {uploadFile && <Box sx={{ display: 'flex', flexWrap: 'wrap', width: '100%', mt: 3, justifyContent: 'flex-end' }}>
+                    <Button
+                        component='span'
+                        variant='contained'
+                        color='primary'
+                        onClick={handleBack}
+                        sx={{ textTransform: "none", borderRadius: 10 }}>
+                        <Typography sx={uploadStyles.buttonFile}>
+                            Ver registros
+                        </Typography>
+                    </Button>
+                </Box>}
             </Box>
 
         </Box>

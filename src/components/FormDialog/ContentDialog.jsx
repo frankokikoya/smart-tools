@@ -1,6 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import DialogContent from "@mui/material/DialogContent";
+import React from 'react';
+
+import DialogContent from '@mui/material/DialogContent';
+import PropTypes from 'prop-types';
 
 const ContentDialog = ({ children, ...props }) => {
     return (

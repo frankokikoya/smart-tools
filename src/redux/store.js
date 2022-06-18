@@ -1,5 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { TodoSlice, UserSlice, ErrorSlice } from "./states";
+import { configureStore } from '@reduxjs/toolkit';
+
+import { TodoSlice, UserSlice, ErrorSlice } from './states';
 
 export const store = configureStore({
   reducer: {

@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -10,8 +11,8 @@ const ConfirmDialog = ({ children, open, handleClose }) => {
         <Dialog
             open={open}
             onClose={handleClose}
-            aria-labelledby="confirm-dialog-title"
-            aria-describedby="confirm-dialog-description"
+            aria-labelledby='confirm-dialog-title'
+            aria-describedby='confirm-dialog-description'
         >
             {children}
         </Dialog>
@@ -20,7 +21,7 @@ const ConfirmDialog = ({ children, open, handleClose }) => {
 
 ConfirmDialog.Title = ({ children }) => {
     return (
-        <DialogTitle id="confirm-dialog-title">
+        <DialogTitle id='confirm-dialog-title'>
             {children}
         </DialogTitle>
     )
@@ -29,7 +30,7 @@ ConfirmDialog.Title = ({ children }) => {
 ConfirmDialog.Content = ({ children }) => {
     return (
         <DialogContent>
-            <DialogContentText id="confirm-dialog-description">
+            <DialogContentText id='confirm-dialog-description'>
                 {children}
             </DialogContentText>
         </DialogContent>

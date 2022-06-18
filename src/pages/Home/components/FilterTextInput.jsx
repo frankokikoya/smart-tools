@@ -1,6 +1,7 @@
-import React from "react";
-import TextField from "@mui/material/TextField";
-import { useField } from "formik";
+import React from 'react';
+
+import TextField from '@mui/material/TextField';
+import { useField } from 'formik';
 
 export const FilterTextInput = (props) => {
   const [field, meta] = useField(props);

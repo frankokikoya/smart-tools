@@ -1,6 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { CustomDialog } from "./CustomDialog";
+import React from 'react';
+
+import PropTypes from 'prop-types';
+
+import { CustomDialog } from './CustomDialog';
 
 function FormDialog({ children, open, handleClose, ...props }) {
 
@@ -8,7 +10,7 @@ function FormDialog({ children, open, handleClose, ...props }) {
         <CustomDialog
             {...props}
             onClose={handleClose}
-            aria-labelledby="form-dialog-title"
+            aria-labelledby='form-dialog-title'
             open={open}
         >
             {children}

@@ -1,7 +1,9 @@
-import React from "react";
-import Grid from "@mui/material/Grid";
-import useStyles from "./Login.styles";
-import { LoginLeft, LoginRight, LoginForm } from "./components";
+import React from 'react';
+
+import Grid from '@mui/material/Grid';
+
+import { LoginLeft, LoginRight, LoginForm } from './components';
+import useStyles from './Login.styles';
 
 export const Login = () => {
   const classes = useStyles();

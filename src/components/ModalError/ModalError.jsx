@@ -1,7 +1,9 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Box, Button, Modal, Typography, Portal } from "@mui/material";
-import { clearError } from "../../redux/states/ErrorSlice";
+import React from 'react';
+
+import { Box, Button, Modal, Typography, Portal } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { clearError } from '../../redux/states/ErrorSlice';
 
 const style = {
     position: "absolute",
@@ -27,20 +29,20 @@ const ModalError = () => {
             <Modal
                 open={openDialog}
                 onClose={handleClose}
-                aria-labelledby="modal-axios-title"
-                aria-describedby="modal-axios-description"
+                aria-labelledby='modal-axios-title'
+                aria-describedby='modal-axios-description'
             >
                 <Box sx={style}>
-                    <Typography id="modal-axios-title" variant="h6" component="h2" sx={{ fontWeight: "bold" }}>
+                    <Typography id='modal-axios-title' variant='h6' component='h2' sx={{ fontWeight: "bold" }}>
                         {title}
                     </Typography>
-                    <Typography id="modal-axios-description" sx={{ mt: 2 }}>
+                    <Typography id='modal-axios-description' sx={{ mt: 2 }}>
                         {message}
                     </Typography>
                     <Button
                         onClick={handleClose}
-                        variant="contained"
-                        color="secondary"
+                        variant='contained'
+                        color='secondary'
                         sx={{ textTransform: "none", color: "white", borderRadius: 10, width: "25%", height: "45%", ml: "80%" }}
                     >
                         Aceptar

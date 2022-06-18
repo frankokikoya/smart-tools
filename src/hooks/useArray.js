@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export const useArray = (defaultValue = []) => {
   const [array, setArray] = useState(defaultValue);
+
+  function unshift(element) {
+    setArray((a) => [element, ...a]);
+  }
 
   function push(element) {
     setArray((a) => [...a, element]);
@@ -23,5 +27,5 @@ export const useArray = (defaultValue = []) => {
     setArray([]);
   }
 
-  return { array, set: setArray, push, filter, update, remove, clear };
+  return { array, set: setArray, unshift, push, filter, update, remove, clear };
 }

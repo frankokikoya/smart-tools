@@ -1,7 +1,9 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
-import Grid from "@mui/material/Grid";
-import { NavBar } from "./NavBar";
+import React from 'react';
+
+import Grid from '@mui/material/Grid';
+import { Outlet } from 'react-router-dom';
+
+import { NavBar } from './NavBar';
 
 const useStyles = {
   root: {

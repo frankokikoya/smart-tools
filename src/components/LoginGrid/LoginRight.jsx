@@ -1,5 +1,6 @@
-import React from "react";
-import Box from "@mui/material/Box";
+import React from 'react';
+
+import Box from '@mui/material/Box';
 
 const useStyles = {
     RightContainer: {
@@ -37,10 +38,10 @@ export const LoginRight = ({ children }) => {
     return (
         <Box sx={{ ...RightContainer }}>
             <Box sx={{ ...backGroundItem }}>
-                <Box component="img" alt="logo-kikoya" src="imgs/logo-kikoya.svg" sx={{ ...logoItem }} />
+                <Box component='img' alt='logo-kikoya' src='imgs/logo-kikoya.svg' sx={{ ...logoItem }} />
             </Box>
             <Box sx={{ ...loginContent }}>
-                <Box component="div" sx={{ height: "65%", width: "70%" }}>
+                <Box component='div' sx={{ height: "65%", width: "70%" }}>
                     {children}
                 </Box>
             </Box>

@@ -1,4 +1,4 @@
-import { makeStyles } from "@mui/styles";
+import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
   gridContainder: {
@@ -13,6 +13,6 @@ const useStyles = makeStyles({
     backgroundPosition: "center",
     backgroundSize: "cover",
   },
-}, {index: 1});
+}, { index: 1 });
 
 export default useStyles;

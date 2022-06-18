@@ -1,15 +1,23 @@
-import React, { useState } from "react";
-import { LoadingButton } from "@mui/lab";
-import { Box, Typography } from "@mui/material";
-import { uploadStyles } from "./sxStyles"
-import { StepperUpload } from "./StepperUpload";
+import React, { useContext } from 'react';
 
-const UploadCatalog = ({ step, handleNext }) => {
+import { LoadingButton } from '@mui/lab';
+import { Box, Typography } from '@mui/material';
+
+import CatalogContext from '../../context/CatalogContext';
+import { StepperUpload } from './StepperUpload';
+import { uploadStyles } from './sxStyles'
+
+const UploadCatalog = () => {
+  const { uploadStep, setUploadStep } = useContext(CatalogContext);
+
+  const handleNext = () => {
+    setUploadStep((prevActiveStep) => prevActiveStep + 1);
+  }
 
   return (
     <>
       {
-        step === 0
+        uploadStep === 0
           ? <Box
             sx={uploadStyles.container} >
             <Typography>
@@ -19,12 +27,12 @@ const UploadCatalog = ({ step, handleNext }) => {
               en el botón para cargar uno.
             </Typography>
             <LoadingButton
-              color="secondary"
-              variant="contained"
-              size="medium"
+              color='secondary'
+              variant='contained'
+              size='medium'
               onClick={handleNext}
               sx={uploadStyles.buttonStyles} >
-              <Typography component="span" color="common.white" sx={uploadStyles.buttonText}>
+              <Typography component='span' color='common.white' sx={uploadStyles.buttonText}>
                 Cargar catálogo
               </Typography>
             </LoadingButton>

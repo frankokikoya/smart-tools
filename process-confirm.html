@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kikoya</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: auto;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    header {
+      background-color: #F6A704;
+      padding: 60px;
+      text-align: start;
+      font-size: 35px;
+      color: white;
+    }
+
+    footer {
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 60px;
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+
+    .section-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .section-item {
+      margin: 3% 10%;
+    }
+
+    hr.solid {
+      border-top: 1px solid #F6A704;
+      margin-top: 3%;
+    }
+
+    .title-setup {
+      margin-bottom: 3%;
+    }
+
+    .title-font {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 30px;
+      line-height: 143%;
+      letter-spacing: 0.17px;
+      color: #2C4154;
+    }
+
+    .text-font {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 25px;
+      line-height: 143%;
+      letter-spacing: 0.17px;
+      color: #2C4154;
+    }
+
+    .text-setup {
+      margin-bottom: 2%;
+    }
+
+    .button {
+      background-color: #2C4154;
+      border: none;
+      border-radius: 60px;
+      color: #F9FCFF;
+      padding: 15px 40px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 20px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+
+    .img-footer {
+      width: 5%;
+    }
+
+    .img-section-setup {
+      margin: 0;
+    }
+
+    .text-list {
+      display: flex;
+      flex-flow: column wrap;
+    }
+
+    .title-list {
+      margin-left: 0;
+      margin-bottom: 5%;
+    }
+
+    .list {
+      list-style: none;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <!--<img src="https://portal-kikoya-staging.s3.us-west-1.amazonaws.com/Template/kikoya_logo.png"
+      alt="logo-kikoya" /> -->
+</header>
+<div>
+  <section class="section-item">
+    <img src="https://portal-kikoya-staging.s3.us-west-1.amazonaws.com/Template/monitos_small.png"
+         alt="kikoya-team-small"/>
+    <hr class="solid"/>
+  </section>
+  <section class="section-item">
+    <h2 class="title-font title-setup">Tu archivo CSV se ha terminado de cargar</h2>
+    <p class="text-font text-setup">
+      ¡Gracias por la paciencia! Se complet&oacute; el proceso de carga del
+      archivo <strong>AccesoriosAbril2022.CSV</strong> que subiste al cat&aacute;logo del<br>
+      cotizador. Ya puedes ingresar a la plataforma para conocer
+      el resultado.
+    </p>
+    <br>
+    <a href="{{ link_recover_password }}" class="button">Ver resultados</a>
+  </section>
+</div>
+</body>
+
+</html>

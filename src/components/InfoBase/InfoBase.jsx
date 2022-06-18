@@ -1,7 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Grid, AppBar, Box, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import React from 'react';
+
+import { Grid, AppBar, Box, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles({
     gridContainder: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles({
         maxWidth: "75%",
         maxHeight: "75%",
     },
-}, {index: 1});
+}, { index: 1 });
 
 const sxStyles = {
     appBarBox: {
@@ -48,23 +49,23 @@ const InfoBase = ({ imageSrc, imageProps, title, message, children }) => {
     const { appBarBox, boxContent, texTitle, texContent, boxButton } = sxStyles;
     return (
         <Grid container className={gridContainder}>
-            <AppBar position="static" sx={appBarBox}>
+            <AppBar position='static' sx={appBarBox}>
                 <Box sx={{ flexGrow: 1 }} />
-                <Box component="img" sx={{ flexGrow: 0 }} alt="logo-kikoya" src="imgs/logo-kikoya.svg" className={logoItem} />
+                <Box component='img' sx={{ flexGrow: 0 }} alt='logo-kikoya' src='imgs/logo-kikoya.svg' className={logoItem} />
             </AppBar>
-            <Grid container className={content} direction="row" justifyContent="center" alignItems="center">
-                <Box component="div" sx={boxContent}>
+            <Grid container className={content} direction='row' justifyContent='center' alignItems='center'>
+                <Box component='div' sx={boxContent}>
                     <Typography
-                        variant="h3"
-                        color="primary.main"
+                        variant='h3'
+                        color='primary.main'
                         sx={texTitle}
                         gutterBottom
                     >
                         {title}
                     </Typography>
                     <Typography
-                        variant="span"
-                        color="primary.main"
+                        variant='span'
+                        color='primary.main'
                         sx={texContent}
                         gutterBottom
                     >
@@ -77,15 +78,15 @@ const InfoBase = ({ imageSrc, imageProps, title, message, children }) => {
             </Grid>
             <footer className={footerContent}>
                 <Typography
-                    variant="h6"
-                    color="primary.main"
+                    variant='h6'
+                    color='primary.main'
                     component={Box}
                     sx={{ ml: 4, fontWeight: "bold", fontSize: 30 }}
                     gutterBottom
                 >
                     Smooth Journeys. Smart Decisions.
                 </Typography>
-                <Box component="img" sx={imageProps} alt="pensando" src={imageSrc} />
+                <Box component='img' sx={imageProps} alt='pensando' src={imageSrc} />
             </footer>
         </Grid>
 

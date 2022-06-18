@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from "react";
-import * as Yup from "yup";
-import { Formik, Form } from "formik";
-import { useNavigate, Link as RouterLink } from "react-router-dom";
-import LoadingButton from "@mui/lab/LoadingButton";
+import React, { useState, useEffect } from 'react';
+
+import LoadingButton from '@mui/lab/LoadingButton';
+import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import { useFetchAndLoad, useAuth } from "../../../hooks";
-import { userSessionAdapter } from "../../../adapters";
-import { login } from "../services/login.service";
-import { LabelTextInput } from "../../../components/LabelTextInput";
-import useStyles from "../styles/LoginForm.styles";
+import Typography from '@mui/material/Typography';
+import { Formik, Form } from 'formik';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
+import * as Yup from 'yup';
+
+import { userSessionAdapter } from '../../../adapters';
+import { LabelTextInput } from '../../../components/LabelTextInput';
+import { useFetchAndLoad, useAuth } from '../../../hooks';
+import { login } from '../services/login.service';
+import useStyles from '../styles/LoginForm.styles';
 
 export const LoginForm = () => {
   const { loading, callEndpoint } = useFetchAndLoad();
@@ -42,7 +44,7 @@ export const LoginForm = () => {
   };
   return (
     <>
-      <Typography component={Box} variant="h3" sx={{ ...formTitle }} gutterBottom>
+      <Typography component={Box} variant='h3' sx={{ ...formTitle }} gutterBottom>
         Inicio de sesión
       </Typography>
       <Formik
@@ -56,33 +58,33 @@ export const LoginForm = () => {
         {(formik) => (
           <Form>
             <LabelTextInput
-              type="text"
-              name="email"
-              label="Correo electrónico"
+              type='text'
+              name='email'
+              label='Correo electrónico'
               labelProps={{ ml: 1 }}
-              placeholder="correo@ejemplo.com"
-              variant="outlined"
+              placeholder='correo@ejemplo.com'
+              variant='outlined'
               sx={{ ...formInput }}
             />
             <LabelTextInput
-              type="password"
-              name="password"
-              label="Contraseña"
+              type='password'
+              name='password'
+              label='Contraseña'
               labelProps={{ ml: 1 }}
-              placeholder="contraseña"
-              variant="outlined"
+              placeholder='contraseña'
+              variant='outlined'
               sx={{ ...formInput }}
             />
             <Box sx={{ ...loginContent }}>
               <Box sx={{ width: "50%", height: "100%" }}>
-                <LoadingButton type="submit" variant="contained" size="medium" loading={loading} sx={{ ...loadingButton }}>
-                  <Typography component="span" color="common.white" sx={{ ...textButton }}>
+                <LoadingButton type='submit' variant='contained' size='medium' loading={loading} sx={{ ...loadingButton }}>
+                  <Typography component='span' color='common.white' sx={{ ...textButton }}>
                     Inicio de sesión
                   </Typography>
                 </LoadingButton>
               </Box>
               <Box sx={{ width: "45%" }}>
-                <Typography component="span" color="red" sx={{ ...textError }}>
+                <Typography component='span' color='red' sx={{ ...textError }}>
                   {errorMessage && errorMessage}
                 </Typography>
               </Box>
@@ -101,7 +103,7 @@ export const LoginForm = () => {
         }}
         gutterBottom
       >
-        ¿Has olvidado tu contraseña? <Link component={RouterLink} to="/recovery-password">Recupérala aquí.</Link>
+        ¿Has olvidado tu contraseña? <Link component={RouterLink} to='/recovery-password'>Recupérala aquí.</Link>
       </Typography>
     </>
   );

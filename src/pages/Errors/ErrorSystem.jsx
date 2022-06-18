@@ -1,7 +1,9 @@
-import React from "react";
-import { Typography } from "@mui/material";
-import LoadingButton from "@mui/lab/LoadingButton";
-import { InfoBase } from "../../components/InfoBase";
+import React from 'react';
+
+import LoadingButton from '@mui/lab/LoadingButton';
+import { Typography } from '@mui/material';
+
+import { InfoBase } from '../../components/InfoBase';
 
 const sxStyles = {
     buttonStyle: { width: "20%", textTransform: "none", borderRadius: 10, p: 1 },
@@ -17,12 +19,12 @@ export const ErrorSystem = () => {
     return (
         <InfoBase imageSrc={imageSrc} imageProps={imageProps} title={title} message={message}>
             <LoadingButton
-                color="secondary"
-                variant="contained"
-                size="medium"
+                color='secondary'
+                variant='contained'
+                size='medium'
                 sx={buttonStyle}
             >
-                <Typography component="span" color="common.white" sx={buttonText}>
+                <Typography component='span' color='common.white' sx={buttonText}>
                     Ingresa una contraseña nueva
                 </Typography>
             </LoadingButton>

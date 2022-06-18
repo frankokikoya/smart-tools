@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { DataGrid } from "@mui/x-data-grid";
-import { columns } from "../../data/Accessories.data";
-import { NoRows } from "../../../../components/DataGridBox/NoRows";
-import { useFetchAndLoad, useAsync, useArray } from "../../../../hooks";
-import { getAccessories } from "../../services/catalogs.service";
-import { AccessoryAdapter, AccessoryPaginationAdapter } from "../../../../adapters/accessory.adapter";
-import { Box } from "@mui/material";
-import { gridStyles } from "./sxStyles";
+import React, { useState, useEffect } from 'react';
+
+import { Box } from '@mui/material';
+import { DataGrid } from '@mui/x-data-grid';
+
+import { AccessoryAdapter, AccessoryPaginationAdapter } from '../../../../adapters/accessory.adapter';
+import { NoRows } from '../../../../components/DataGridBox/NoRows';
+import { useFetchAndLoad, useAsync, useArray } from '../../../../hooks';
+import { columns } from '../../data/Accessories.data';
+import { getAccessories } from '../../services/catalogs.service';
+import { gridStyles } from './sxStyles';
 
 const AccessoryGrid = () => {
     const { loading, callEndpoint } = useFetchAndLoad();
@@ -32,7 +34,7 @@ const AccessoryGrid = () => {
 
     const adapAccessories = ({ data, status }) => {
         if (status === 200) {
-            console.log(data);
+            // console.log(data);
             setPageInfo(AccessoryPaginationAdapter(data))
             setAccessories(data.content.map(accessory => AccessoryAdapter(accessory)));
         }
@@ -56,10 +58,11 @@ const AccessoryGrid = () => {
                 pagination
                 page={page}
                 pageSize={pageSize}
-                paginationMode="server"
+                paginationMode='server'
                 onPageChange={(newPage) => setPage(newPage)}
                 onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
                 disableColumnMenu
+                autoHeight
                 components={{
                     NoRowsOverlay: NoRows,
                     NoResultsOverlay: NoRows,

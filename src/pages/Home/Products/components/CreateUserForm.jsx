@@ -1,11 +1,13 @@
-import React from "react";
-import * as Yup from "yup";
-import "yup-phone-lite";
-import { Formik, Form } from "formik";
-import { Button, Box, MenuItem } from "@mui/material";
-import { FormDialog } from "../../../../components/FormDialog";
-import { LabelTextInput } from "../../../../components/LabelTextInput";
-import { LabelSelectInput } from "../../../../components/LabelSelectInput";
+import React from 'react';
+
+import { Button, Box, MenuItem } from '@mui/material';
+import { Formik, Form } from 'formik';
+import 'yup-phone-lite';
+import * as Yup from 'yup';
+
+import { FormDialog } from '../../../../components/FormDialog';
+import { LabelSelectInput } from '../../../../components/LabelSelectInput';
+import { LabelTextInput } from '../../../../components/LabelTextInput';
 
 const styles = {
     form: { display: "flex", flexDirection: "column", width: "100%", height: "100%", pl: 2 },
@@ -53,59 +55,59 @@ const CreateUserForm = ({ handleClose, onSubmit, loading }) => {
                 >
                     <Box sx={{ display: "flex" }}>
                         <LabelTextInput
-                            type="text"
-                            name="name"
-                            label="Nombre*"
+                            type='text'
+                            name='name'
+                            label='Nombre*'
                             labelProps={{ ...styles.inputLabel }}
-                            placeholder="example@example.com"
-                            variant="outlined"
+                            placeholder='example@example.com'
+                            variant='outlined'
                             sx={{ ...styles.widthInput }}
                         />
                         <LabelTextInput
-                            type="text"
-                            name="surname"
-                            label="Primer apellido*"
+                            type='text'
+                            name='surname'
+                            label='Primer apellido*'
                             labelProps={{ ...styles.inputLabel }}
-                            placeholder="example@example.com"
-                            variant="outlined"
+                            placeholder='example@example.com'
+                            variant='outlined'
                             divProps={{ ml: 5 }}
                             sx={{ ...styles.widthInput }}
                         />
                     </Box>
                     <Box sx={{ display: "flex" }}>
                         <LabelTextInput
-                            type="text"
-                            name="secondSurname"
-                            label="Segundo apellido"
+                            type='text'
+                            name='secondSurname'
+                            label='Segundo apellido'
                             labelProps={{ ...styles.inputLabel }}
-                            placeholder="example@example.com"
-                            variant="outlined"
+                            placeholder='example@example.com'
+                            variant='outlined'
                             sx={{ ...styles.widthInput }}
                         />
                         <LabelTextInput
-                            type="text"
-                            name="email"
-                            label="Correo electrónico*"
+                            type='text'
+                            name='email'
+                            label='Correo electrónico*'
                             labelProps={{ ...styles.inputLabel }}
-                            placeholder="example@example.com"
-                            variant="outlined"
+                            placeholder='example@example.com'
+                            variant='outlined'
                             divProps={{ ml: 5 }}
                             sx={{ ...styles.widthInput }}
                         />
                     </Box>
                     <Box sx={{ display: "flex" }}>
                         <LabelTextInput
-                            type="text"
-                            name="phone"
-                            label="Teléfono"
+                            type='text'
+                            name='phone'
+                            label='Teléfono'
                             labelProps={{ ...styles.inputLabel }}
-                            placeholder="+53 55 55 55 55 55"
-                            variant="outlined"
+                            placeholder='+53 55 55 55 55 55'
+                            variant='outlined'
                             sx={{ ...styles.widthInput }}
                         />
                         <LabelSelectInput
-                            name="role"
-                            label="Roles y permisos"
+                            name='role'
+                            label='Roles y permisos'
                             labelProps={{ ...styles.inputLabel }}
                             divProps={{ ml: 5 }}
                             sx={{ ...styles.widthInput }}
@@ -118,8 +120,8 @@ const CreateUserForm = ({ handleClose, onSubmit, loading }) => {
                     </Box>
                     <Box sx={{ display: "flex" }}>
                         <LabelSelectInput
-                            name="branch"
-                            label="Sucursal"
+                            name='branch'
+                            label='Sucursal'
                             labelProps={{ ...styles.inputLabel }}
                             sx={{ ...styles.widthInput }}
                         >
@@ -128,10 +130,10 @@ const CreateUserForm = ({ handleClose, onSubmit, loading }) => {
                         </LabelSelectInput>
                     </Box>
                     <FormDialog.Actions>
-                        <Button onClick={handleClose} variant="outlined" sx={{ ...styles.button }}>
+                        <Button onClick={handleClose} variant='outlined' sx={{ ...styles.button }}>
                             Cancelar
                         </Button>
-                        <Button type="submit" variant="contained" loading={loading} sx={{ ...styles.button }}>
+                        <Button type='submit' variant='contained' loading={loading} sx={{ ...styles.button }}>
                             Crear usuario
                         </Button>
                     </FormDialog.Actions>

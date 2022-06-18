@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+
 import { Box, Step, StepContent, StepLabel, Stepper } from '@mui/material';
-import StepOne from './StepOne';
-import StepTwo from './StepTwo';
-import StepThree from './StepThree';
+
 import { useArray, useFetchAndLoad } from '../../../../hooks';
 import { formatBytes } from '../../../../utilities/formatBytes.utility';
+import CatalogContext from '../../context/CatalogContext';
 import { processCSV, validateCSV } from '../../services/catalogs.service';
+import StepOne from './StepOne';
+import StepThree from './StepThree';
+import StepTwo from './StepTwo';
 import { uploadStyles } from './sxStyles';
 
 
@@ -32,7 +35,7 @@ const steps = [
 ];
 
 export const StepperUpload = () => {
-  const [activeStep, setActiveStep] = useState(0);
+  const { activeStep, setActiveStep } = useContext(CatalogContext);
   const [uploadFile, setUploadFile] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [fileInfo, setFileInfo] = useState({ name: null, size: null });
@@ -41,16 +44,6 @@ export const StepperUpload = () => {
   const { array: fileErrors, push: addError, clear: clearErrors } = useArray([]);
   const { loading: loadingValidate, callEndpoint: callValidate } = useFetchAndLoad();
   const { callEndpoint: callProcess } = useFetchAndLoad();
-  // handle stepper
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-  /*const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-  const handleReset = () => {
-    setActiveStep(0);
-  };*/
   // hanlde file
   const handleOnChange = (event) => {
     const file = event.target.files[0];
@@ -91,7 +84,7 @@ export const StepperUpload = () => {
     <Box sx={{ display: 'flex', justifyContent: 'start', width: '95%', height: '100%', ml: '2%' }}>
       <Stepper
         activeStep={activeStep}
-        orientation="vertical"
+        orientation='vertical'
         sx={uploadStyles.stepperStyle}>
         {
           steps.map((step, i) => (
@@ -109,7 +102,7 @@ export const StepperUpload = () => {
       <Box sx={{ ml: '10%', width: '50%', height: '100%' }}>
         {
           activeStep === 0
-            ? <StepOne handleNext={handleNext} />
+            ? <StepOne />
             : activeStep === 1
               ? <StepTwo
                 loading={loadingValidate}

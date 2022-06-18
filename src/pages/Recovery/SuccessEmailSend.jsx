@@ -1,8 +1,10 @@
-import { LoadingButton } from "@mui/lab";
-import { Link as RouterLink } from "react-router-dom";
-import { Typography } from "@mui/material";
-import React from "react";
-import { InfoBase } from "../../components/InfoBase";
+import React from 'react';
+
+import { LoadingButton } from '@mui/lab';
+import { Typography } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+
+import { InfoBase } from '../../components/InfoBase';
 
 const sxStyles = {
     buttonStyle: { width: "20%", textTransform: "none", borderRadius: 10, p: 1 },
@@ -19,13 +21,13 @@ export const SuccessEmailSend = () => {
         <InfoBase imageSrc={imageSrc} imageProps={imageProps} title={title} message={message}>
             <LoadingButton
                 LinkComponent={RouterLink}
-                color="secondary"
-                variant="contained"
-                size="medium"
+                color='secondary'
+                variant='contained'
+                size='medium'
                 sx={buttonStyle}
-                to="/"
+                to='/'
             >
-                <Typography component="span" color="common.white" sx={buttonText}>
+                <Typography component='span' color='common.white' sx={buttonText}>
                     Volver al inicio de sesión
                 </Typography>
             </LoadingButton>

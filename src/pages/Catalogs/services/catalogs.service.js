@@ -1,5 +1,5 @@
-import axiosInstance from "../../../interceptors/axiosInstance";
-import { loadAbort } from "../../../utilities";
+import axiosInstance from '../../../interceptors/axiosInstance';
+import { loadAbort } from '../../../utilities';
 
 const baseURL = process.env.REACT_APP_CATALOGS_API_URL;
 

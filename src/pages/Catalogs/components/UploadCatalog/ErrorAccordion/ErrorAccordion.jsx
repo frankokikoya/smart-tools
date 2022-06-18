@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { Box, Typography } from '@mui/material';
+
 import AccordionItem from './AccordionItem';
 
 const ErrorAccordion = ({ errorRows = [] }) => {

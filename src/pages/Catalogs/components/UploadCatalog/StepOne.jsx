@@ -1,9 +1,26 @@
-import React from 'react';
-import { LoadingButton } from '@mui/lab';
+import React, { useContext } from 'react';
+
 import SimCardDownloadIcon from '@mui/icons-material/SimCardDownload';
+import { LoadingButton } from '@mui/lab';
 import { Box, Typography } from '@mui/material';
 
-const StepOne = ({ handleNext }) => {
+import CatalogContext from '../../context/CatalogContext';
+
+
+
+const StepOne = () => {
+    const { setActiveStep, isUpdate, setIsUpdate, setUploadStep, setIsEmpty } = useContext(CatalogContext);
+
+    const handleNext = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    };
+
+    const handleBack = () => {
+        setIsUpdate(false);
+        setUploadStep(0);
+        setIsEmpty(2);
+    };
+
     return (
         <>
             <Typography gutterBottom>
@@ -31,22 +48,48 @@ const StepOne = ({ handleNext }) => {
                 </Box>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
+                {isUpdate && <LoadingButton
+                    color='secondary'
+                    variant='text'
+                    size='medium'
+                    onClick={handleBack}
+                    sx={{ textTransform: "none", borderRadius: 10, mr: 2 }} >
+                    <Typography
+                        component='span'
+                        color='primary'
+                        sx={{ fontWeight: "bold", fontSize: 14 }}>
+                        Cancelar
+                    </Typography>
+                </LoadingButton>}
                 <LoadingButton
-                    color="secondary"
-                    variant="contained"
-                    size="medium"
+                    color={isUpdate ? 'primary' : 'secondary'}
+                    variant='contained'
+                    size='medium'
                     endIcon={<SimCardDownloadIcon sx={{ color: 'white' }} />}
                     // download
                     // href="assets/accesories_template.csv"
                     onClick={handleNext}
                     sx={{ textTransform: "none", borderRadius: 10 }} >
                     <Typography
-                        component="span"
-                        color="common.white"
+                        component='span'
+                        color='common.white'
                         sx={{ fontWeight: "bold", fontSize: 14 }}>
                         Descargar CSV
                     </Typography>
                 </LoadingButton>
+                {isUpdate && <LoadingButton
+                    color='secondary'
+                    variant='contained'
+                    size='medium'
+                    onClick={handleNext}
+                    sx={{ textTransform: "none", borderRadius: 10, ml: 2 }} >
+                    <Typography
+                        component='span'
+                        color='common.white'
+                        sx={{ fontWeight: "bold", fontSize: 14 }}>
+                        Omitir descarga
+                    </Typography>
+                </LoadingButton>}
             </Box>
         </>
     )

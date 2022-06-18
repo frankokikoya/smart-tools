@@ -1,30 +1,20 @@
-import React, { useState } from "react";
-import CircularProgress from '@mui/material/CircularProgress';
-import { Box } from "@mui/material";
-import { useFetchAndLoad, useAsync } from "../../../../hooks";
-import { getAccessories } from "../../services/catalogs.service";
-import UploadCatalog from "../UploadCatalog";
-import AccessoryHeader from "./AccessoryHeader";
-import AccessoryGrid from "./AccessoryGrid";
-import { panelStyles } from "./sxStyles";
+import React, { useContext } from 'react';
 
-const CatalogPanel = () => {
-    const [step, setStep] = useState(0);
-    const [isEmpty, setIsEmpty] = useState(0);
+import { Box } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
+
+import { useFetchAndLoad, useAsync } from '../../../../hooks';
+import CatalogContext from '../../context/CatalogContext';
+import { getAccessories } from '../../services/catalogs.service';
+import UploadCatalog from '../UploadCatalog';
+import AccessoryGrid from './AccessoryGrid';
+import AccessoryHeader from './AccessoryHeader';
+import { panelStyles } from './sxStyles';
+
+const CatalogPanel = ({ isActive }) => {
+    const { isEmpty, setIsEmpty } = useContext(CatalogContext);
     const { callEndpoint } = useFetchAndLoad();
 
-    const handleNext = () => {
-        setStep((prevActiveStep) => prevActiveStep + 1);
-      };
-    
-      // const handleBack = () => {
-      //    setStep((prevActiveStep) => prevActiveStep - 1);
-      //  };
-    
-      /*const handleReset = () => {
-        setStep(0);
-      };*/
-    
     // CHECK ACCESSORIES
     const adapAccessories = ({ status }) => {
         // console.log({ status, data });
@@ -46,14 +36,14 @@ const CatalogPanel = () => {
     return (
         <>
             {
-                isEmpty === 0
+                isEmpty === 0 && isActive
                     ? <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: 10 }}> <CircularProgress /> </Box>
-                    : isEmpty === 2
+                    : isEmpty === 2 && isActive
                         ? <Box sx={panelStyles.tabPanelBox}>
                             <AccessoryHeader />
                             <AccessoryGrid />
                         </Box>
-                        : <UploadCatalog step={step} handleNext={handleNext} />
+                        : <UploadCatalog />
             }
         </>
     )

@@ -1,8 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Box, Typography } from '@mui/material';
-import { uploadStyles } from './sxStyles';
+
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import { Box, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
+
+import { uploadStyles } from './sxStyles';
+
 
 const ErrorsLocalValidate = ({ fileErrors }) => {
     return (
