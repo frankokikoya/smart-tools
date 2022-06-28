@@ -1,29 +1,17 @@
 import React from 'react';
 
 import { Typography } from '@mui/material';
-import { createStyles, makeStyles } from '@mui/styles';
 import { NavLink } from 'react-router-dom';
+import './index.css';
 
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    activeLink: {
-      color: theme.palette.secondary.main,
-    },
-    inacitveLink: {
-      color: "white",
-    },
-  }, { index: 1 })
-);
-
-export const NavLinkCustom = React.forwardRef((props, ref) => {
-  const classes = useStyles();
+const NavLinkCustom = React.forwardRef((props, ref) => {
 
   return (
     <NavLink
       ref={ref}
       to={props.to}
-      style={{ textDecoration: "none" }}
-      className={({ isActive }) => `${props.className} ${isActive ? classes.activeLink : classes.inacitveLink}`}
+      style={{ textDecoration: "none", marginLeft: "3%" }}
+      className={({ isActive }) => isActive ? 'active' : 'inactive'}
       end={props.end ? true : false}
     >
       <Typography variant='body3' sx={{ alignItems: "center", display: "flex" }}>
@@ -32,3 +20,5 @@ export const NavLinkCustom = React.forwardRef((props, ref) => {
     </NavLink>
   );
 });
+
+export default NavLinkCustom;

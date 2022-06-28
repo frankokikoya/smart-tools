@@ -15,6 +15,10 @@ export const useArray = (defaultValue = []) => {
     setArray((a) => a.filter(callback));
   }
 
+  function map(callback) {
+    setArray((a) => a.map(callback));
+  }
+
   function update(index, newElement) {
     setArray((a) => [...a.slice(0, index), newElement, ...a.slice(index + 1, a.length)]);
   }
@@ -27,5 +31,15 @@ export const useArray = (defaultValue = []) => {
     setArray([]);
   }
 
-  return { array, set: setArray, unshift, push, filter, update, remove, clear };
+  return {
+    array,
+    set: setArray,
+    unshift,
+    push,
+    filter,
+    map,
+    update,
+    remove,
+    clear
+  };
 }

@@ -6,7 +6,11 @@ import { GridExpandMoreIcon } from '@mui/x-data-grid';
 const Summary = ({ id, title, children }) => {
     return (
         <AccordionSummary
-            expandIcon={<GridExpandMoreIcon sx={{ fontSize: 50 }} />}
+            expandIcon={
+                <GridExpandMoreIcon
+                    sx={{ fontSize: 50 }}
+                />
+            }
             aria-controls={`preload-${id}-content`}
             id={`preload-${id}-header`}
         >

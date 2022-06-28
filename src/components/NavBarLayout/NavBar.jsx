@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth, useFetchAndLoad } from '../../hooks';
 import { logout } from '../../services/public.service';
 import { MenuItems } from './MenuItems';
-import { NavLinkCustom } from './NavLinkCustom';
+import NavLinkCustom from './NavLinkCustom';
 
 const useSx = {
   boxContent: {
@@ -24,8 +24,8 @@ const useSx = {
     height: "10%",
   },
   menuTab: {
-    flexWrap: "wrap",
     display: "flex",
+    flexWrap: "wrap",
     width: "70%",
     alignItems: "center",
   },
@@ -80,10 +80,12 @@ export const NavBar = () => {
           <Box sx={{ ...menuTab }}>
             {MenuItems.map(({ id, label, path, icon, haveNested }) => {
               return (
-                <Box key={`${id}-${label}`} component={NavLinkCustom} to={path} sx={{ my: 3, ml: 2 }} end={haveNested}>
-                  {icon}
-                  {label}
-                </Box>
+                <NavLinkCustom
+                  key={`${id}-${label}`}
+                  to={path}
+                  end={haveNested}>
+                  {icon}{label}
+                </NavLinkCustom>
               );
             })}
           </Box>

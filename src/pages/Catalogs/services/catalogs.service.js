@@ -50,3 +50,47 @@ export const processCSV = ({ file }) => {
         controller,
     };
 };
+
+export const getCatalog = ({ id, page = 0, size = 5 }) => {
+    const controller = loadAbort();
+    return {
+        call: axiosInstance().get(
+            `${baseURL}/internal/${id}/childs?page=${page}&size=${size}&sort=id,desc`,
+            { signal: controller.signal }
+        ),
+        controller,
+    };
+};
+
+export const createCatalog = (data) => {
+    const controller = loadAbort();
+    return {
+        call: axiosInstance().post(
+            `${baseURL}/internal`, data,
+            { signal: controller.signal }
+        ),
+        controller,
+    };
+};
+
+export const deleteCatalog = (id) => {
+    const controller = loadAbort();
+    return {
+        call: axiosInstance().delete(
+            `${baseURL}/internal/${id}`,
+            { signal: controller.signal }
+        ),
+        controller,
+    };
+};
+
+export const updateCatalog = ({ id, data }) => {
+    const controller = loadAbort();
+    return {
+        call: axiosInstance().put(
+            `${baseURL}/internal/${id}`, data,
+            { signal: controller.signal }
+        ),
+        controller,
+    };
+};

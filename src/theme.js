@@ -15,7 +15,7 @@ const theme = unstable_createMuiStrictModeTheme({
             main: "#fcbb13",
             light: "#ffb644",
             dark: "#c55600",
-            contrastText: "#000000"
+            contrastText: "#000000",
         },
         error: {
             main: "#A21C2B",
