@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 
 const useStyles = {
     gridBoxContent: {
-        flexWrap: "wrap",
         display: "flex",
+        flexWrap: "wrap",
         height: "82%",
     },
 };

@@ -32,4 +32,11 @@ export const MenuItems = [
         haveNested: false,
         icon: <SettingsOutlinedIcon style={{ marginRight: 5 }} fontSize='small' />
     },
+    {
+        id: 5,
+        label: "Designer",
+        path: "designer",
+        haveNested: false,
+        icon: <SettingsOutlinedIcon style={{ marginRight: 5 }} fontSize='small' />
+    },
 ];

@@ -7,3 +7,5 @@ export * from './Recovery';
 export * from './Unauthorized';
 export * from './User';
 export * from './Catalogs';
+export * from './Designer';
+export * from './TemplateDesigner';

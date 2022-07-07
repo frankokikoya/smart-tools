@@ -13,7 +13,9 @@ import {
   SuccessPassword,
   NewPassword,
   Catalogs,
-  SuccessEmailSend
+  SuccessEmailSend,
+  Designer,
+  TemplateDesigner
 } from '../../pages';
 import { ErrorToken, ErrorSystem } from '../../pages/Errors';
 import { Products } from '../../pages/Home/Products';
@@ -43,11 +45,13 @@ export const Navigation = () => {
         {/* protected routes */}
         {/* only conected */}
         <Route element={<RequireAuth />}>
+          <Route path='template-designer' element={<TemplateDesigner />} />
           <Route element={<NavBarLayout />}>
             <Route path='home' element={<Home />} />
             <Route path='products' element={<div>Productos...</div>} />
             <Route path='catalogs' element={<Catalogs />} />
             <Route path='settings' element={<Products />} />
+            <Route path='designer' element={<Designer />} />
           </Route>
         </Route>
         {/* ADMIN */}

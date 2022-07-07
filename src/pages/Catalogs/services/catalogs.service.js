@@ -55,7 +55,7 @@ export const getCatalog = ({ id, page = 0, size = 5 }) => {
     const controller = loadAbort();
     return {
         call: axiosInstance().get(
-            `${baseURL}/internal/${id}/childs?page=${page}&size=${size}&sort=id,desc`,
+            `${baseURL}/internal/${id}/childs?page=${page}&size=${size}&sort=id,asc`,
             { signal: controller.signal }
         ),
         controller,

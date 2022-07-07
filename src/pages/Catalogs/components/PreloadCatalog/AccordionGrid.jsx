@@ -37,7 +37,7 @@ const AccordionGrid = ({ id }) => {
     /* GET ALL*/
     const getApiData = async () => await callEndpoint(getCatalog({ id, page, size: pageSize }));
     const adapData = ({ data, status }) => {
-        // console.log({ data, status });
+        console.log({ data, status });
         if (status === 200) {
             setPageInfo(PaginationAdapter(data))
             setRows(data.content.map(catalog => CatalogAdapter(catalog)));
@@ -82,13 +82,19 @@ const AccordionGrid = ({ id }) => {
     ]);
 
     useEffect(() => {
-        console.log({ action: actionCell?.action });
+        console.log({ action: actionCell?.action, pageInfo: pageInfo.totalPages });
         if (actionCell.action !== "") {
-            actionCell.action === "SAVE" && setReload((prev) => !prev);
+            // actionCell.action === "SAVE" && setReload((prev) => !prev);
+            if (actionCell.action === "SAVE") {
+                // const to = pageInfo.last ? pageInfo.totalPages + 1 : pageInfo.totalPages;
+                console.log({ total: pageInfo.totalPages })
+                setReload((prev) => !prev);
+                //setPage(to);
+            }
             actionCell.action === "UPDATE" && setReload((prev) => !prev);
             actionCell.action === "DELETE" && setReload((prev) => !prev);
         }
-    }, [actionCell?.action, setReload]);
+    }, [actionCell.action, pageInfo?.totalPages, setReload]);
     // ASYNC CALL
     useAsync(getApiData, adapData, catchError, () => { }, [page, pageSize, reload]);
 

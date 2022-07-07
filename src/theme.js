@@ -15,6 +15,9 @@ const theme = unstable_createMuiStrictModeTheme({
             main: "#fcbb13",
             light: "#ffb644",
             dark: "#c55600",
+            grey: "#898A8E",
+            gold: "#D49536",
+            background: "#eeeeee",
             contrastText: "#000000",
         },
         error: {
