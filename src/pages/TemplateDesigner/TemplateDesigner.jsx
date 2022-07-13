@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { Paper } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
 
+import AddPage from './components/AddPage';
 import AppBarDesigner from './components/AppBarDesigner';
 import DrawerLeft from './components/DrawerLeft';
-import DrawerRigthCOG from './components/DrawerRigthCOG';
+import DrawerRightCOG from './components/DrawerRightCOG';
+import DrawerRigthTemplate from './components/DrawerRightTemplate';
+import ItemContainer from './components/ItemContainer';
+import PageTitle from './components/PageTitle';
 import ViewSection from './components/ViewSection';
 
-export const TemplateDesigner = () => {
+const TemplateDesigner = () => {
     const [layoutSelected, setLayoutSelected] = useState(2);
-    const [drawerLeftSelected, setDrawerLeftSelected] = useState(0);
+    const [drawerLeftSelected, setDrawerLeftSelected] = useState(1);
     const [sections, setSections] = useState(1);
 
     const hanldeClickLayout = (layout) => setLayoutSelected(layout);
@@ -48,17 +50,7 @@ export const TemplateDesigner = () => {
                 {
                     [...Array(sections)].map((v, i) => (
                         <ViewSection key={`selector-${i}`}>
-                            <Box
-                                sx={{
-                                    mb: 2,
-                                    p: 1,
-                                    width: '90%',
-                                    border: '1px dashed #898A8E',
-                                }}>
-                                <Typography sx={{ color: 'secondary.grey' }}>
-                                    Pág. 1
-                                </Typography>
-                            </Box>
+                            <PageTitle />
                             <Box sx={{
                                 width: '100%',
                                 height: '100%',
@@ -74,26 +66,19 @@ export const TemplateDesigner = () => {
                                         width: '90%',
                                         height: '100%'
                                     }}>
-                                    <Typography sx={{ color: 'secondary.gold' }}>¡Necesitas añadir columnas!</Typography>
-                                    <AddCircleOutlineIcon sx={{ color: 'secondary.gold', fontSize: 35 }} />
+                                    <ItemContainer />
                                 </Paper>
-                                <Box
-                                    sx={{
-                                        width: '10%',
-                                        height: '100%',
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        border: '1px dashed grey',
-                                    }}>
-                                    <AddCircleOutlineIcon sx={{ color: 'secondary.grey', fontSize: 35 }} />
-                                </Box>
+                                <AddPage />
                             </Box>
                         </ViewSection>
                     ))
                 }
             </Box>
-            <DrawerRigthCOG />
+            {drawerLeftSelected === 0
+                ? <DrawerRightCOG />
+                : <DrawerRigthTemplate />}
         </Grid>
     )
 };
+
+export default TemplateDesigner;

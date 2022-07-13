@@ -8,12 +8,19 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import { useNavigate } from 'react-router-dom';
 
 import DesktopIcon from '../../../../components/CustomIcons/DesktopIcon';
 import MobileIcon from '../../../../components/CustomIcons/MobileIcon';
 import TabletIcon from '../../../../components/CustomIcons/TabletIcon';
 
 const AppBarDesigner = ({ selected, handleClick, handleAdd, handleSub }) => {
+    const navigate = useNavigate();
+
+    const handleBack = (event) => {
+        event.preventDefault();
+        navigate("/designer");
+    };
     return (
         <AppBar
             position='fixed'
@@ -26,6 +33,7 @@ const AppBarDesigner = ({ selected, handleClick, handleAdd, handleSub }) => {
                     size='small'
                     edge='start'
                     color='inherit'
+                    onClick={handleBack}
                     sx={{ mr: 2 }}
                 >
                     <ArrowBackIosIcon sx={{ color: 'primary.main' }} />

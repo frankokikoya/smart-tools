@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import DrawerRight from './DrawerRight';
 import TableDetail from './TableDetail';
 
-const DrawerRigthCOG = () => {
+const DrawerRightCOG = () => {
   const [creditType, setCreditType] = useState(0);
 
   const hanldeClickCreditType = (event) => setCreditType(event.target.value);
@@ -199,4 +199,4 @@ const DrawerRigthCOG = () => {
   )
 }
 
-export default DrawerRigthCOG;
+export default DrawerRightCOG;

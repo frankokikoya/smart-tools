@@ -1,15 +1,29 @@
 import React, { useState } from 'react';
 
 import AddIcon from '@mui/icons-material/Add';
-import { Box, Divider, FormControl, Select, MenuItem, Typography, Button } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Typography from '@mui/material/Typography';
+import { useNavigate } from 'react-router-dom';
 
 import MainBox from '../../components/MainBox';
 
 export const Designer = () => {
+    const navigate = useNavigate();
     const [filter, setFilter] = useState(10);
 
     const handleChange = (event) => {
+        event.preventDefault();
         setFilter(event.target.value);
+    };
+
+    const handleClick = (event) => {
+        event.preventDefault();
+        navigate("/template-designer");
     };
 
     return (
@@ -60,6 +74,7 @@ export const Designer = () => {
                                 color='secondary'
                                 variant='contained'
                                 size='small'
+                                onClick={handleClick}
                                 endIcon={<AddIcon sx={{ color: "white" }} />}
                                 sx={{ textTransform: "none", px: 6 }}
                             >
