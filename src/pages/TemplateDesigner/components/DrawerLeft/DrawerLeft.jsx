@@ -16,7 +16,7 @@ const DrawerLeft = ({ selected, handleClick }) => {
     return (
         <Drawer variant='permanent'>
             <Toolbar />
-            <Box sx={{ overflow: "auto" }}>
+            <Box className='designer__two' sx={{ overflow: "auto" }}>
                 <List>
                     {itemsLeft.map((item, index) => (
                         <ListItem key={item.id} disablePadding sx={sxStyles.listItem}>

@@ -54,7 +54,7 @@ const AppBarDesigner = ({ selected, handleClick, handleAdd, handleSub }) => {
                         alignItems: 'center',
                     }}
                 >
-                    <Stack direction='row' spacing={1}>
+                    <Stack direction='row' spacing={1} className='designer__first'>
                         <IconButton
                             aria-label='mobile'
                             selected={selected === 0}
@@ -78,28 +78,30 @@ const AppBarDesigner = ({ selected, handleClick, handleAdd, handleSub }) => {
                         </IconButton>
                     </Stack>
                 </Box>
-                <Button
-                    color='primary'
-                    variant='contained'
-                    size='small'
-                    onClick={handleSub}
-                    sx={{ textTransform: "none", py: 1, mr: 2 }}
-                >
-                    <Typography component='span' color='common.white'>
-                        Guardar cambios
-                    </Typography>
-                </Button>
-                <Button
-                    color='secondary'
-                    variant='contained'
-                    size='small'
-                    onClick={handleAdd}
-                    sx={{ textTransform: "none", py: 1 }}
-                >
-                    <Typography component='span' color='common.white'>
-                        Publicar
-                    </Typography>
-                </Button>
+                <div className='designer__three'>
+                    <Button
+                        color='primary'
+                        variant='contained'
+                        size='small'
+                        onClick={handleSub}
+                        sx={{ textTransform: "none", py: 1, mr: 2 }}
+                    >
+                        <Typography component='span' color='common.white'>
+                            Guardar cambios
+                        </Typography>
+                    </Button>
+                    <Button
+                        color='secondary'
+                        variant='contained'
+                        size='small'
+                        onClick={handleAdd}
+                        sx={{ textTransform: "none", py: 1 }}
+                    >
+                        <Typography component='span' color='common.white'>
+                            Publicar
+                        </Typography>
+                    </Button>
+                </div>
             </Toolbar>
         </AppBar>
     )

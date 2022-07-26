@@ -9,7 +9,7 @@ const ViewSection = ({ children }) => {
             display: 'flex',
             flexDirection: 'column',
             width: '50em',
-            height: '12em'
+            // border: '2px solid #FFB23F',
         }}>
             {children}
         </Box>

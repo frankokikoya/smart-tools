@@ -43,3 +43,49 @@ export const itemsLeft = [
         icon: EyeIcon
     }
 ];
+
+export const typeColumn = {
+    ONE_COLUMN: "ONE_COLUMN",
+    TWO_COLUMN: "TWO_COLUMN",
+    THREE_COLUMN: "THREE_COLUMN",
+    TITLE: "TITLE",
+    SUBTITLE: "SUBTITLE",
+    TEXT: "TEXT"
+};
+
+export const sideContent = {
+    NO_SIDE: "NO_SIDE",
+    RIGHT: "RIGHT",
+    CENTER: "CENTER",
+    LEFT: "LEFT",
+};
+
+export const pagesDnD = [
+    {
+        name: 'Pág. 1',
+        columns: [
+            {
+                id: 1,
+                type: typeColumn.ONE_COLUMN,
+                content: [
+                    // {
+                    //     id: 1,
+                    //     side: sideContent.NO_SIDE,
+                    //     type: typeColumn.TITLE,
+                    //     content: []
+                    // }
+                ]
+            },
+            {
+                id: 2,
+                type: typeColumn.THREE_COLUMN,
+                content: []
+            },
+            {
+                id: 3,
+                type: typeColumn.TWO_COLUMN,
+                content: []
+            }
+        ]
+    }
+]

@@ -2,8 +2,9 @@ import React from 'react';
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
 
-const AddPage = () => {
+const AddPage = ({ onClick }) => {
     return (
         <Box
             sx={{
@@ -12,8 +13,11 @@ const AddPage = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
+                //border: '1px solid black'
             }}>
-            <AddCircleOutlineIcon sx={{ color: 'secondary.grey', fontSize: 35 }} />
+            <IconButton aria-label='add page' onClick={onClick}>
+                <AddCircleOutlineIcon sx={{ color: 'secondary.gray', fontSize: 35 }} />
+            </IconButton>
         </Box>
     )
 }
