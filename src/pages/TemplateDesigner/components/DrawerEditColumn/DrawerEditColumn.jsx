@@ -10,7 +10,6 @@ import DrawerRight from '../DrawerRight';
 
 const sxStyles = {
     columnContainer: {
-        width: '30.3em',
         display: 'flex',
         justifyContent: 'space-between',
     },
@@ -57,7 +56,7 @@ const DrawerEditColumn = () => {
         <DrawerRight>
             <DrawerRight.Section title='COMPONENTE-1 COLUMNA' >
                 <DrawerRight.Content>
-                    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                    <Box sx={{ width: '30.3em', display: 'flex', flexDirection: 'column' }}>
                         <Typography sx={{ fontWeight: 'bold', mb: 2 }}>
                             Número de columnas
                         </Typography>
@@ -118,27 +117,27 @@ const DrawerEditColumn = () => {
                 <DrawerRight.Content>
                 </DrawerRight.Content>
             </DrawerRight.Section>
-            <DrawerRight.Section title='' >
-                <DrawerRight.Content>
-                    <Box sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        width: '100%',
-                    }}>
-                        <Button
-                            variant='outlined'
-                            onClick={deleteColumn}
-                            sx={{ width: '100%' }}>
-                            Borrar columna
-                        </Button>
-                        <Typography sx={{ color: '#898A8E', mt: 2 }}>
-                            Se removerán todos los campos de formulario
-                        </Typography>
-                    </Box>
-                </DrawerRight.Content>
-            </DrawerRight.Section>
+            <DrawerRight.Content>
+                <Box sx={{
+                    mt: 2,
+                    width: '30.3em',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
+                    <Button
+                        variant='outlined'
+                        onClick={deleteColumn}
+                        sx={{ width: '100%' }}>
+                        Borrar columna
+                    </Button>
+                    <Typography sx={{ color: '#898A8E', mt: 2 }}>
+                        Se removerán todos los campos de formulario
+                    </Typography>
+                </Box>
+            </DrawerRight.Content>
+
         </DrawerRight>
     )
 }

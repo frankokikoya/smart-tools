@@ -1,11 +1,12 @@
 export const sxStyles = {
     content: {
+        width: '29.4em',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between'
     },
     itemContainer: {
-        width: '29.4em',
+        width: '100%',
         height: '6em',
         boxShadow: 1,
         p: 1, mt: 3
@@ -14,7 +15,7 @@ export const sxStyles = {
         display: 'flex',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        width: '29.4em',
+        width: '100%',
         height: '6em',
         boxShadow: 2,
         p: 2, mt: 3

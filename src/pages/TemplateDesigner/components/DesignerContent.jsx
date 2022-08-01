@@ -7,6 +7,7 @@ import DesignerContext from '../context/DesignerContext';
 import AppBarDesigner from './AppBarDesigner';
 import DrawerEditColumn from './DrawerEditColumn';
 import DrawerLeft from './DrawerLeft';
+import DrawerRightCal from './DrawerRightCal';
 import DrawerRightCOG from './DrawerRightCOG';
 import DrawerRightTemplate from './DreawerRightTemplate';
 import ViewZone from './ViewZone';
@@ -37,6 +38,7 @@ const DesignerContent = () => {
                 <ViewZone />
                 {drawerLeftSelected === 0 && <DrawerRightCOG />}
                 {drawerLeftSelected === 1 && <DrawerRightTemplate />}
+                {drawerLeftSelected === 3 && <DrawerRightCal />}
                 {selectedRow?.id && <DrawerEditColumn />}
             </DndProvider>
         </>

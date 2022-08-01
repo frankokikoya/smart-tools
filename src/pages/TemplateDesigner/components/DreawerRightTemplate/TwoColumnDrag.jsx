@@ -8,7 +8,7 @@ import { typeColumn } from '../../data/DrawerItems';
 import { sxStyles } from './sxStyles';
 
 const TwoColumnDrag = () => {
-    const [{ isDragging }, drag] = useDrag(() => ({
+    const [, drag] = useDrag(() => ({
         type: typeColumn.TWO_COLUMN,
         item: () => {
             return {
