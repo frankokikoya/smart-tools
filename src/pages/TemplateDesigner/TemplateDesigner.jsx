@@ -1,17 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import Grid from '@mui/material/Grid';
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
 import Joyride, { STATUS } from 'react-joyride';
 
 //import useTour from '../../hooks/useTour';
 import { useLocalStorage } from '../../hooks/useStorage';
-import AppBarDesigner from './components/AppBarDesigner';
-import DrawerLeft from './components/DrawerLeft';
-import DrawerRightCOG from './components/DrawerRightCOG';
-import DrawerRightTemplate from './components/DreawerRightTemplate';
-import ViewZone from './components/ViewZone';
+import DesignerContent from './components/DesignerContent';
 import { DesignerProvider } from './context/DesignerContext';
 
 const STEPS = [
@@ -49,17 +43,9 @@ const STEPS = [
 ]
 
 const TemplateDesigner = () => {
-    const [layoutSelected, setLayoutSelected] = useState(2);
-    const [drawerLeftSelected, setDrawerLeftSelected] = useState(1);
     const [run, setRun] = useState(false);
     const [tourKey, setTourKey] = useLocalStorage("TOUR_KEY");
     //const tour = useTour(STEPS);
-
-    const hanldeClickLayout = (layout) => setLayoutSelected(layout);
-    const hanldeClickDrawerLeft = (iconNumber) => setDrawerLeftSelected(iconNumber);
-    const AddSection = () => console.log('Click add');
-    const SubSection = () => console.log('Click add');
-
 
     useEffect(
         () => {
@@ -122,18 +108,7 @@ const TemplateDesigner = () => {
             }}>
             {tour}
             <DesignerProvider>
-                <AppBarDesigner
-                    selected={layoutSelected}
-                    handleClick={hanldeClickLayout}
-                    handleAdd={AddSection}
-                    handleSub={SubSection}
-                />
-                <DrawerLeft selected={drawerLeftSelected} handleClick={hanldeClickDrawerLeft} />
-                <DndProvider backend={HTML5Backend}>
-                    <ViewZone />
-                    {drawerLeftSelected === 1 && <DrawerRightTemplate />}
-                </DndProvider>
-                {drawerLeftSelected === 0 && <DrawerRightCOG />}
+                <DesignerContent />
             </DesignerProvider>
         </Grid>
     )

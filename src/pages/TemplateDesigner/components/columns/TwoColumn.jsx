@@ -1,13 +1,16 @@
-import React, { useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 
 import Box from '@mui/material/Box';
 import { useDrag, useDrop } from 'react-dnd';
 
+import DesignerContext from '../../context/DesignerContext';
 import { sideContent, typeColumn } from '../../data/DrawerItems';
 import ColumnDropZone from './ColumnDropZone';
 
 const TwoColumn = ({ id, index, moveColumn, content = [], parent }) => {
     const ref = useRef(null);
+    const { selectedRow, setSelectedRow } = useContext(DesignerContext);
+
     const [, drop] = useDrop({
         accept: [typeColumn.ONE_COLUMN, typeColumn.TWO_COLUMN, typeColumn.THREE_COLUMN],
         hover(item, monitor) {
@@ -16,6 +19,7 @@ const TwoColumn = ({ id, index, moveColumn, content = [], parent }) => {
             }
             const dragIndex = item.index;
             const hoverIndex = index;
+            const currentId = item?.id
 
             if (dragIndex === hoverIndex) {
                 return
@@ -33,8 +37,15 @@ const TwoColumn = ({ id, index, moveColumn, content = [], parent }) => {
             if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
                 return;
             }
-            moveColumn(dragIndex, hoverIndex);
-            item.index = hoverIndex;
+            if (currentId) {
+                const getCurrentParent = parseInt(currentId.split('parent-')[1]);
+                if (getCurrentParent === parent) {
+                    moveColumn(dragIndex, hoverIndex);
+                    item.index = hoverIndex;
+                }
+            } else {
+                return;
+            }
         },
     })
 
@@ -55,13 +66,34 @@ const TwoColumn = ({ id, index, moveColumn, content = [], parent }) => {
 
     drag(drop(ref))
 
-    //const opacity = isDragging ? 0 : 1;
+    const handleChangeColumn = () => {
+        if (content.length === 0) {
+            if (selectedRow?.id === id) {
+                setSelectedRow({});
+            }
+            else {
+                setSelectedRow(prev => {
+                    return {
+                        ...prev,
+                        id,
+                        index,
+                        typeColumn: typeColumn.TWO_COLUMN,
+                        parent
+                    };
+                });
+            }
+        }
+    };
+
     return (
         <Box
             ref={ref}
+            onClick={handleChangeColumn}
             sx={{
                 display: 'flex',
                 width: '100%',
+                ...(selectedRow?.id === id && selectedRow?.parent === parent
+                    ? { border: '2px solid #D49536' } : {}),
                 cursor: 'move',
                 // '&:hover': {
                 //     border: '2px solid #64b5f6'

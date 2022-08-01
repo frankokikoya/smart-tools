@@ -10,19 +10,10 @@ import ViewSection from './ViewSection';
 
 const ViewZone = () => {
 
-    const { pages, setPages } = useContext(DesignerContext);
+    const { pages, addPage } = useContext(DesignerContext);
 
-    const addNewPage = () => {
-        setPages((prev) => {
-            return [
-                ...prev,
-                {
-                    name: `Pág. ${pages.length + 1}`,
-                    columns: []
-                }
-            ]
-        });
-    }
+    const addNewPage = () => addPage();
+
     return (
         <Box
             sx={{
