@@ -1,11 +1,7 @@
 {
-  "root": "build/",
-  "routes": {
-    "/**": "index.html"
-  },
-  "proxies": {
-    "/api/": {
-      "origin": "${REACT_APP_API_URL}"
+  "buildpacks": [
+    {
+      "url": "mars/create-react-app"
     }
-  }
+  ]
 }
