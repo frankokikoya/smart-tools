@@ -3,49 +3,14 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Joyride, { STATUS } from 'react-joyride';
 
-//import useTour from '../../hooks/useTour';
 import { useLocalStorage } from '../../hooks/useStorage';
 import DesignerContent from './components/DesignerContent';
 import { DesignerProvider } from './context/DesignerContext';
-
-const STEPS = [
-    {
-        content: `El menú superior central te permite ver la vista de tu cotizador para diferentes dispositivos.`,
-        locale: { next: <strong>SIGUIENTE</strong> },
-        disableBeacon: true,
-        hideBackButton: true,
-        hideCloseButton: true,
-        disableCloseOnEsc: true,
-        disableOverlayClose: true,
-        target: '.designer__first',
-    },
-    {
-        content: `El menú izquierdo  contiene opciones para editar tu cotizador.`,
-        locale: { next: <strong>SIGUIENTE</strong> },
-        placement: 'right',
-        disableBeacon: true,
-        hideBackButton: true,
-        hideCloseButton: true,
-        disableCloseOnEsc: true,
-        disableOverlayClose: true,
-        target: '.designer__two',
-    },
-    {
-        content: `El menú superior derecho te permite guardar cambios y publicar si así lo deseas.`,
-        locale: { last: <strong>LISTO</strong> },
-        disableBeacon: true,
-        hideBackButton: true,
-        hideCloseButton: true,
-        disableCloseOnEsc: true,
-        disableOverlayClose: true,
-        target: '.designer__three',
-    }
-]
+import { STEPS } from './data/DrawerItems';
 
 const TemplateDesigner = () => {
     const [run, setRun] = useState(false);
     const [tourKey, setTourKey] = useLocalStorage("TOUR_KEY");
-    //const tour = useTour(STEPS);
 
     useEffect(
         () => {

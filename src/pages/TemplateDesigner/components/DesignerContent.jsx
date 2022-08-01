@@ -13,7 +13,7 @@ import ViewZone from './ViewZone';
 
 const DesignerContent = () => {
     const [layoutSelected, setLayoutSelected] = useState(2);
-    const [drawerLeftSelected, setDrawerLeftSelected] = useState(1);
+    const [drawerLeftSelected, setDrawerLeftSelected] = useState(0);
     const { selectedRow, setSelectedRow } = useContext(DesignerContext);
 
     const hanldeClickLayout = (layout) => setLayoutSelected(layout);
@@ -35,8 +35,8 @@ const DesignerContent = () => {
             <DrawerLeft selected={drawerLeftSelected} handleClick={hanldeClickDrawerLeft} />
             <DndProvider backend={HTML5Backend}>
                 <ViewZone />
-                {drawerLeftSelected === 1 && <DrawerRightTemplate />}
                 {drawerLeftSelected === 0 && <DrawerRightCOG />}
+                {drawerLeftSelected === 1 && <DrawerRightTemplate />}
                 {selectedRow?.id && <DrawerEditColumn />}
             </DndProvider>
         </>

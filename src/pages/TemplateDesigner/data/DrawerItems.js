@@ -6,6 +6,40 @@ import GridIcon from '../../../components/CustomIcons/GridIcon';
 import SwatchIcon from '../../../components/CustomIcons/SwatchIcon';
 import TemplateIcon from '../../../components/CustomIcons/TemplateIcon';
 
+export const STEPS = [
+    {
+        content: `El menú superior central te permite ver la vista de tu cotizador para diferentes dispositivos.`,
+        locale: { next: <strong>SIGUIENTE</strong> },
+        disableBeacon: true,
+        hideBackButton: true,
+        hideCloseButton: true,
+        disableCloseOnEsc: true,
+        disableOverlayClose: true,
+        target: '.designer__first',
+    },
+    {
+        content: `El menú izquierdo  contiene opciones para editar tu cotizador.`,
+        locale: { next: <strong>SIGUIENTE</strong> },
+        placement: 'right',
+        disableBeacon: true,
+        hideBackButton: true,
+        hideCloseButton: true,
+        disableCloseOnEsc: true,
+        disableOverlayClose: true,
+        target: '.designer__two',
+    },
+    {
+        content: `El menú superior derecho te permite guardar cambios y publicar si así lo deseas.`,
+        locale: { last: <strong>LISTO</strong> },
+        disableBeacon: true,
+        hideBackButton: true,
+        hideCloseButton: true,
+        disableCloseOnEsc: true,
+        disableOverlayClose: true,
+        target: '.designer__three',
+    }
+]
+
 export const itemsLeft = [
     {
         id: "dl-config",
