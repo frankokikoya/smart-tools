@@ -84,7 +84,9 @@ export const typeColumn = {
     THREE_COLUMN: "THREE_COLUMN",
     TITLE: "TITLE",
     SUBTITLE: "SUBTITLE",
-    TEXT: "TEXT"
+    TEXT: "TEXT",
+    SELECT: "SELECT",
+    TXT_INPUT: "TXT_INPUT",
 };
 
 export const sideContent = {

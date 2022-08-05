@@ -4,6 +4,8 @@ import { useDrop } from 'react-dnd';
 
 import DesignerContext from '../../context/DesignerContext';
 import { sideContent, typeColumn } from '../../data/DrawerItems';
+import SelectDrag from '../InputsDraggables/SelectDrag';
+import TextInputDrag from '../InputsDraggables/TextInputDrag';
 import SubTitleDrag from '../TextDraggables/SubTitleDrag';
 import TextDrag from '../TextDraggables/TextDrag';
 import TitleDrag from '../TextDraggables/TitleDrag';
@@ -23,7 +25,13 @@ const ColumnDropZone = ({ width, side = sideContent.NO_SIDE, content = [], paren
     };
 
     const [{ isOver, canDrop }, drop] = useDrop(() => ({
-        accept: [typeColumn.TITLE, typeColumn.SUBTITLE, typeColumn.TEXT],
+        accept: [
+            typeColumn.TITLE,
+            typeColumn.SUBTITLE,
+            typeColumn.TEXT,
+            typeColumn.SELECT,
+            typeColumn.TXT_INPUT,
+        ],
         drop: (item) => addContent({ ...item, side, content: [] }),
         collect: (monitor) => ({
             isOver: !!monitor.isOver(),
@@ -44,11 +52,23 @@ const ColumnDropZone = ({ width, side = sideContent.NO_SIDE, content = [], paren
                     index={index}
                     parent={parent}
                     key={`text-zone-${idx}`} />
-                : <TextDrag
-                    item={c}
-                    index={index}
-                    parent={parent}
-                    key={`text-zone-${idx}`} />
+                : c.type === typeColumn.TEXT
+                    ? <TextDrag
+                        item={c}
+                        index={index}
+                        parent={parent}
+                        key={`text-zone-${idx}`} />
+                    : c.type === typeColumn.SELECT
+                        ? <SelectDrag
+                            item={c}
+                            index={index}
+                            parent={parent}
+                            key={`input-zone-${idx}`} />
+                        : <TextInputDrag
+                            item={c}
+                            index={index}
+                            parent={parent}
+                            key={`input-zone-${idx}`} />
     };
 
     return (

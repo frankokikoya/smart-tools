@@ -11,6 +11,10 @@ const OneColumn = ({ id, index, moveColumn, content = [], parent }) => {
     const ref = useRef(null);
     const { selectedRow, setSelectedRow } = useContext(DesignerContext);
 
+    const handleDragging = () => {
+        return !selectedRow?.id;
+    };
+
     const [, drop] = useDrop({
         accept: [typeColumn.ONE_COLUMN, typeColumn.TWO_COLUMN, typeColumn.THREE_COLUMN],
         hover(item, monitor) {
@@ -49,7 +53,7 @@ const OneColumn = ({ id, index, moveColumn, content = [], parent }) => {
         },
     })
 
-    const [, drag] = useDrag({
+    const [, drag] = useDrag(() => ({
         type: typeColumn.ONE_COLUMN,
         item: () => {
             return {
@@ -59,10 +63,11 @@ const OneColumn = ({ id, index, moveColumn, content = [], parent }) => {
                 content
             }
         },
+        canDrag: handleDragging,
         collect: (monitor) => ({
-            isDragging: !!monitor.isDragging(),
-        }),
-    })
+            isDragging: monitor.isDragging()
+        })
+    }), [selectedRow]);
 
     drag(drop(ref))
 
@@ -95,9 +100,6 @@ const OneColumn = ({ id, index, moveColumn, content = [], parent }) => {
                 ...(selectedRow?.id === id && selectedRow?.parent === parent
                     ? { border: '2px solid #D49536' } : {}),
                 cursor: 'move',
-                // '&:hover': {
-                //     border: '2px solid #64b5f6'
-                // }
             }} >
             <ColumnDropZone
                 width='100%'

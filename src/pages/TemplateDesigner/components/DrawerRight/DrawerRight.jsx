@@ -8,7 +8,12 @@ const DrawerRight = ({ children }) => {
     return (
         <Drawer
             variant='permanent'
-            anchor='right'>
+            anchor='right'
+            PaperProps={{
+                sx: {
+                    backgroundColor: '#f5f5f5'
+                }
+            }}>
             <Toolbar />
             <Box sx={{ overflow: 'auto' }}>
                 {children}

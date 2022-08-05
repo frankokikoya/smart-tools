@@ -68,7 +68,7 @@ const DrawerEditColumn = () => {
                                     width: '100%',
                                     height: '100%',
                                     border: selectedRow?.typeColumn === typeColumn.ONE_COLUMN
-                                        ? '2px solid #F6A704' : '1px solid #D8D8D8'
+                                        ? '2px solid #F6A704' : '1px solid #9e9e9e'
                                 }} />
                             </Box>
                             <Box
@@ -78,13 +78,13 @@ const DrawerEditColumn = () => {
                                     width: '49%',
                                     height: '100%',
                                     border: selectedRow?.typeColumn === typeColumn.TWO_COLUMN
-                                        ? '2px solid #F6A704' : '1px solid #D8D8D8'
+                                        ? '2px solid #F6A704' : '1px solid #9e9e9e'
                                 }} />
                                 <Box sx={{
                                     width: '49%',
                                     height: '100%',
                                     border: selectedRow?.typeColumn === typeColumn.TWO_COLUMN
-                                        ? '2px solid #F6A704' : '1px solid #D8D8D8'
+                                        ? '2px solid #F6A704' : '1px solid #9e9e9e'
                                 }} />
                             </Box>
                             <Box
@@ -94,19 +94,19 @@ const DrawerEditColumn = () => {
                                     width: '32%',
                                     height: '100%',
                                     border: selectedRow?.typeColumn === typeColumn.THREE_COLUMN
-                                        ? '2px solid #F6A704' : '1px solid #D8D8D8'
+                                        ? '2px solid #F6A704' : '1px solid #9e9e9e'
                                 }} />
                                 <Box sx={{
                                     width: '32%',
                                     height: '100%',
                                     border: selectedRow?.typeColumn === typeColumn.THREE_COLUMN
-                                        ? '2px solid #F6A704' : '1px solid #D8D8D8'
+                                        ? '2px solid #F6A704' : '1px solid #9e9e9e'
                                 }} />
                                 <Box sx={{
                                     width: '32%',
                                     height: '100%',
                                     border: selectedRow?.typeColumn === typeColumn.THREE_COLUMN
-                                        ? '2px solid #F6A704' : '1px solid #D8D8D8'
+                                        ? '2px solid #F6A704' : '1px solid #9e9e9e'
                                 }} />
                             </Box>
                         </Box>

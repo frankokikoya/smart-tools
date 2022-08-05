@@ -11,7 +11,11 @@ import { typeColumn } from '../../data/DrawerItems';
 
 const TitleDrag = ({ item, index, parent }) => {
     const [isShown, setIsShown] = useState(false);
-    const { deletedContent } = useContext(DesignerContext);
+    const { deletedContent, selectedRow } = useContext(DesignerContext);
+
+    const handleDragging = () => {
+        return !selectedRow?.id;
+    };
 
     const [, drag] = useDrag(() => ({
         type: typeColumn.TITLE,
@@ -24,10 +28,11 @@ const TitleDrag = ({ item, index, parent }) => {
                 type: typeColumn.TITLE,
             }
         },
+        canDrag: handleDragging,
         collect: (monitor) => ({
             isDragging: monitor.isDragging()
         })
-    }));
+    }), [selectedRow]);
 
     const deleteComponent = () => {
         deletedContent({

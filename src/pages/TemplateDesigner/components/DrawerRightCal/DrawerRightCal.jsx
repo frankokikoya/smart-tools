@@ -8,18 +8,78 @@ import Select from '@mui/material/Select';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
+import { typeColumn } from '../../data/DrawerItems';
 import DrawerRight from '../DrawerRight';
+import SelectToDrag from './SelectToDrag';
+import TextInputToDrag from './TextInputToDrag';
 
 const data = [
     {
         id: 1,
         label: 'Marca',
-        type: 'select',
-        options: []
+        type: typeColumn.SELECT,
+        isSelected: false,
+        options: [
+            { id: 1, value: 1, text: 'Op. uno' },
+            { id: 2, value: 2, text: 'Op. dos' },
+        ]
+    },
+    {
+        id: 2,
+        label: 'Modelo',
+        type: typeColumn.SELECT,
+        isSelected: false,
+        options: [
+            { id: 1, value: 1, text: 'Op. uno' },
+            { id: 2, value: 2, text: 'Op. dos' },
+        ]
+    },
+    {
+        id: 3,
+        label: 'Año',
+        type: typeColumn.SELECT,
+        isSelected: false,
+        options: [
+            { id: 1, value: 1, text: 'Op. uno' },
+            { id: 2, value: 2, text: 'Op. dos' },
+        ]
+    },
+    {
+        id: 4,
+        label: 'Versión',
+        type: typeColumn.SELECT,
+        isSelected: false,
+        options: [
+            { id: 1, value: 1, text: 'Op. uno' },
+            { id: 2, value: 2, text: 'Op. dos' },
+        ]
+    },
+    {
+        id: 5,
+        label: 'Kilometraje',
+        type: typeColumn.SELECT,
+        isSelected: false,
+        options: [
+            { id: 1, value: 1, text: 'Op. uno' },
+            { id: 2, value: 2, text: 'Op. dos' },
+        ]
+    },
+    {
+        id: 6,
+        label: 'Text custom',
+        type: typeColumn.TXT_INPUT,
+        isSelected: false,
+    },
+    {
+        id: 7,
+        label: 'Text custom2',
+        type: typeColumn.TXT_INPUT,
+        isSelected: false,
     },
 ]
 const DrawerRightCal = () => {
     const [creditType, setCreditType] = useState(0);
+    const [componentToSelect] = useState(data);
 
     const hanldeClickCreditType = (event) => setCreditType(event.target.value);
     return (
@@ -36,8 +96,7 @@ const DrawerRightCal = () => {
                                 Conexión a Catálogos
                             </Typography>
                             <Select
-                                labelId='connect-label'
-                                id='connect'
+                                id='connect-label'
                                 value={creditType}
                                 onChange={hanldeClickCreditType}
                             >
@@ -52,6 +111,17 @@ const DrawerRightCal = () => {
                             <Chip label='Opción 1' onDelete={() => console.log('Código 1')} />
                             <Chip label='Opción 2' onDelete={() => console.log('Código 2')} />
                         </Stack>
+                    </Box>
+                </DrawerRight.Content>
+            </DrawerRight.Section>
+            <DrawerRight.Section title='COMPONENTES' >
+                <DrawerRight.Content>
+                    <Box sx={{ width: '29.4em', display: 'flex', flexDirection: 'column' }}>
+                        {componentToSelect.filter((item) => !item.isSelected)
+                            .map((item) => {
+                                if (item.type === typeColumn.SELECT) return <SelectToDrag key={`item-${item.id}`} label={item.label} options={item.options} />
+                                else return <TextInputToDrag key={`item-${item.id}`} label={item.label} />
+                            })}
                     </Box>
                 </DrawerRight.Content>
             </DrawerRight.Section>
