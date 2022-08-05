@@ -77,12 +77,12 @@ const SelectDrag = ({ item, index, parent }) => {
                 }}>
                 <CloseIcon sx={{ color: 'red', fontSize: 'large' }} />
             </IconButton>}
-            <FormControl sx={{ width: '100%' }}>
+            <FormControl sx={{ width: '100%' }} size='small' >
                 <Typography
                     gutterBottom
                     component='label'
                     htmlFor='connect-label'
-                    sx={{ color: '#2C4154', fontWeight: 'bold' }}>
+                    sx={{ color: '#2C4154', fontWeight: 'bold', fontSize: 'small' }}>
                     {item?.label ? item.label : 'Select'}
                 </Typography>
                 <Select

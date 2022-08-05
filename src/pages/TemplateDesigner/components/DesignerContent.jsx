@@ -9,12 +9,13 @@ import DrawerEditColumn from './DrawerEditColumn';
 import DrawerLeft from './DrawerLeft';
 import DrawerRightCal from './DrawerRightCal';
 import DrawerRightCOG from './DrawerRightCOG';
+import DrawerRightGrid from './DrawerRightGrid/DrawerRightGrid';
 import DrawerRightTemplate from './DreawerRightTemplate';
 import ViewZone from './ViewZone';
 
 const DesignerContent = () => {
     const [layoutSelected, setLayoutSelected] = useState(2);
-    const [drawerLeftSelected, setDrawerLeftSelected] = useState(0);
+    const [drawerLeftSelected, setDrawerLeftSelected] = useState(4);
     const { selectedRow, setSelectedRow } = useContext(DesignerContext);
 
     const hanldeClickLayout = (layout) => setLayoutSelected(layout);
@@ -39,6 +40,7 @@ const DesignerContent = () => {
                 {drawerLeftSelected === 0 && <DrawerRightCOG />}
                 {drawerLeftSelected === 1 && <DrawerRightTemplate />}
                 {drawerLeftSelected === 3 && <DrawerRightCal />}
+                {drawerLeftSelected === 4 && <DrawerRightGrid />}
                 {selectedRow?.id && <DrawerEditColumn />}
             </DndProvider>
         </>

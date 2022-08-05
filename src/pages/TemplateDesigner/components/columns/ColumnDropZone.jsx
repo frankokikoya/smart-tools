@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { createElement, useContext } from 'react';
 
 import { useDrop } from 'react-dnd';
 
@@ -11,6 +11,14 @@ import TextDrag from '../TextDraggables/TextDrag';
 import TitleDrag from '../TextDraggables/TitleDrag';
 import ColumnContainer from './ColumnContainer';
 import ColumnEmpty from './ColumnEmpty';
+
+const columnComponents = {
+    [typeColumn.TITLE]: TitleDrag,
+    [typeColumn.SUBTITLE]: SubTitleDrag,
+    [typeColumn.TEXT]: TextDrag,
+    [typeColumn.SELECT]: SelectDrag,
+    [typeColumn.TXT_INPUT]: TextInputDrag,
+};
 
 const ColumnDropZone = ({ width, side = sideContent.NO_SIDE, content = [], parent, index }) => {
     const { addedContent } = useContext(DesignerContext);
@@ -40,35 +48,15 @@ const ColumnDropZone = ({ width, side = sideContent.NO_SIDE, content = [], paren
     }));
 
     const renderContent = (c, idx) => {
-        return c.type === typeColumn.TITLE
-            ? <TitleDrag
-                item={c}
-                index={index}
-                parent={parent}
-                key={`text-zone-${idx}`} />
-            : c.type === typeColumn.SUBTITLE
-                ? <SubTitleDrag
-                    item={c}
-                    index={index}
-                    parent={parent}
-                    key={`text-zone-${idx}`} />
-                : c.type === typeColumn.TEXT
-                    ? <TextDrag
-                        item={c}
-                        index={index}
-                        parent={parent}
-                        key={`text-zone-${idx}`} />
-                    : c.type === typeColumn.SELECT
-                        ? <SelectDrag
-                            item={c}
-                            index={index}
-                            parent={parent}
-                            key={`input-zone-${idx}`} />
-                        : <TextInputDrag
-                            item={c}
-                            index={index}
-                            parent={parent}
-                            key={`input-zone-${idx}`} />
+        return createElement(
+            columnComponents[c.type],
+            {
+                item: c,
+                index,
+                parent,
+                key: `comp-zone-${idx}`
+            }
+        );
     };
 
     return (

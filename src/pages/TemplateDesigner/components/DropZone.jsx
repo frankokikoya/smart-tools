@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { createElement, useCallback, useContext } from 'react';
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Paper from '@mui/material/Paper';
@@ -10,6 +10,12 @@ import { typeColumn } from '../data/DrawerItems';
 import OneColumn from './columns/OneColumn';
 import ThreeColumn from './columns/ThreeColumn';
 import TwoColumn from './columns/TwoColumn';
+
+const columnComponents = {
+    [typeColumn.ONE_COLUMN]: OneColumn,
+    [typeColumn.TWO_COLUMN]: TwoColumn,
+    [typeColumn.THREE_COLUMN]: ThreeColumn,
+};
 
 const DropZone = ({ parent, columns }) => {
 
@@ -41,32 +47,18 @@ const DropZone = ({ parent, columns }) => {
 
     const renderColumn = useCallback((c, idx) => {
         //console.log('render ', c)
-        return c.type === typeColumn.ONE_COLUMN
-            ? <OneColumn
-                key={`column-container-${idx}-parent-${parent}`}
-                id={`column-container-${c.id}-parent-${parent}`}
-                type={c.type}
-                index={idx}
-                content={c.content}
-                parent={parent}
-                moveColumn={moveColumn} />
-            : c.type === typeColumn.TWO_COLUMN
-                ? <TwoColumn
-                    key={`column-container-${idx}-parent-${parent}`}
-                    id={`column-container-${c.id}-parent-${parent}`}
-                    type={c.type}
-                    index={idx}
-                    content={c.content}
-                    parent={parent}
-                    moveColumn={moveColumn} />
-                : <ThreeColumn
-                    key={`column-container-${idx}-parent-${parent}`}
-                    id={`column-container-${c.id}-parent-${parent}`}
-                    type={c.type}
-                    index={idx}
-                    content={c.content}
-                    parent={parent}
-                    moveColumn={moveColumn} />
+        return createElement(
+            columnComponents[c.type],
+            {
+                key: `column-container-${idx}-parent-${parent}`,
+                id: `column-container-${c.id}-parent-${parent}`,
+                type: c.type,
+                index: idx,
+                content: c.content,
+                parent: parent,
+                moveColumn
+            }
+        );
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

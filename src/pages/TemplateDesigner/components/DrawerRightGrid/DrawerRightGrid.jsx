@@ -16,7 +16,7 @@ import TextInputToDrag from '../InputsDraggables/TextInputToDrag';
 const data = [
     {
         id: 1,
-        label: 'Marca',
+        label: '¿Cómo quieres pagar tu seguro?',
         type: typeColumn.SELECT,
         isSelected: false,
         options: [
@@ -26,7 +26,7 @@ const data = [
     },
     {
         id: 2,
-        label: 'Modelo',
+        label: '¿Qué extras deseas agregar a tu vehículo?',
         type: typeColumn.SELECT,
         isSelected: false,
         options: [
@@ -34,58 +34,17 @@ const data = [
             { id: 2, value: 2, text: 'Op. dos' },
         ]
     },
-    {
-        id: 3,
-        label: 'Año',
-        type: typeColumn.SELECT,
-        isSelected: false,
-        options: [
-            { id: 1, value: 1, text: 'Op. uno' },
-            { id: 2, value: 2, text: 'Op. dos' },
-        ]
-    },
-    {
-        id: 4,
-        label: 'Versión',
-        type: typeColumn.SELECT,
-        isSelected: false,
-        options: [
-            { id: 1, value: 1, text: 'Op. uno' },
-            { id: 2, value: 2, text: 'Op. dos' },
-        ]
-    },
-    {
-        id: 5,
-        label: 'Kilometraje',
-        type: typeColumn.SELECT,
-        isSelected: false,
-        options: [
-            { id: 1, value: 1, text: 'Op. uno' },
-            { id: 2, value: 2, text: 'Op. dos' },
-        ]
-    },
-    {
-        id: 6,
-        label: 'Text custom',
-        type: typeColumn.TXT_INPUT,
-        isSelected: false,
-    },
-    {
-        id: 7,
-        label: 'Text custom2',
-        type: typeColumn.TXT_INPUT,
-        isSelected: false,
-    },
-];
+]
 
-const DrawerRightCal = () => {
+const DrawerRightGrid = () => {
     const [creditType, setCreditType] = useState(0);
     const [componentToSelect] = useState(data);
 
     const hanldeClickCreditType = (event) => setCreditType(event.target.value);
+
     return (
         <DrawerRight>
-            <DrawerRight.Section title='VEHÍCULO' >
+            <DrawerRight.Section title='SEGUROS Y ACCESORIOS' >
                 <DrawerRight.Content>
                     <Box sx={{ width: '29.4em', display: 'flex', flexDirection: 'column' }}>
                         <FormControl sx={{ width: '100%' }}>
@@ -131,4 +90,4 @@ const DrawerRightCal = () => {
     )
 }
 
-export default DrawerRightCal;
+export default DrawerRightGrid;
