@@ -87,6 +87,7 @@ export const typeColumn = {
     TEXT: "TEXT",
     SELECT: "SELECT",
     TXT_INPUT: "TXT_INPUT",
+    INSURANCE: "INSURANCE",
 };
 
 export const sideContent = {

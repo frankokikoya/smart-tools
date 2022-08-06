@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { createElement, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
@@ -78,11 +78,27 @@ const data = [
     },
 ];
 
+const listComponents = {
+    [typeColumn.SELECT]: SelectToDrag,
+    [typeColumn.TXT_INPUT]: TextInputToDrag,
+};
+
 const DrawerRightCal = () => {
     const [creditType, setCreditType] = useState(0);
     const [componentToSelect] = useState(data);
 
     const hanldeClickCreditType = (event) => setCreditType(event.target.value);
+
+    const renderComponents = (item, index) => {
+        return createElement(
+            listComponents[item.type],
+            {
+                key: `item-${item.id}`,
+                label: item.label,
+                ...(item.type === typeColumn.SELECT ? { options: item.options } : {})
+            }
+        );
+    };
     return (
         <DrawerRight>
             <DrawerRight.Section title='VEHÍCULO' >
@@ -119,10 +135,7 @@ const DrawerRightCal = () => {
                 <DrawerRight.Content>
                     <Box sx={{ width: '29.4em', display: 'flex', flexDirection: 'column' }}>
                         {componentToSelect.filter((item) => !item.isSelected)
-                            .map((item) => {
-                                if (item.type === typeColumn.SELECT) return <SelectToDrag key={`item-${item.id}`} label={item.label} options={item.options} />
-                                else return <TextInputToDrag key={`item-${item.id}`} label={item.label} />
-                            })
+                            .map((item, index) => renderComponents(item, index))
                         }
                     </Box>
                 </DrawerRight.Content>
