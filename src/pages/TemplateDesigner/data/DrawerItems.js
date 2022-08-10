@@ -100,29 +100,6 @@ export const sideContent = {
 export const pagesDnD = [
     {
         name: 'Pág. 1',
-        columns: [
-            {
-                id: 1,
-                type: typeColumn.ONE_COLUMN,
-                content: [
-                    // {
-                    //     id: 1,
-                    //     side: sideContent.NO_SIDE,
-                    //     type: typeColumn.TITLE,
-                    //     content: []
-                    // }
-                ]
-            },
-            {
-                id: 2,
-                type: typeColumn.THREE_COLUMN,
-                content: []
-            },
-            {
-                id: 3,
-                type: typeColumn.TWO_COLUMN,
-                content: []
-            }
-        ]
+        columns: []
     }
 ]

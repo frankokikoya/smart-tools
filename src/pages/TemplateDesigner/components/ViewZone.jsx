@@ -9,7 +9,6 @@ import PageTitle from './PageTitle';
 import ViewSection from './ViewSection';
 
 const ViewZone = () => {
-
     const { pages, addPage } = useContext(DesignerContext);
 
     const addNewPage = () => addPage();

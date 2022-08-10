@@ -94,7 +94,7 @@ const SelectDrag = ({ item, index, parent }) => {
                     <MenuItem value={0}>
                         <em style={{ color: '#898A8E' }}>Seleccionar</em>
                     </MenuItem>
-                    {item.options.lenght > 0 && item.options.map((item) => (
+                    {item.options.map((item) => (
                         <MenuItem key={item.id} value={item.value}>
                             {item.text}
                         </MenuItem>

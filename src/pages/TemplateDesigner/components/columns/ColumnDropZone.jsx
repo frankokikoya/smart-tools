@@ -4,6 +4,7 @@ import { useDrop } from 'react-dnd';
 
 import DesignerContext from '../../context/DesignerContext';
 import { sideContent, typeColumn } from '../../data/DrawerItems';
+import InsuranceDrag from '../InputsDraggables/InsuranceDrag';
 import SelectDrag from '../InputsDraggables/SelectDrag';
 import TextInputDrag from '../InputsDraggables/TextInputDrag';
 import SubTitleDrag from '../TextDraggables/SubTitleDrag';
@@ -18,6 +19,7 @@ const columnComponents = {
     [typeColumn.TEXT]: TextDrag,
     [typeColumn.SELECT]: SelectDrag,
     [typeColumn.TXT_INPUT]: TextInputDrag,
+    [typeColumn.INSURANCE]: InsuranceDrag,
 };
 
 const ColumnDropZone = ({ width, side = sideContent.NO_SIDE, content = [], parent, index }) => {
@@ -39,6 +41,7 @@ const ColumnDropZone = ({ width, side = sideContent.NO_SIDE, content = [], paren
             typeColumn.TEXT,
             typeColumn.SELECT,
             typeColumn.TXT_INPUT,
+            typeColumn.INSURANCE
         ],
         drop: (item) => addContent({ ...item, side, content: [] }),
         collect: (monitor) => ({

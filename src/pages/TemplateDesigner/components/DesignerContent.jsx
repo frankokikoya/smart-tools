@@ -1,8 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
+import { useLocalStorage } from '../../../hooks';
 import DesignerContext from '../context/DesignerContext';
 import AppBarDesigner from './AppBarDesigner';
 import DrawerEditColumn from './DrawerEditColumn';
@@ -14,9 +15,10 @@ import DrawerRightTemplate from './DreawerRightTemplate';
 import ViewZone from './ViewZone';
 
 const DesignerContent = () => {
+    const [pagesSaved, setPagesSaved] = useLocalStorage('PAGES');
     const [layoutSelected, setLayoutSelected] = useState(2);
-    const [drawerLeftSelected, setDrawerLeftSelected] = useState(4);
-    const { selectedRow, setSelectedRow } = useContext(DesignerContext);
+    const [drawerLeftSelected, setDrawerLeftSelected] = useState(0);
+    const { pages, setPages, selectedRow, setSelectedRow } = useContext(DesignerContext);
 
     const hanldeClickLayout = (layout) => setLayoutSelected(layout);
     const hanldeClickDrawerLeft = (iconNumber) => {
@@ -24,7 +26,15 @@ const DesignerContent = () => {
         setDrawerLeftSelected(iconNumber);
     };
     const AddSection = () => console.log('Click add');
-    const SubSection = () => console.log('Click add');
+    const SubSection = () => {
+        setPagesSaved(pages);
+    };
+
+    useEffect(() => {
+        if (pagesSaved?.length > 0) {
+            setPages(pagesSaved);
+        }
+    }, [pagesSaved, setPages])
 
     return (
         <>
