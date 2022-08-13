@@ -86,8 +86,9 @@ const SelectDrag = ({ item, index, parent }) => {
                     {item?.label ? item.label : 'Select'}
                 </Typography>
                 <Select
-                    labelId='connect-label'
                     id='connect'
+                    size='small'
+                    labelId='connect-label'
                     value={optionSelected}
                     onChange={hanldeClick}
                 >

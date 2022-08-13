@@ -1,16 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
 
 import DrawerRight from '../DrawerRight';
+import DraggableList from './DraggableList';
 
 const DrawerRightPay = () => {
+    const [radio, setRadio] = useState('$');
+    const [minMax, setMinMax] = useState({ min: 10, max: 10 });
+
+    const handleChange = (event) => {
+        const { id, value } = event.target;
+        if (value !== '') {
+            setMinMax((prev) => ({
+                ...prev,
+                [id]: value,
+            }));
+        }
+    };
+
+    const handleRadioChange = (event) => {
+        console.log(event.target.value)
+        setRadio(event.target.value);
+        if (event.target.value === '$' && radio === '%') {
+            setMinMax((prev) => ({
+                ...prev,
+                min: Math.round(prev.min * 100),
+                max: Math.round(prev.max * 100),
+            }));
+        }
+
+        if (event.target.value === '%' && radio === '$') {
+            setMinMax((prev) => ({
+                ...prev,
+                min: (prev.min / 100).toFixed(2),
+                max: (prev.max / 100).toFixed(2),
+            }));
+        }
+    };
+
     return (
         <DrawerRight>
             <DrawerRight.Section title='ENGANCHE' >
@@ -37,14 +73,18 @@ const DrawerRightPay = () => {
                             <Typography
                                 gutterBottom
                                 component='label'
-                                htmlFor='pay-min'
+                                htmlFor='min'
                                 sx={{ color: '#2C4154', fontWeight: 'bold' }}>
                                 Mín.
                             </Typography>
                             <OutlinedInput
-                                id='pay-min'
+                                id='min'
+                                size='small'
+                                type='number'
                                 placeholder='10'
                                 sx={{ pr: 0 }}
+                                value={minMax.min}
+                                onChange={handleChange}
                                 endAdornment={
                                     <InputAdornment
                                         sx={{
@@ -57,7 +97,9 @@ const DrawerRightPay = () => {
                                             justifyContent: 'center',
                                         }}
                                         position='end'>
-                                        <Typography sx={{ fontWeight: 'bold', fontSize: '1.5rem' }}>%</Typography>
+                                        <Typography sx={{ fontWeight: 'bold', fontSize: '1.5rem' }}>
+                                            {radio}
+                                        </Typography>
                                     </InputAdornment>
                                 } />
                         </FormControl>
@@ -65,14 +107,18 @@ const DrawerRightPay = () => {
                             <Typography
                                 gutterBottom
                                 component='label'
-                                htmlFor='pay-max'
+                                htmlFor='max'
                                 sx={{ color: '#2C4154', fontWeight: 'bold' }}>
                                 Máx.
                             </Typography>
                             <OutlinedInput
-                                id='pay-max'
+                                id='max'
+                                size='small'
+                                type='number'
                                 placeholder='10'
                                 sx={{ pr: 0 }}
+                                value={minMax.max}
+                                onChange={handleChange}
                                 endAdornment={
                                     <InputAdornment
                                         sx={{
@@ -85,14 +131,44 @@ const DrawerRightPay = () => {
                                             justifyContent: 'center',
                                         }}
                                         position='end'>
-                                        <Typography sx={{ fontWeight: 'bold', fontSize: '1.5rem' }}>%</Typography>
+                                        <Typography sx={{ fontWeight: 'bold', fontSize: '1.5rem' }}>
+                                            {radio}
+                                        </Typography>
                                     </InputAdornment>
                                 } />
                         </FormControl>
                     </Box>
                 </DrawerRight.Content>
+                <DrawerRight.Content>
+                    <Box sx={{
+                        width: '29.4em',
+                        display: 'flex',
+                        flexDirection: 'column'
+                    }}>
+                        <FormControl sx={{ width: '100%' }}>
+                            <RadioGroup
+                                name='type-money'
+                                value={radio}
+                                onChange={handleRadioChange}
+                            >
+                                <FormControlLabel value='$' control={<Radio color='secondary' />} label='Expresar en pesos' />
+                                <FormControlLabel value='%' control={<Radio color='secondary' />} label='Expresar en porcentaje' />
+                            </RadioGroup>
+                        </FormControl>
+                    </Box>
+                </DrawerRight.Content>
             </DrawerRight.Section>
-        </DrawerRight>
+            <DrawerRight.Section title='PLAZOS' >
+                <Box sx={{
+                    pl: 2,
+                    width: '29.4em',
+                    display: 'flex',
+                    flexDirection: 'column'
+                }}>
+                    <DraggableList />
+                </Box>
+            </DrawerRight.Section>
+        </DrawerRight >
     )
 }
 

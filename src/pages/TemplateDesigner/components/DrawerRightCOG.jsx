@@ -35,7 +35,10 @@ const DrawerRightCOG = () => {
                 sx={{ color: '#2C4154', fontWeight: 'bold' }}>
                 Nombre del cotizador
               </Typography>
-              <OutlinedInput id='cot-input' placeholder='Crediauto' />
+              <OutlinedInput
+                id='cot-input'
+                size='small'
+                placeholder='Crediauto' />
             </FormControl>
             <FormControl sx={{ width: '30%' }}>
               <Typography
@@ -47,6 +50,7 @@ const DrawerRightCOG = () => {
               </Typography>
               <OutlinedInput
                 id='cot-pref'
+                size='small'
                 placeholder='Max. 4 char.' />
             </FormControl>
           </Box>
@@ -82,8 +86,9 @@ const DrawerRightCOG = () => {
                 Tipo de crédito
               </Typography>
               <Select
-                labelId='credit-type-label'
                 id='credit-type'
+                size='small'
+                labelId='credit-type-label'
                 value={creditType}
                 onChange={hanldeClickCreditType}
               >
@@ -112,8 +117,9 @@ const DrawerRightCOG = () => {
                 Amortización
               </Typography>
               <Select
-                labelId='amort-label'
                 id='amort'
+                size='small'
+                labelId='amort-label'
                 value={creditType}
                 onChange={hanldeClickCreditType}
               >
@@ -144,8 +150,9 @@ const DrawerRightCOG = () => {
                 Plan
               </Typography>
               <Select
-                labelId='plan-type-label'
                 id='plan-type'
+                size='small'
+                labelId='plan-type-label'
                 value={creditType}
                 onChange={hanldeClickCreditType}
               >

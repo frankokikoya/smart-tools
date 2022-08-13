@@ -51,6 +51,7 @@ const SelectToDrag = ({ label = 'Select', options = [] }) => {
                 </Typography>
                 <Select
                     id='connect-label'
+                    size='small'
                     value={optionSelected}
                     onChange={hanldeClick}
                 >

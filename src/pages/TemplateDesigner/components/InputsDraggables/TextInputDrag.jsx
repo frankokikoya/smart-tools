@@ -82,6 +82,7 @@ const TextInputDrag = ({ item, index, parent }) => {
                 </Typography>
                 <TextField
                     id='input-text-label'
+                    size='small'
                     placeholder={item?.placeholder ? item.placeholder : 'Seleccciona'}
                     variant='outlined' />
             </FormControl>

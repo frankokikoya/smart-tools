@@ -44,6 +44,7 @@ const DrawerRightGrid = () => {
                             </Typography>
                             <Select
                                 id='connect-label'
+                                size='small'
                                 value={creditType}
                                 onChange={hanldeClickCreditType}
                             >
