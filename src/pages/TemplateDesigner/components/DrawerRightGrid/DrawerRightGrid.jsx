@@ -8,70 +8,19 @@ import Select from '@mui/material/Select';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-import { typeColumn } from '../../data/DrawerItems';
+import { dataGrid, dataInsurance, inputComponentsToDrag, typeColumn } from '../../data/DrawerItems';
 import DrawerRight from '../DrawerRight';
 import InsuranceToDrag from '../InputsDraggables/InsuranceToDrag';
-import SelectToDrag from '../InputsDraggables/SelectToDrag';
-import TextInputToDrag from '../InputsDraggables/TextInputToDrag';
-
-const data = [
-    {
-        id: 1,
-        label: '¿Cómo quieres pagar tu seguro?',
-        type: typeColumn.SELECT,
-        isSelected: false,
-        options: [
-            { id: 1, value: 1, text: 'Op. uno' },
-            { id: 2, value: 2, text: 'Op. dos' },
-        ]
-    },
-    {
-        id: 2,
-        label: '¿Qué extras deseas agregar a tu vehículo?',
-        type: typeColumn.SELECT,
-        isSelected: false,
-        options: [
-            { id: 1, value: 1, text: 'Op. uno' },
-            { id: 2, value: 2, text: 'Op. dos' },
-        ]
-    },
-];
-
-const dataInsurance = [
-    {
-        id: 1,
-        name: 'Afirme',
-        image: 'imgs/afirme.png',
-        price: '$6750.00'
-    },
-    {
-        id: 2,
-        name: 'Qualitas',
-        image: 'imgs/qualitas.png',
-        price: '$6750.00'
-    },
-    {
-        id: 3,
-        name: 'GNP',
-        image: 'imgs/gnp.png',
-        price: '$6750.00'
-    },
-];
-
-const listComponents = {
-    [typeColumn.SELECT]: SelectToDrag,
-    [typeColumn.TXT_INPUT]: TextInputToDrag,
-};
 
 const DrawerRightGrid = () => {
     const [creditType, setCreditType] = useState(0);
-    const [componentToSelect] = useState(data);
+    const [componentToSelect] = useState(dataGrid);
 
     const hanldeClickCreditType = (event) => setCreditType(event.target.value);
 
     const renderComponents = (item, index) => {
         return createElement(
-            listComponents[item.type],
+            inputComponentsToDrag[item.type],
             {
                 key: `item-${item.id}`,
                 label: item.label,

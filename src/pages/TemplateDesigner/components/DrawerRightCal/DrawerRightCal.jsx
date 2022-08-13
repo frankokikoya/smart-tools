@@ -8,90 +8,19 @@ import Select from '@mui/material/Select';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-import { typeColumn } from '../../data/DrawerItems';
+import { typeColumn, dataCal, inputComponentsToDrag } from '../../data/DrawerItems';
 import DrawerRight from '../DrawerRight';
-import SelectToDrag from '../InputsDraggables/SelectToDrag';
-import TextInputToDrag from '../InputsDraggables/TextInputToDrag';
 
-const data = [
-    {
-        id: 1,
-        label: 'Marca',
-        type: typeColumn.SELECT,
-        isSelected: false,
-        options: [
-            { id: 1, value: 1, text: 'Op. uno' },
-            { id: 2, value: 2, text: 'Op. dos' },
-        ]
-    },
-    {
-        id: 2,
-        label: 'Modelo',
-        type: typeColumn.SELECT,
-        isSelected: false,
-        options: [
-            { id: 1, value: 1, text: 'Op. uno' },
-            { id: 2, value: 2, text: 'Op. dos' },
-        ]
-    },
-    {
-        id: 3,
-        label: 'Año',
-        type: typeColumn.SELECT,
-        isSelected: false,
-        options: [
-            { id: 1, value: 1, text: 'Op. uno' },
-            { id: 2, value: 2, text: 'Op. dos' },
-        ]
-    },
-    {
-        id: 4,
-        label: 'Versión',
-        type: typeColumn.SELECT,
-        isSelected: false,
-        options: [
-            { id: 1, value: 1, text: 'Op. uno' },
-            { id: 2, value: 2, text: 'Op. dos' },
-        ]
-    },
-    {
-        id: 5,
-        label: 'Kilometraje',
-        type: typeColumn.SELECT,
-        isSelected: false,
-        options: [
-            { id: 1, value: 1, text: 'Op. uno' },
-            { id: 2, value: 2, text: 'Op. dos' },
-        ]
-    },
-    {
-        id: 6,
-        label: 'Text custom',
-        type: typeColumn.TXT_INPUT,
-        isSelected: false,
-    },
-    {
-        id: 7,
-        label: 'Text custom2',
-        type: typeColumn.TXT_INPUT,
-        isSelected: false,
-    },
-];
-
-const listComponents = {
-    [typeColumn.SELECT]: SelectToDrag,
-    [typeColumn.TXT_INPUT]: TextInputToDrag,
-};
 
 const DrawerRightCal = () => {
     const [creditType, setCreditType] = useState(0);
-    const [componentToSelect] = useState(data);
+    const [componentToSelect] = useState(dataCal);
 
     const hanldeClickCreditType = (event) => setCreditType(event.target.value);
 
     const renderComponents = (item, index) => {
         return createElement(
-            listComponents[item.type],
+            inputComponentsToDrag[item.type],
             {
                 key: `item-${item.id}`,
                 label: item.label,

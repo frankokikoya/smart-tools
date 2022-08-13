@@ -6,16 +6,7 @@ import Typography from '@mui/material/Typography';
 import { useDrop } from 'react-dnd';
 
 import DesignerContext from '../context/DesignerContext';
-import { typeColumn } from '../data/DrawerItems';
-import OneColumn from './columns/OneColumn';
-import ThreeColumn from './columns/ThreeColumn';
-import TwoColumn from './columns/TwoColumn';
-
-const columnComponents = {
-    [typeColumn.ONE_COLUMN]: OneColumn,
-    [typeColumn.TWO_COLUMN]: TwoColumn,
-    [typeColumn.THREE_COLUMN]: ThreeColumn,
-};
+import { typeColumn, columnComponents } from '../data/DrawerItems';
 
 const DropZone = ({ parent, columns }) => {
 
@@ -28,7 +19,11 @@ const DropZone = ({ parent, columns }) => {
     };
 
     const [{ canDrop }, drop] = useDrop(() => ({
-        accept: [typeColumn.ONE_COLUMN, typeColumn.TWO_COLUMN, typeColumn.THREE_COLUMN],
+        accept: [
+            typeColumn.ONE_COLUMN,
+            typeColumn.TWO_COLUMN,
+            typeColumn.THREE_COLUMN
+        ],
         drop: (item) => addColumns(item),
         collect: (monitor) => ({
             //isOver: !!monitor.isOver(),

@@ -3,24 +3,9 @@ import React, { createElement, useContext } from 'react';
 import { useDrop } from 'react-dnd';
 
 import DesignerContext from '../../context/DesignerContext';
-import { sideContent, typeColumn } from '../../data/DrawerItems';
-import InsuranceDrag from '../InputsDraggables/InsuranceDrag';
-import SelectDrag from '../InputsDraggables/SelectDrag';
-import TextInputDrag from '../InputsDraggables/TextInputDrag';
-import SubTitleDrag from '../TextDraggables/SubTitleDrag';
-import TextDrag from '../TextDraggables/TextDrag';
-import TitleDrag from '../TextDraggables/TitleDrag';
+import { inputComponents, sideContent, typeColumn } from '../../data/DrawerItems';
 import ColumnContainer from './ColumnContainer';
 import ColumnEmpty from './ColumnEmpty';
-
-const columnComponents = {
-    [typeColumn.TITLE]: TitleDrag,
-    [typeColumn.SUBTITLE]: SubTitleDrag,
-    [typeColumn.TEXT]: TextDrag,
-    [typeColumn.SELECT]: SelectDrag,
-    [typeColumn.TXT_INPUT]: TextInputDrag,
-    [typeColumn.INSURANCE]: InsuranceDrag,
-};
 
 const ColumnDropZone = ({ width, side = sideContent.NO_SIDE, content = [], parent, index }) => {
     const { addedContent } = useContext(DesignerContext);
@@ -52,7 +37,7 @@ const ColumnDropZone = ({ width, side = sideContent.NO_SIDE, content = [], paren
 
     const renderContent = (c, idx) => {
         return createElement(
-            columnComponents[c.type],
+            inputComponents[c.type],
             {
                 item: c,
                 index,
