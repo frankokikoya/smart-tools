@@ -10,7 +10,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import OutlinedInput from '@mui/material/OutlinedInput';
 
-const DraggableListItem = () => {
+const DraggableListItem = ({ item, idx }) => {
     return (
         <>
             <ListItem
@@ -21,18 +21,24 @@ const DraggableListItem = () => {
                 }>
                 <ListItemIcon sx={{
                     mr: 3,
-                    width: '25%',
+                    width: '30%',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between'
                 }} >
                     <DehazeIcon sx={{ cursor: 'move' }} />
-                    <FormControl sx={{ width: '60%' }} >
-                        <OutlinedInput id='one' type='number' size='small' />
+                    <FormControl sx={{ width: '70%' }} >
+                        <OutlinedInput
+                            id={`${idx}-ops`}
+                            type='number'
+                            size='small'
+                            value={item.value}
+                            inputProps={{ min: 1, max: 3 }} />
                     </FormControl>
                 </ListItemIcon>
                 <ListItemText
-                    primary='Mes(es)'
+                    sx={{ color: 'secondary.gray' }}
+                    primary={item.text}
                 />
             </ListItem>
             <Divider />

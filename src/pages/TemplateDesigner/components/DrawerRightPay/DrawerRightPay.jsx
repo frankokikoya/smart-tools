@@ -1,19 +1,28 @@
 import React, { useState } from 'react';
 
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import InputAdornment from '@mui/material/InputAdornment';
+import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
+import Select from '@mui/material/Select';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
 
 import DrawerRight from '../DrawerRight';
 import DraggableList from './DraggableList';
 
+const ops = [
+    { order: 0, value: 48, text: 'Mes(es)' },
+    { order: 1, value: 36, text: 'Mes(es)' },
+];
+
 const DrawerRightPay = () => {
+    const [selectOps, setSelectOps] = useState(ops);
     const [radio, setRadio] = useState('$');
     const [minMax, setMinMax] = useState({ min: 10, max: 10 });
 
@@ -159,14 +168,62 @@ const DrawerRightPay = () => {
                 </DrawerRight.Content>
             </DrawerRight.Section>
             <DrawerRight.Section title='PLAZOS' >
-                <Box sx={{
-                    pl: 2,
-                    width: '29.4em',
-                    display: 'flex',
-                    flexDirection: 'column'
-                }}>
-                    <DraggableList />
-                </Box>
+                <DrawerRight.Content>
+                    <Box sx={{
+                        width: '29.4em',
+                        display: 'flex',
+                        flexDirection: 'column'
+                    }}>
+                        <DraggableList ops={selectOps} />
+                    </Box>
+                </DrawerRight.Content>
+                <DrawerRight.Content>
+                    <Box sx={{
+                        px: 2,
+                        width: '29.4em',
+                        display: 'flex',
+                        justifyContent: 'space-between'
+                    }}>
+                        <FormControl sx={{ width: '25%' }} >
+                            <OutlinedInput
+                                id={`value-ops`}
+                                type='number'
+                                size='small'
+                                value={24}
+                                inputProps={{ min: 1, max: 3 }} />
+                        </FormControl>
+                        <FormControl sx={{ width: '70%' }} >
+                            <Select
+                                id='connect-label'
+                                size='small'
+                                value={10}
+                            //onChange={hanldeClickCreditType}
+                            >
+                                <MenuItem value={0}>
+                                    <em style={{ color: '#898A8E' }}>Seleccionar</em>
+                                </MenuItem>
+                                <MenuItem value={10}>Mes(es)</MenuItem>
+                                <MenuItem value={21}>Año(s)</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Box>
+                </DrawerRight.Content>
+                <DrawerRight.Content>
+                    <Box sx={{
+                        px: 2,
+                        mt: 2,
+                        width: '29.4em',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
+                        <Button
+                            variant='outlined'
+                            sx={{ width: '100%', textTransform: 'none' }}>
+                            Añadir plazo +
+                        </Button>
+                    </Box>
+                </DrawerRight.Content>
             </DrawerRight.Section>
         </DrawerRight >
     )
