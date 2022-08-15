@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -17,14 +17,16 @@ import DrawerRight from '../DrawerRight';
 import DraggableList from './DraggableList';
 
 const ops = [
-    { order: 0, value: 48, text: 'Mes(es)' },
-    { order: 1, value: 36, text: 'Mes(es)' },
+    { order: 1, value: 48, text: 'Mes(es)' },
+    { order: 2, value: 36, text: 'Mes(es)' },
 ];
 
 const DrawerRightPay = () => {
     const [selectOps, setSelectOps] = useState(ops);
     const [radio, setRadio] = useState('$');
+    const [canAdd, setCanAdd] = useState(true);
     const [minMax, setMinMax] = useState({ min: 10, max: 10 });
+    const [newOp, setNewOp] = useState({ value: 0, text: 'EMPTY' });
 
     const handleChange = (event) => {
         const { id, value } = event.target;
@@ -37,7 +39,6 @@ const DrawerRightPay = () => {
     };
 
     const handleRadioChange = (event) => {
-        console.log(event.target.value)
         setRadio(event.target.value);
         if (event.target.value === '$' && radio === '%') {
             setMinMax((prev) => ({
@@ -56,15 +57,53 @@ const DrawerRightPay = () => {
         }
     };
 
+    const onChangeValue = (event) => {
+        const { id, value } = event.target;
+        setNewOp((prev) => ({
+            ...prev,
+            [id === 'value-ops'
+                ? 'value'
+                : 'text']: value
+        }));
+    };
+
+    const addOption = () => {
+        setSelectOps((prev) => ([
+            ...prev,
+            {
+                order: prev.length + 1,
+                value: parseInt(newOp.value, 10),
+                text: newOp.text
+            }
+        ]));
+        setNewOp({ value: 0, text: 'EMPTY' });
+    };
+
+    const removeOption = (item) => {
+        setSelectOps((prev) => ([
+            ...prev.filter((i) => i.order !== item.order)
+        ]));
+    };
+
+    useEffect(() => {
+        if (
+            newOp.value !== '' &&
+            newOp.value !== 0 &&
+            newOp.text !== 'EMPTY'
+        ) setCanAdd(false);
+        else setCanAdd(true);
+    }, [newOp.text, newOp.value]);
+
     return (
         <DrawerRight>
             <DrawerRight.Section title='ENGANCHE' >
                 <DrawerRight.Content>
-                    <Box sx={{
-                        width: '29.4em',
-                        display: 'flex',
-                        flexDirection: 'column'
-                    }}>
+                    <Box
+                        sx={{
+                            width: '29.4em',
+                            display: 'flex',
+                            flexDirection: 'column'
+                        }}>
                         <FormControl sx={{ width: '100%' }}>
                             <FormControlLabel
                                 control={<Switch defaultChecked />}
@@ -169,56 +208,64 @@ const DrawerRightPay = () => {
             </DrawerRight.Section>
             <DrawerRight.Section title='PLAZOS' >
                 <DrawerRight.Content>
-                    <Box sx={{
-                        width: '29.4em',
-                        display: 'flex',
-                        flexDirection: 'column'
-                    }}>
-                        <DraggableList ops={selectOps} />
+                    <Box
+                        sx={{
+                            width: '29.4em',
+                            display: 'flex',
+                            flexDirection: 'column'
+                        }}>
+                        <DraggableList
+                            ops={selectOps}
+                            removeOption={removeOption} />
                     </Box>
                 </DrawerRight.Content>
                 <DrawerRight.Content>
-                    <Box sx={{
-                        px: 2,
-                        width: '29.4em',
-                        display: 'flex',
-                        justifyContent: 'space-between'
-                    }}>
+                    <Box
+                        sx={{
+                            px: 2,
+                            width: '29.4em',
+                            display: 'flex',
+                            justifyContent: 'space-between'
+                        }}>
                         <FormControl sx={{ width: '25%' }} >
                             <OutlinedInput
                                 id={`value-ops`}
                                 type='number'
                                 size='small'
-                                value={24}
+                                value={newOp.value}
+                                onChange={onChangeValue}
                                 inputProps={{ min: 1, max: 3 }} />
                         </FormControl>
                         <FormControl sx={{ width: '70%' }} >
                             <Select
                                 id='connect-label'
                                 size='small'
-                                value={10}
-                            //onChange={hanldeClickCreditType}
+                                value={newOp.text}
+                                onChange={onChangeValue}
                             >
-                                <MenuItem value={0}>
+                                <MenuItem value={'EMPTY'}>
                                     <em style={{ color: '#898A8E' }}>Seleccionar</em>
                                 </MenuItem>
-                                <MenuItem value={10}>Mes(es)</MenuItem>
-                                <MenuItem value={21}>Año(s)</MenuItem>
+                                <MenuItem value={'Mes(es)'}>Mes(es)</MenuItem>
+                                <MenuItem value={'Año(s)'}>Año(s)</MenuItem>
                             </Select>
                         </FormControl>
                     </Box>
                 </DrawerRight.Content>
                 <DrawerRight.Content>
-                    <Box sx={{
-                        px: 2,
-                        mt: 2,
-                        width: '29.4em',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                    }}>
+                    <Box
+                        sx={{
+                            px: 2,
+                            mt: 2,
+                            width: '29.4em',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        }}>
                         <Button
                             variant='outlined'
+                            disabled={canAdd}
+                            onClick={addOption}
                             sx={{ width: '100%', textTransform: 'none' }}>
                             Añadir plazo +
                         </Button>

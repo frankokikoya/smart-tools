@@ -4,11 +4,14 @@ import List from '@mui/material/List';
 
 import DraggableListItem from './DraggableListItem';
 
-const DraggableList = ({ ops = [] }) => {
+const DraggableList = ({ ops = [], removeOption }) => {
     return (
         <List>
             {ops.map((item, idx) => (
-                <DraggableListItem key={idx} item={item} />
+                <DraggableListItem
+                    key={idx}
+                    item={item}
+                    removeOption={removeOption} />
             ))}
         </List>
     )

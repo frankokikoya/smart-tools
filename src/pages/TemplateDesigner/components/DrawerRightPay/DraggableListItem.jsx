@@ -10,12 +10,15 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import OutlinedInput from '@mui/material/OutlinedInput';
 
-const DraggableListItem = ({ item, idx }) => {
+const DraggableListItem = ({ item, idx, removeOption }) => {
     return (
         <>
             <ListItem
                 secondaryAction={
-                    <IconButton edge='end' aria-label='delete'>
+                    <IconButton
+                        edge='end'
+                        aria-label='delete'
+                        onClick={() => removeOption(item)}>
                         <DeleteIcon sx={{ color: 'secondary.main' }} />
                     </IconButton>
                 }>
