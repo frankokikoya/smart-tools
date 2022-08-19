@@ -26,7 +26,8 @@ const ColumnDropZone = ({ width, side = sideContent.NO_SIDE, content = [], paren
             typeColumn.TEXT,
             typeColumn.SELECT,
             typeColumn.TXT_INPUT,
-            typeColumn.INSURANCE
+            typeColumn.INSURANCE,
+            typeColumn.SLIDER
         ],
         drop: (item) => addContent({ ...item, side, content: [] }),
         collect: (monitor) => ({

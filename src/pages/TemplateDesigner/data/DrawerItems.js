@@ -11,6 +11,7 @@ import TwoColumn from '../components/columns/TwoColumn';
 import InsuranceDrag from '../components/InputsDraggables/InsuranceDrag';
 import SelectDrag from '../components/InputsDraggables/SelectDrag';
 import SelectToDrag from '../components/InputsDraggables/SelectToDrag';
+import SliderDrag from '../components/InputsDraggables/SliderDrag';
 import TextInputDrag from '../components/InputsDraggables/TextInputDrag';
 import TextInputToDrag from '../components/InputsDraggables/TextInputToDrag';
 import SubTitleDrag from '../components/TextDraggables/SubTitleDrag';
@@ -99,6 +100,7 @@ export const typeColumn = {
     SELECT: "SELECT",
     TXT_INPUT: "TXT_INPUT",
     INSURANCE: "INSURANCE",
+    SLIDER: "SLIDER",
 };
 
 export const sideContent = {
@@ -121,6 +123,7 @@ export const inputComponents = {
     [typeColumn.SELECT]: SelectDrag,
     [typeColumn.TXT_INPUT]: TextInputDrag,
     [typeColumn.INSURANCE]: InsuranceDrag,
+    [typeColumn.SLIDER]: SliderDrag,
 };
 
 export const inputComponentsToDrag = {

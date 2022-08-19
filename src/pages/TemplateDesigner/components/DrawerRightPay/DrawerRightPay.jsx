@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -12,13 +12,16 @@ import RadioGroup from '@mui/material/RadioGroup';
 import Select from '@mui/material/Select';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
+import update from 'immutability-helper';
 
 import DrawerRight from '../DrawerRight';
+import SelectToDrag from '../InputsDraggables/SelectToDrag';
+import SliderToDrag from '../InputsDraggables/SliderToDrag';
 import DraggableList from './DraggableList';
 
 const ops = [
-    { order: 1, value: 48, text: 'Mes(es)' },
-    { order: 2, value: 36, text: 'Mes(es)' },
+    { id: 1, value: 48, text: '48 Mes(es)', toShow: 'Mes(es)' },
+    { id: 2, value: 36, text: '36 Mes(es)', toShow: 'Mes(es)' },
 ];
 
 const DrawerRightPay = () => {
@@ -26,7 +29,18 @@ const DrawerRightPay = () => {
     const [radio, setRadio] = useState('$');
     const [canAdd, setCanAdd] = useState(true);
     const [minMax, setMinMax] = useState({ min: 10, max: 10 });
-    const [newOp, setNewOp] = useState({ value: 0, text: 'EMPTY' });
+    const [newOp, setNewOp] = useState({ value: 0, text: '', toShow: 'EMPTY' });
+
+    const moveItem = useCallback((dragIndex, hoverIndex) => {
+        setSelectOps((prev) =>
+            update(prev, {
+                $splice: [
+                    [dragIndex, 1],
+                    [hoverIndex, 0, prev[dragIndex]],
+                ],
+            }),
+        )
+    }, [])
 
     const handleChange = (event) => {
         const { id, value } = event.target;
@@ -61,9 +75,12 @@ const DrawerRightPay = () => {
         const { id, value } = event.target;
         setNewOp((prev) => ({
             ...prev,
+            text: id === 'value-ops'
+                ? `${value} ${prev.toShow}`
+                : `${prev.value} ${value}`,
             [id === 'value-ops'
                 ? 'value'
-                : 'text']: value
+                : 'toShow']: value
         }));
     };
 
@@ -71,17 +88,31 @@ const DrawerRightPay = () => {
         setSelectOps((prev) => ([
             ...prev,
             {
-                order: prev.length + 1,
+                id: prev.length + 1,
                 value: parseInt(newOp.value, 10),
-                text: newOp.text
+                text: `${newOp.value} ${newOp.toShow}`,
+                toShow: newOp.toShow
             }
         ]));
-        setNewOp({ value: 0, text: 'EMPTY' });
+        setNewOp({ value: 0, text: '', toShow: 'EMPTY' });
     };
 
     const removeOption = (item) => {
         setSelectOps((prev) => ([
-            ...prev.filter((i) => i.order !== item.order)
+            ...prev.filter((i) => i.id !== item.id)
+        ]));
+    };
+
+    const changeValueOption = (event) => {
+        const { id, value } = event;
+        setSelectOps((prev) => ([
+            ...prev.map((i) => {
+                if (i.id === id) {
+                    i.value = value;
+                    i.text = `${value} ${i.toShow}`
+                }
+                return i;
+            })
         ]));
     };
 
@@ -89,10 +120,10 @@ const DrawerRightPay = () => {
         if (
             newOp.value !== '' &&
             newOp.value !== 0 &&
-            newOp.text !== 'EMPTY'
+            newOp.toShow !== 'EMPTY'
         ) setCanAdd(false);
         else setCanAdd(true);
-    }, [newOp.text, newOp.value]);
+    }, [newOp.toShow, newOp.value]);
 
     return (
         <DrawerRight>
@@ -106,7 +137,7 @@ const DrawerRightPay = () => {
                         }}>
                         <FormControl sx={{ width: '100%' }}>
                             <FormControlLabel
-                                control={<Switch defaultChecked />}
+                                control={<Switch />}
                                 label='Usar enganche del producto' />
                         </FormControl>
                     </Box>
@@ -216,6 +247,8 @@ const DrawerRightPay = () => {
                         }}>
                         <DraggableList
                             ops={selectOps}
+                            onChangeValue={changeValueOption}
+                            moveItem={moveItem}
                             removeOption={removeOption} />
                     </Box>
                 </DrawerRight.Content>
@@ -240,7 +273,7 @@ const DrawerRightPay = () => {
                             <Select
                                 id='connect-label'
                                 size='small'
-                                value={newOp.text}
+                                value={newOp.toShow}
                                 onChange={onChangeValue}
                             >
                                 <MenuItem value={'EMPTY'}>
@@ -269,6 +302,22 @@ const DrawerRightPay = () => {
                             sx={{ width: '100%', textTransform: 'none' }}>
                             Añadir plazo +
                         </Button>
+                    </Box>
+                </DrawerRight.Content>
+            </DrawerRight.Section>
+            <DrawerRight.Section title='COMPONENTES' >
+                <DrawerRight.Content>
+                    <Box
+                        sx={{
+                            width: '29.4em',
+                            display: 'flex',
+                            flexDirection: 'column',
+                        }}>
+                        <SelectToDrag
+                            label='¿A cuántos plazos deseas pagar?'
+                            options={selectOps}
+                        />
+                        <SliderToDrag />
                     </Box>
                 </DrawerRight.Content>
             </DrawerRight.Section>

@@ -23,7 +23,7 @@ const SelectToDrag = ({ label = 'Select', options = [] }) => {
         collect: (monitor) => ({
             isDragging: monitor.isDragging()
         })
-    }));
+    }), [options]);
 
     const [optionSelected, setOptionSelected] = useState(0);
 
@@ -59,7 +59,9 @@ const SelectToDrag = ({ label = 'Select', options = [] }) => {
                         <em style={{ color: '#898A8E' }}>Seleccionar</em>
                     </MenuItem>
                     {options.map((item) => (
-                        <MenuItem key={item.id} value={item.value}>
+                        <MenuItem
+                            key={item.id}
+                            value={item.value}>
                             {item.text}
                         </MenuItem>
                     ))}
