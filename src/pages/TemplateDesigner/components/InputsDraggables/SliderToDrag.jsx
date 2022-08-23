@@ -1,43 +1,72 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Box from '@mui/material/Box';
-import FormControl from '@mui/material/FormControl';
 import Grid from '@mui/material/Grid';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import Slider from '@mui/material/Slider';
+import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { useDrag } from 'react-dnd';
-import styled from 'styled-components';
 
 import { typeColumn } from '../../data/DrawerItems';
 
-const sliderMarks = [
-  { value: 10000 },
-  { value: 15000, label: '$10,000' },
-  { value: 20000 },
-  { value: 25000 },
-  { value: 30000 },
-  { value: 35000 },
-  { value: 40000 },
-  { value: 45000 },
-  { value: 50000 },
-  { value: 55000, label: '$60,000' },
-  { value: 60000 },
-];
+function ValueLabelComponent(props) {
+  const { children, value } = props;
 
-const SliderToDrag = () => {
+  return (
+    <Tooltip
+      PopperProps={{
+        modifiers: [
+          {
+            name: "offset",
+            options: {
+              offset: [0, -12],
+            },
+          },
+        ],
+      }}
+      componentsProps={{
+        tooltip: {
+          sx: {
+            m: 0,
+            color: '#BCD500',
+            bgcolor: 'transparent',
+            fontSize: '20px',
+            fontWeight: 'bold'
+          },
+        },
+      }}
+      enterTouchDelay={0}
+      placement='bottom'
+      open={true}
+      title={value}>
+      {children}
+    </Tooltip>
+  );
+}
+
+const SliderToDrag = ({ label, min, max, exp }) => {
+  const [valueSlider, setValueSlider] = useState(min);
+
+  const handleSliderValue = (event, newValue) => {
+    setValueSlider(newValue);
+  };
+
   const [, drag] = useDrag(() => ({
     type: typeColumn.SLIDER,
     item: () => {
       return {
         type: typeColumn.SLIDER,
-        label: '¿Cuánto deseas agregar de renta extraordinaria?*',
+        label,
+        min,
+        max,
+        value: valueSlider,
+        exp
       }
     },
     collect: (monitor) => ({
       isDragging: monitor.isDragging()
     })
-  }), []);
+  }), [min, max, valueSlider, exp]);
 
   return (
     <Box
@@ -56,34 +85,32 @@ const SliderToDrag = () => {
         gutterBottom
         id='input-slider'
         sx={{ color: '#2C4154', fontWeight: 'bold' }}>
-        ¿Cuánto deseas agregar de renta extraordinaria?*
+        {label}
       </Typography>
-      <Grid container spacing={2} alignItems='center'>
-        <Grid item xs={3}>
-          <FormControl sx={{ width: '100%' }}>
-            <OutlinedInput
-              //id={`${item.id}`}
-              type='number'
-              size='small'
-              value={3000}
-              //onChange={handleChange}
-              inputProps={{ min: 1, max: 3 }} />
-          </FormControl>
-        </Grid>
-        <Grid item xs={9} sx={{ p: 1 }}>
-          <EvalSliderModal>
-            <Slider
-              className='sliders'
-              value={35000}
-              //onChange={handleSliderChange}
-              marks={sliderMarks}
-              aria-labelledby='input-slider'
-              color='secondary'
-              min={10000}
-              max={60000}
-              step={5000}
-            />
-          </EvalSliderModal>
+      <Grid
+        sx={{ p: 2 }}
+        container
+        spacing={2}
+        alignItems='center' >
+        <Grid item xs={12}>
+          <Slider
+            sx={{
+              color: '#BCD500',
+              '& .MuiSlider-rail': {
+                opacity: 0.5,
+                backgroundColor: '#898A8E',
+              },
+            }}
+            aria-labelledby='input-slider'
+            min={min}
+            max={max}
+            value={valueSlider}
+            onChange={handleSliderValue}
+            valueLabelDisplay='on'
+            components={{
+              ValueLabel: ValueLabelComponent
+            }}
+          />
         </Grid>
       </Grid>
     </Box>
@@ -91,44 +118,3 @@ const SliderToDrag = () => {
 }
 
 export default SliderToDrag;
-
-const EvalSliderModal = styled.div`
-  & .sliders {
-    & .MuiSlider-mark:nth-child(n) {
-      top: 90%;
-      height: 10px;
-      width: 1px;
-      background: #bfbfbf;
-    }
-    & .MuiSlider-mark:nth-child(3n) {
-      top: 110%;
-      height: 20px;
-      width: 1px;
-      background: #bfbfbf;
-    }
-    & .MuiSlider-markActive {
-      background: #111;
-    }
-    & .MuiSlider-markLabel {
-      margin-top: 12px;
-    }
-    & .MuiSlider-markLabelActive {
-      font: bold;
-    }
-  }
-`;
-
-/**
- *  & .MuiSlider-mark:nth-child(9) {
-      top: 110%;
-      height: 20px;
-      width: 1px;
-      background: #bfbfbf;
-    }
-    & .MuiSlider-mark:nth-child(15) {
-      top: 110%;
-      height: 20px;
-      width: 1px;
-      background: #bfbfbf;
-    }
- */

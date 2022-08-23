@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 import DehazeIcon from '@mui/icons-material/Dehaze';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -12,13 +12,20 @@ import ListItemText from '@mui/material/ListItemText';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { useDrag, useDrop } from 'react-dnd';
 
+import { useOutsideClick } from '../../../../hooks/useOutsideClick';
+
 const ItemType = {
     BOX: 'box',
 }
 
 const DraggableListItem = ({ item, index, onChangeValue, moveItem, removeOption }) => {
-    const ref = useRef(null)
     const [canEdit, setCanEdit] = useState(false);
+
+    const handleClickOutside = () => {
+        setCanEdit(false)
+    };
+
+    const ref = useOutsideClick(handleClickOutside);
 
     const [, drop] = useDrop({
         accept: [ItemType.BOX],
@@ -86,7 +93,7 @@ const DraggableListItem = ({ item, index, onChangeValue, moveItem, removeOption 
                         <IconButton
                             edge='end'
                             aria-label='delete'
-                            onClick={() => removeOption(item)}>
+                            onClick={() => removeOption(item.id)}>
                             <DeleteIcon sx={{ color: 'secondary.main' }} />
                         </IconButton>
                     </>

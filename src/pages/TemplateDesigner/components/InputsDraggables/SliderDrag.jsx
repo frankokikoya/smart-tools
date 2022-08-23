@@ -2,20 +2,62 @@ import React, { useContext, useState } from 'react';
 
 import CloseIcon from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
-import FormControl from '@mui/material/FormControl';
+import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
+import Slider from '@mui/material/Slider';
+import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { useDrag } from 'react-dnd';
 
 import DesignerContext from '../../context/DesignerContext';
 import { typeColumn } from '../../data/DrawerItems';
 
+function ValueLabelComponent(props) {
+  const { children, value } = props;
+
+  return (
+    <Tooltip
+      PopperProps={{
+        modifiers: [
+          {
+            name: "offset",
+            options: {
+              offset: [0, -20],
+            },
+          },
+        ],
+      }}
+      componentsProps={{
+        tooltip: {
+          sx: {
+            m: 0,
+            color: '#BCD500',
+            bgcolor: 'transparent',
+            fontSize: '15px',
+            fontWeight: 'bold'
+          },
+        },
+      }}
+      enterTouchDelay={0}
+      placement='bottom'
+      open={true}
+      title={value}>
+      {children}
+    </Tooltip>
+  );
+}
+
 const SliderDrag = ({ item, index, parent }) => {
+  const [valueSlider, setValueSlider] = useState(item.value);
   const [isShown, setIsShown] = useState(false);
   const { deletedContent, selectedRow } = useContext(DesignerContext);
 
   const handleDragging = () => {
     return !selectedRow?.id;
+  };
+
+  const handleSliderValue = (event, newValue) => {
+    setValueSlider(newValue);
   };
 
   const [, drag] = useDrag(() => ({
@@ -27,14 +69,17 @@ const SliderDrag = ({ item, index, parent }) => {
         action: 'LEAVE',
         fromParent: parent,
         type: typeColumn.SLIDER,
-        label: item.label,
+        min: item.min,
+        max: item.max,
+        value: valueSlider,
+        exp: item.exp
       }
     },
     canDrag: handleDragging,
     collect: (monitor) => ({
       isDragging: monitor.isDragging()
     })
-  }), [selectedRow]);
+  }), [selectedRow, valueSlider]);
 
   const deleteComponent = () => {
     deletedContent({
@@ -54,6 +99,7 @@ const SliderDrag = ({ item, index, parent }) => {
         p: 2,
         display: 'flex',
         alignItems: 'center',
+        flexDirection: 'column',
         justifyContent: 'flex-start',
         position: 'relative',
         border: '1px dashed #D1D1D1',
@@ -71,15 +117,40 @@ const SliderDrag = ({ item, index, parent }) => {
         }}>
         <CloseIcon sx={{ color: 'red', fontSize: 'large' }} />
       </IconButton>}
-      <FormControl sx={{ width: '100%' }} size='small' >
-        <Typography
-          gutterBottom
-          component='label'
-          htmlFor='pay-label'
-          sx={{ color: '#2C4154', fontWeight: 'bold', fontSize: 'small' }}>
-          {item?.label ? item.label : 'Slider'}
-        </Typography>
-      </FormControl>
+      <Typography
+        gutterBottom
+        component='label'
+        htmlFor='pay-label'
+        sx={{ color: '#2C4154', fontWeight: 'bold', fontSize: 'small', alignSelf: 'start' }}>
+        {item?.label ? item.label : 'Slider'}
+      </Typography>
+      <Grid
+        sx={{ p: 1 }}
+        container
+        spacing={2}
+        alignItems='center' >
+        <Grid item xs={12}>
+          <Slider
+            sx={{
+              color: '#BCD500',
+              '& .MuiSlider-rail': {
+                opacity: 0.5,
+                backgroundColor: '#898A8E',
+              },
+            }}
+            size='small'
+            aria-labelledby='input-slider'
+            min={item.min}
+            max={item.max}
+            value={valueSlider}
+            onChange={handleSliderValue}
+            valueLabelDisplay='on'
+            components={{
+              ValueLabel: ValueLabelComponent
+            }}
+          />
+        </Grid>
+      </Grid>
     </Box>
   )
 }

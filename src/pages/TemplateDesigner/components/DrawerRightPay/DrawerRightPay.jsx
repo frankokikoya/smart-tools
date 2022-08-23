@@ -28,7 +28,8 @@ const DrawerRightPay = () => {
     const [selectOps, setSelectOps] = useState(ops);
     const [radio, setRadio] = useState('$');
     const [canAdd, setCanAdd] = useState(true);
-    const [minMax, setMinMax] = useState({ min: 10, max: 10 });
+
+    const [minMax, setMinMax] = useState({ min: 10, max: 100 });
     const [newOp, setNewOp] = useState({ value: 0, text: '', toShow: 'EMPTY' });
 
     const moveItem = useCallback((dragIndex, hoverIndex) => {
@@ -44,12 +45,16 @@ const DrawerRightPay = () => {
 
     const handleChange = (event) => {
         const { id, value } = event.target;
-        if (value !== '') {
-            setMinMax((prev) => ({
-                ...prev,
-                [id]: value,
-            }));
-        }
+        const convertValue = parseInt(value && value > 0 ? value : 0, 10);
+        setMinMax((prev) => ({
+            ...prev,
+            [id]: convertValue,
+            ...(
+                id === 'max' && convertValue < prev.min
+                    ? { min: convertValue }
+                    : id === 'min' && convertValue > prev.max
+                        ? { max: convertValue } : {})
+        }));
     };
 
     const handleRadioChange = (event) => {
@@ -57,8 +62,8 @@ const DrawerRightPay = () => {
         if (event.target.value === '$' && radio === '%') {
             setMinMax((prev) => ({
                 ...prev,
-                min: Math.round(prev.min * 100),
-                max: Math.round(prev.max * 100),
+                min: Math.round(prev.min * 100).toFixed(0),
+                max: Math.round(prev.max * 100).toFixed(0),
             }));
         }
 
@@ -97,9 +102,10 @@ const DrawerRightPay = () => {
         setNewOp({ value: 0, text: '', toShow: 'EMPTY' });
     };
 
-    const removeOption = (item) => {
+    const removeOption = (id) => {
+        console.log(id);
         setSelectOps((prev) => ([
-            ...prev.filter((i) => i.id !== item.id)
+            ...prev.filter((i) => i.id !== id)
         ]));
     };
 
@@ -143,11 +149,12 @@ const DrawerRightPay = () => {
                     </Box>
                 </DrawerRight.Content>
                 <DrawerRight.Content>
-                    <Box sx={{
-                        width: '29.4em',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                    }}>
+                    <Box
+                        sx={{
+                            width: '29.4em',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                        }}>
                         <FormControl sx={{ width: '45%' }}>
                             <Typography
                                 gutterBottom
@@ -219,11 +226,12 @@ const DrawerRightPay = () => {
                     </Box>
                 </DrawerRight.Content>
                 <DrawerRight.Content>
-                    <Box sx={{
-                        width: '29.4em',
-                        display: 'flex',
-                        flexDirection: 'column'
-                    }}>
+                    <Box
+                        sx={{
+                            width: '29.4em',
+                            display: 'flex',
+                            flexDirection: 'column'
+                        }}>
                         <FormControl sx={{ width: '100%' }}>
                             <RadioGroup
                                 name='type-money'
@@ -317,7 +325,11 @@ const DrawerRightPay = () => {
                             label='¿A cuántos plazos deseas pagar?'
                             options={selectOps}
                         />
-                        <SliderToDrag />
+                        <SliderToDrag
+                            label='Enganche'
+                            min={minMax.min}
+                            max={minMax.max}
+                            exp={radio} />
                     </Box>
                 </DrawerRight.Content>
             </DrawerRight.Section>

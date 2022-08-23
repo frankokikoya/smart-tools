@@ -17,13 +17,14 @@ const theme = unstable_createMuiStrictModeTheme({
             dark: "#c55600",
             gray: "#898A8E",
             gold: "#D49536",
+            green: '#BCD500',
             background: "#eeeeee",
             contrastText: "#000000",
         },
         error: {
             main: "#A21C2B",
         },
-    },
+    }
 });
 
 export default theme;
