@@ -9,12 +9,14 @@ import { useDrag } from 'react-dnd';
 
 import { typeColumn } from '../../data/DrawerItems';
 
-const SelectToDrag = ({ label = 'Select', options = [] }) => {
+const SelectToDrag = ({ componentId = 0, drawer = '', label = 'Select', options = [] }) => {
 
     const [, drag] = useDrag(() => ({
         type: typeColumn.SELECT,
         item: () => {
             return {
+                componentId,
+                drawer,
                 type: typeColumn.SELECT,
                 label,
                 options

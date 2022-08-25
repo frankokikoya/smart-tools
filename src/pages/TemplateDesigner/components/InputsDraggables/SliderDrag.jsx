@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import CloseIcon from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
@@ -9,6 +9,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { useDrag } from 'react-dnd';
 
+import { kFormatter } from '../../../../utilities/k-format';
 import DesignerContext from '../../context/DesignerContext';
 import { typeColumn } from '../../data/DrawerItems';
 
@@ -47,10 +48,23 @@ function ValueLabelComponent(props) {
   );
 }
 
+function valuetext(value, exp) {
+  const valueText = exp === '$'
+    ? `$${value > 999 ? kFormatter(value) : value}` : `${value}%`;
+  return valueText;
+}
+
 const SliderDrag = ({ item, index, parent }) => {
-  const [valueSlider, setValueSlider] = useState(item.value);
+  const {
+    deletedContent,
+    selectedRow,
+    setComponentsUsed,
+    minMax,
+    radio
+  } = useContext(DesignerContext);
+
   const [isShown, setIsShown] = useState(false);
-  const { deletedContent, selectedRow } = useContext(DesignerContext);
+  const [valueSlider, setValueSlider] = useState(item.value);
 
   const handleDragging = () => {
     return !selectedRow?.id;
@@ -68,7 +82,10 @@ const SliderDrag = ({ item, index, parent }) => {
         index,
         action: 'LEAVE',
         fromParent: parent,
+        componentId: item.componentId,
+        drawer: item.drawer,
         type: typeColumn.SLIDER,
+        label: item.label,
         min: item.min,
         max: item.max,
         value: valueSlider,
@@ -79,15 +96,26 @@ const SliderDrag = ({ item, index, parent }) => {
     collect: (monitor) => ({
       isDragging: monitor.isDragging()
     })
-  }), [selectedRow, valueSlider]);
+  }), [item, selectedRow, valueSlider]);
 
   const deleteComponent = () => {
+    setComponentsUsed((prev) => [
+      ...prev.filter((cu) => cu.componentId !== item.componentId)
+    ]);
+
     deletedContent({
       parent,
       index,
       id: item.id,
     });
   };
+
+  useEffect(() => {
+    item.min = minMax.min;
+    item.max = minMax.max;
+    item.exp = radio;
+    item.value = minMax.min;
+  }, [item, minMax.max, minMax.min, radio]);
 
   return (
     <Box
@@ -140,8 +168,10 @@ const SliderDrag = ({ item, index, parent }) => {
             }}
             size='small'
             aria-labelledby='input-slider'
-            min={item.min}
-            max={item.max}
+            valueLabelFormat={(value) => valuetext(value, radio)}
+            step={1}
+            min={minMax.min}
+            max={minMax.max}
             value={valueSlider}
             onChange={handleSliderValue}
             valueLabelDisplay='on'

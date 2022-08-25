@@ -7,6 +7,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { useDrag } from 'react-dnd';
 
+import { kFormatter } from '../../../../utilities/k-format';
 import { typeColumn } from '../../data/DrawerItems';
 
 function ValueLabelComponent(props) {
@@ -44,7 +45,13 @@ function ValueLabelComponent(props) {
   );
 }
 
-const SliderToDrag = ({ label, min, max, exp }) => {
+function valuetext(value, exp) {
+  const valueText = exp === '$'
+    ? `$${value > 999 ? kFormatter(value) : value}` : `${value}%`;
+  return valueText;
+}
+
+const SliderToDrag = ({ componentId = 0, drawer = '', label, min, max, exp }) => {
   const [valueSlider, setValueSlider] = useState(min);
 
   const handleSliderValue = (event, newValue) => {
@@ -55,6 +62,8 @@ const SliderToDrag = ({ label, min, max, exp }) => {
     type: typeColumn.SLIDER,
     item: () => {
       return {
+        componentId,
+        drawer,
         type: typeColumn.SLIDER,
         label,
         min,
@@ -77,9 +86,9 @@ const SliderToDrag = ({ label, min, max, exp }) => {
         boxShadow: 2,
         backgroundColor: 'white',
         cursor: 'move',
-        '&:hover': {
-          border: '2px solid #64b5f6'
-        }
+        // '&:hover': {
+        //   border: '2px solid #64b5f6'
+        // }
       }}>
       <Typography
         gutterBottom
@@ -102,6 +111,8 @@ const SliderToDrag = ({ label, min, max, exp }) => {
               },
             }}
             aria-labelledby='input-slider'
+            valueLabelFormat={(value) => valuetext(value, exp)}
+            step={1}
             min={min}
             max={max}
             value={valueSlider}

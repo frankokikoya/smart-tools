@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { createElement, useCallback, useContext, useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -14,26 +14,52 @@ import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
 import update from 'immutability-helper';
 
+import DesignerContext from '../../context/DesignerContext';
+import { dataPay, inputComponentsToDrag, typeColumn } from '../../data/DrawerItems';
 import DrawerRight from '../DrawerRight';
-import SelectToDrag from '../InputsDraggables/SelectToDrag';
-import SliderToDrag from '../InputsDraggables/SliderToDrag';
 import DraggableList from './DraggableList';
 
-const ops = [
-    { id: 1, value: 48, text: '48 Mes(es)', toShow: 'Mes(es)' },
-    { id: 2, value: 36, text: '36 Mes(es)', toShow: 'Mes(es)' },
-];
-
 const DrawerRightPay = () => {
-    const [selectOps, setSelectOps] = useState(ops);
-    const [radio, setRadio] = useState('$');
+    const {
+        componentsUsed,
+        selectOpsPay,
+        setSelectOpsPay,
+        minMax,
+        setMinMax,
+        radio,
+        setRadio
+    } = useContext(DesignerContext);
+
+    const [componentToSelect] = useState(dataPay);
+    //const [selectOps, setSelectOps] = useState(ops);
+    // const [radio, setRadio] = useState('$');
     const [canAdd, setCanAdd] = useState(true);
 
-    const [minMax, setMinMax] = useState({ min: 10, max: 100 });
+    // const [minMax, setMinMax] = useState({ min: 0, max: 1 });
     const [newOp, setNewOp] = useState({ value: 0, text: '', toShow: 'EMPTY' });
 
+    const renderComponents = (item, index) => {
+        return createElement(
+            inputComponentsToDrag[item.type],
+            {
+                key: `item-pay-${item.id}-${index}`,
+                componentId: item.componentId,
+                drawer: item.drawer,
+                label: item.label,
+                ...(item.type === typeColumn.SELECT
+                    ? { options: selectOpsPay }
+                    : {
+                        min: minMax.min,
+                        max: minMax.max,
+                        exp: radio,
+                    }
+                )
+            }
+        );
+    };
+
     const moveItem = useCallback((dragIndex, hoverIndex) => {
-        setSelectOps((prev) =>
+        setSelectOpsPay((prev) =>
             update(prev, {
                 $splice: [
                     [dragIndex, 1],
@@ -41,6 +67,7 @@ const DrawerRightPay = () => {
                 ],
             }),
         )
+        // eslint-disable-next-line
     }, [])
 
     const handleChange = (event) => {
@@ -59,21 +86,11 @@ const DrawerRightPay = () => {
 
     const handleRadioChange = (event) => {
         setRadio(event.target.value);
-        if (event.target.value === '$' && radio === '%') {
-            setMinMax((prev) => ({
-                ...prev,
-                min: Math.round(prev.min * 100).toFixed(0),
-                max: Math.round(prev.max * 100).toFixed(0),
-            }));
-        }
-
-        if (event.target.value === '%' && radio === '$') {
-            setMinMax((prev) => ({
-                ...prev,
-                min: (prev.min / 100).toFixed(2),
-                max: (prev.max / 100).toFixed(2),
-            }));
-        }
+        setMinMax((prev) => ({
+            ...prev,
+            min: 0,
+            max: 1,
+        }));
     };
 
     const onChangeValue = (event) => {
@@ -90,7 +107,7 @@ const DrawerRightPay = () => {
     };
 
     const addOption = () => {
-        setSelectOps((prev) => ([
+        setSelectOpsPay((prev) => ([
             ...prev,
             {
                 id: prev.length + 1,
@@ -104,14 +121,14 @@ const DrawerRightPay = () => {
 
     const removeOption = (id) => {
         console.log(id);
-        setSelectOps((prev) => ([
+        setSelectOpsPay((prev) => ([
             ...prev.filter((i) => i.id !== id)
         ]));
     };
 
     const changeValueOption = (event) => {
         const { id, value } = event;
-        setSelectOps((prev) => ([
+        setSelectOpsPay((prev) => ([
             ...prev.map((i) => {
                 if (i.id === id) {
                     i.value = value;
@@ -254,7 +271,7 @@ const DrawerRightPay = () => {
                             flexDirection: 'column'
                         }}>
                         <DraggableList
-                            ops={selectOps}
+                            ops={selectOpsPay}
                             onChangeValue={changeValueOption}
                             moveItem={moveItem}
                             removeOption={removeOption} />
@@ -321,15 +338,9 @@ const DrawerRightPay = () => {
                             display: 'flex',
                             flexDirection: 'column',
                         }}>
-                        <SelectToDrag
-                            label='¿A cuántos plazos deseas pagar?'
-                            options={selectOps}
-                        />
-                        <SliderToDrag
-                            label='Enganche'
-                            min={minMax.min}
-                            max={minMax.max}
-                            exp={radio} />
+                        {componentToSelect.filter((c) => !componentsUsed.find((cu) => cu.componentId === c.componentId))
+                            .map((item, index) => renderComponents(item, index))
+                        }
                     </Box>
                 </DrawerRight.Content>
             </DrawerRight.Section>

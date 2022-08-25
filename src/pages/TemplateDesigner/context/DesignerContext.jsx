@@ -2,13 +2,19 @@ import React, { createContext, useState } from 'react';
 
 import update from 'immutability-helper';
 
-import { pagesDnD } from '../data/DrawerItems';
+import { opsPay, pagesDnD } from '../data/DrawerItems';
 
 const DesignerContext = createContext();
 
 export const DesignerProvider = ({ children }) => {
     const [pages, setPages] = useState(pagesDnD);
     const [selectedRow, setSelectedRow] = useState({});
+
+    const [componentsUsed, setComponentsUsed] = useState([]);
+    // DRAWER PAY
+    const [selectOpsPay, setSelectOpsPay] = useState(opsPay);
+    const [minMax, setMinMax] = useState({ min: 0, max: 1 });
+    const [radio, setRadio] = useState('$');
 
     const addPage = () => {
         setPages((prev) => {
@@ -207,7 +213,16 @@ export const DesignerProvider = ({ children }) => {
             addedContent,
             deletedContent,
             selectedRow,
-            setSelectedRow
+            setSelectedRow,
+            componentsUsed,
+            setComponentsUsed,
+            // PAY
+            selectOpsPay,
+            setSelectOpsPay,
+            minMax,
+            setMinMax,
+            radio,
+            setRadio
         }}>
             {children}
         </DesignerContext.Provider>

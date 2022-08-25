@@ -8,9 +8,15 @@ import ColumnContainer from './ColumnContainer';
 import ColumnEmpty from './ColumnEmpty';
 
 const ColumnDropZone = ({ width, side = sideContent.NO_SIDE, content = [], parent, index }) => {
-    const { addedContent } = useContext(DesignerContext);
+    const { addedContent, setComponentsUsed } = useContext(DesignerContext);
 
     const addContent = (item) => {
+        if (item.componentId !== 0) {
+            setComponentsUsed((prev) => ([
+                ...prev.filter((cu) => cu.componentId !== item.componentId),
+                { componentId: item.componentId, drawer: item.drawer }
+            ]))
+        }
         // ADD CONTENT
         addedContent({
             item,

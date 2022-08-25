@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import CloseIcon from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
@@ -15,7 +15,7 @@ import { typeColumn } from '../../data/DrawerItems';
 const SelectDrag = ({ item, index, parent }) => {
     const [isShown, setIsShown] = useState(false);
     const [optionSelected, setOptionSelected] = useState(0);
-    const { deletedContent, selectedRow } = useContext(DesignerContext);
+    const { deletedContent, selectedRow, setComponentsUsed, selectOpsPay } = useContext(DesignerContext);
 
     const handleDragging = () => {
         return !selectedRow?.id;
@@ -29,6 +29,8 @@ const SelectDrag = ({ item, index, parent }) => {
                 index,
                 action: 'LEAVE',
                 fromParent: parent,
+                componentId: item.componentId,
+                drawer: item.drawer,
                 type: typeColumn.SELECT,
                 label: item.label,
                 options: item.options,
@@ -38,9 +40,13 @@ const SelectDrag = ({ item, index, parent }) => {
         collect: (monitor) => ({
             isDragging: monitor.isDragging()
         })
-    }), [selectedRow]);
+    }), [selectedRow, item]);
 
     const deleteComponent = () => {
+        setComponentsUsed((prev) => [
+            ...prev.filter((cu) => cu.componentId !== item.componentId)
+        ]);
+
         deletedContent({
             parent,
             index,
@@ -49,6 +55,12 @@ const SelectDrag = ({ item, index, parent }) => {
     };
 
     const hanldeClick = (event) => setOptionSelected(event.target.value);
+
+    useEffect(() => {
+        if (item.drawer === "PAY") {
+            item.options = selectOpsPay;
+        }
+    }, [item, item.drawer, selectOpsPay]);
 
     return (
         <Box

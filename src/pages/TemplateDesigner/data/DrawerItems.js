@@ -12,6 +12,7 @@ import InsuranceDrag from '../components/InputsDraggables/InsuranceDrag';
 import SelectDrag from '../components/InputsDraggables/SelectDrag';
 import SelectToDrag from '../components/InputsDraggables/SelectToDrag';
 import SliderDrag from '../components/InputsDraggables/SliderDrag';
+import SliderToDrag from '../components/InputsDraggables/SliderToDrag';
 import TextInputDrag from '../components/InputsDraggables/TextInputDrag';
 import TextInputToDrag from '../components/InputsDraggables/TextInputToDrag';
 import SubTitleDrag from '../components/TextDraggables/SubTitleDrag';
@@ -129,11 +130,40 @@ export const inputComponents = {
 export const inputComponentsToDrag = {
     [typeColumn.SELECT]: SelectToDrag,
     [typeColumn.TXT_INPUT]: TextInputToDrag,
+    [typeColumn.SLIDER]: SliderToDrag,
 };
+
+export const opsPay = [
+    { id: 1, value: 48, text: '48 Mes(es)', toShow: 'Mes(es)' },
+    { id: 2, value: 36, text: '36 Mes(es)', toShow: 'Mes(es)' },
+];
+
+export const dataPay = [
+    {
+        id: 1,
+        drawer: 'PAY',
+        componentId: 1,
+        label: '¿A cuántos plazos deseas pagar?',
+        type: typeColumn.SELECT,
+        options: []
+    },
+    {
+        id: 2,
+        drawer: 'PAY',
+        componentId: 2,
+        label: 'Enganche',
+        type: typeColumn.SLIDER,
+        min: 0,
+        max: 0,
+        exp: '$'
+    }
+];
 
 export const dataCal = [
     {
-        id: 1,
+        id: 3,
+        drawer: 'CAL',
+        componentId: 3,
         label: 'Marca',
         type: typeColumn.SELECT,
         isSelected: false,
@@ -143,7 +173,9 @@ export const dataCal = [
         ]
     },
     {
-        id: 2,
+        id: 4,
+        drawer: 'CAL',
+        componentId: 4,
         label: 'Modelo',
         type: typeColumn.SELECT,
         isSelected: false,
@@ -153,7 +185,9 @@ export const dataCal = [
         ]
     },
     {
-        id: 3,
+        id: 5,
+        drawer: 'CAL',
+        componentId: 5,
         label: 'Año',
         type: typeColumn.SELECT,
         isSelected: false,
@@ -163,7 +197,9 @@ export const dataCal = [
         ]
     },
     {
-        id: 4,
+        id: 6,
+        drawer: 'CAL',
+        componentId: 6,
         label: 'Versión',
         type: typeColumn.SELECT,
         isSelected: false,
@@ -173,7 +209,9 @@ export const dataCal = [
         ]
     },
     {
-        id: 5,
+        id: 7,
+        drawer: 'CAL',
+        componentId: 7,
         label: 'Kilometraje',
         type: typeColumn.SELECT,
         isSelected: false,
@@ -183,13 +221,17 @@ export const dataCal = [
         ]
     },
     {
-        id: 6,
+        id: 8,
+        drawer: 'CAL',
+        componentId: 8,
         label: 'Text custom',
         type: typeColumn.TXT_INPUT,
         isSelected: false,
     },
     {
-        id: 7,
+        id: 9,
+        drawer: 'CAL',
+        componentId: 9,
         label: 'Text custom2',
         type: typeColumn.TXT_INPUT,
         isSelected: false,
@@ -198,7 +240,9 @@ export const dataCal = [
 
 export const dataGrid = [
     {
-        id: 1,
+        id: 10,
+        drawer: 'GRID',
+        componentId: 10,
         label: '¿Cómo quieres pagar tu seguro?',
         type: typeColumn.SELECT,
         isSelected: false,
@@ -208,7 +252,9 @@ export const dataGrid = [
         ]
     },
     {
-        id: 2,
+        id: 11,
+        drawer: 'GRID',
+        componentId: 11,
         label: '¿Qué extras deseas agregar a tu vehículo?',
         type: typeColumn.SELECT,
         isSelected: false,
@@ -221,19 +267,25 @@ export const dataGrid = [
 
 export const dataInsurance = [
     {
-        id: 1,
+        id: 12,
+        drawer: 'INS',
+        componentId: 12,
         name: 'Afirme',
         image: 'imgs/afirme.png',
         price: '$6750.00'
     },
     {
-        id: 2,
+        id: 13,
+        drawer: 'INS',
+        componentId: 13,
         name: 'Qualitas',
         image: 'imgs/qualitas.png',
         price: '$6750.00'
     },
     {
-        id: 3,
+        id: 14,
+        drawer: 'INS',
+        componentId: 14,
         name: 'GNP',
         image: 'imgs/gnp.png',
         price: '$6750.00'
